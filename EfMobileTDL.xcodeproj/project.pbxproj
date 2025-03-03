@@ -216,7 +216,7 @@
 				};
 			};
 			buildConfigurationList = 7371B0AE2D760D77004E6C73 /* Build configuration list for PBXProject "EfMobileTDL" */;
-			compatibilityVersion = "Xcode 15.0";
+			compatibilityVersion = "Xcode 15.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
