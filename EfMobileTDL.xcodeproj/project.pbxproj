@@ -3,8 +3,21 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 63;
 	objects = {
+
+/* Begin PBXBuildFile section */
+		731CFBAD2D761DEF001C94EA /* EfMobileTDLUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731CFBAA2D761DEF001C94EA /* EfMobileTDLUITests.swift */; };
+		731CFBAE2D761DEF001C94EA /* EfMobileTDLUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731CFBAB2D761DEF001C94EA /* EfMobileTDLUITestsLaunchTests.swift */; };
+		731CFBB12D761DF3001C94EA /* EfMobileTDLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731CFBAF2D761DF3001C94EA /* EfMobileTDLTests.swift */; };
+		731CFBBE2D761DF6001C94EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731CFBB22D761DF6001C94EA /* AppDelegate.swift */; };
+		731CFBBF2D761DF6001C94EA /* EfMobileTDL.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 731CFBB42D761DF6001C94EA /* EfMobileTDL.xcdatamodeld */; };
+		731CFBC02D761DF6001C94EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731CFBBA2D761DF6001C94EA /* SceneDelegate.swift */; };
+		731CFBC12D761DF6001C94EA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731CFBBB2D761DF6001C94EA /* ViewController.swift */; };
+		731CFBC22D761DF6001C94EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 731CFBB32D761DF6001C94EA /* Assets.xcassets */; };
+		731CFBC42D761DF6001C94EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 731CFBB72D761DF6001C94EA /* LaunchScreen.storyboard */; };
+		731CFBC52D761DF6001C94EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 731CFBB92D761DF6001C94EA /* Main.storyboard */; };
+/* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		7371B0CD2D760D78004E6C73 /* PBXContainerItemProxy */ = {
@@ -24,41 +37,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		731CFBAA2D761DEF001C94EA /* EfMobileTDLUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EfMobileTDLUITests.swift; sourceTree = "<group>"; };
+		731CFBAB2D761DEF001C94EA /* EfMobileTDLUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EfMobileTDLUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		731CFBAF2D761DF3001C94EA /* EfMobileTDLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EfMobileTDLTests.swift; sourceTree = "<group>"; };
+		731CFBB22D761DF6001C94EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		731CFBB32D761DF6001C94EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		731CFBB52D761DF6001C94EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		731CFBB62D761DF6001C94EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		731CFBB82D761DF6001C94EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		731CFBBA2D761DF6001C94EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		731CFBBB2D761DF6001C94EA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		731CFBBD2D761DF6001C94EA /* EfMobileTDL.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EfMobileTDL.xcdatamodel; sourceTree = "<group>"; };
 		7371B0B32D760D77004E6C73 /* EfMobileTDL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EfMobileTDL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0CC2D760D78004E6C73 /* EfMobileTDLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0D62D760D78004E6C73 /* EfMobileTDLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		7371B0DE2D760D78004E6C73 /* Exceptions for "EfMobileTDL" folder in "EfMobileTDL" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 7371B0B22D760D77004E6C73 /* EfMobileTDL */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		7371B0B52D760D77004E6C73 /* EfMobileTDL */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				7371B0DE2D760D78004E6C73 /* Exceptions for "EfMobileTDL" folder in "EfMobileTDL" target */,
-			);
-			path = EfMobileTDL;
-			sourceTree = "<group>";
-		};
-		7371B0CF2D760D78004E6C73 /* EfMobileTDLTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = EfMobileTDLTests;
-			sourceTree = "<group>";
-		};
-		7371B0D92D760D78004E6C73 /* EfMobileTDLUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = EfMobileTDLUITests;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		7371B0B02D760D77004E6C73 /* Frameworks */ = {
@@ -85,12 +78,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		731CFBAC2D761DEF001C94EA /* EfMobileTDLUITests */ = {
+			isa = PBXGroup;
+			children = (
+				731CFBAA2D761DEF001C94EA /* EfMobileTDLUITests.swift */,
+				731CFBAB2D761DEF001C94EA /* EfMobileTDLUITestsLaunchTests.swift */,
+			);
+			path = EfMobileTDLUITests;
+			sourceTree = "<group>";
+		};
+		731CFBB02D761DF3001C94EA /* EfMobileTDLTests */ = {
+			isa = PBXGroup;
+			children = (
+				731CFBAF2D761DF3001C94EA /* EfMobileTDLTests.swift */,
+			);
+			path = EfMobileTDLTests;
+			sourceTree = "<group>";
+		};
+		731CFBBC2D761DF6001C94EA /* EfMobileTDL */ = {
+			isa = PBXGroup;
+			children = (
+				731CFBB22D761DF6001C94EA /* AppDelegate.swift */,
+				731CFBB32D761DF6001C94EA /* Assets.xcassets */,
+				731CFBB42D761DF6001C94EA /* EfMobileTDL.xcdatamodeld */,
+				731CFBB52D761DF6001C94EA /* Info.plist */,
+				731CFBB72D761DF6001C94EA /* LaunchScreen.storyboard */,
+				731CFBB92D761DF6001C94EA /* Main.storyboard */,
+				731CFBBA2D761DF6001C94EA /* SceneDelegate.swift */,
+				731CFBBB2D761DF6001C94EA /* ViewController.swift */,
+			);
+			path = EfMobileTDL;
+			sourceTree = "<group>";
+		};
 		7371B0AA2D760D77004E6C73 = {
 			isa = PBXGroup;
 			children = (
-				7371B0B52D760D77004E6C73 /* EfMobileTDL */,
-				7371B0CF2D760D78004E6C73 /* EfMobileTDLTests */,
-				7371B0D92D760D78004E6C73 /* EfMobileTDLUITests */,
+				731CFBBC2D761DF6001C94EA /* EfMobileTDL */,
+				731CFBB02D761DF3001C94EA /* EfMobileTDLTests */,
+				731CFBAC2D761DEF001C94EA /* EfMobileTDLUITests */,
 				7371B0B42D760D77004E6C73 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -120,9 +145,6 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				7371B0B52D760D77004E6C73 /* EfMobileTDL */,
-			);
 			name = EfMobileTDL;
 			packageProductDependencies = (
 			);
@@ -143,9 +165,6 @@
 			dependencies = (
 				7371B0CE2D760D78004E6C73 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				7371B0CF2D760D78004E6C73 /* EfMobileTDLTests */,
-			);
 			name = EfMobileTDLTests;
 			packageProductDependencies = (
 			);
@@ -165,9 +184,6 @@
 			);
 			dependencies = (
 				7371B0D82D760D78004E6C73 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				7371B0D92D760D78004E6C73 /* EfMobileTDLUITests */,
 			);
 			name = EfMobileTDLUITests;
 			packageProductDependencies = (
@@ -200,6 +216,7 @@
 				};
 			};
 			buildConfigurationList = 7371B0AE2D760D77004E6C73 /* Build configuration list for PBXProject "EfMobileTDL" */;
+			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -208,7 +225,6 @@
 			);
 			mainGroup = 7371B0AA2D760D77004E6C73;
 			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			productRefGroup = 7371B0B42D760D77004E6C73 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -225,6 +241,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				731CFBC22D761DF6001C94EA /* Assets.xcassets in Resources */,
+				731CFBC42D761DF6001C94EA /* LaunchScreen.storyboard in Resources */,
+				731CFBC52D761DF6001C94EA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +268,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				731CFBBE2D761DF6001C94EA /* AppDelegate.swift in Sources */,
+				731CFBBF2D761DF6001C94EA /* EfMobileTDL.xcdatamodeld in Sources */,
+				731CFBC02D761DF6001C94EA /* SceneDelegate.swift in Sources */,
+				731CFBC12D761DF6001C94EA /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				731CFBB12D761DF3001C94EA /* EfMobileTDLTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +287,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				731CFBAD2D761DEF001C94EA /* EfMobileTDLUITests.swift in Sources */,
+				731CFBAE2D761DEF001C94EA /* EfMobileTDLUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +306,25 @@
 			targetProxy = 7371B0D72D760D78004E6C73 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		731CFBB72D761DF6001C94EA /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				731CFBB62D761DF6001C94EA /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		731CFBB92D761DF6001C94EA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				731CFBB82D761DF6001C94EA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		7371B0E02D760D78004E6C73 /* Debug */ = {
@@ -400,7 +445,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -457,7 +502,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -579,6 +624,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		731CFBB42D761DF6001C94EA /* EfMobileTDL.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				731CFBBD2D761DF6001C94EA /* EfMobileTDL.xcdatamodel */,
+			);
+			currentVersion = 731CFBBD2D761DF6001C94EA /* EfMobileTDL.xcdatamodel */;
+			path = EfMobileTDL.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7371B0AB2D760D77004E6C73 /* Project object */;
 }
