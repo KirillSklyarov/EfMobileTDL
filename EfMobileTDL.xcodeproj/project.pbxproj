@@ -10,13 +10,12 @@
 		731CFBAD2D761DEF001C94EA /* EfMobileTDLUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731CFBAA2D761DEF001C94EA /* EfMobileTDLUITests.swift */; };
 		731CFBAE2D761DEF001C94EA /* EfMobileTDLUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731CFBAB2D761DEF001C94EA /* EfMobileTDLUITestsLaunchTests.swift */; };
 		731CFBB12D761DF3001C94EA /* EfMobileTDLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731CFBAF2D761DF3001C94EA /* EfMobileTDLTests.swift */; };
-		731CFBBE2D761DF6001C94EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731CFBB22D761DF6001C94EA /* AppDelegate.swift */; };
-		731CFBBF2D761DF6001C94EA /* EfMobileTDL.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 731CFBB42D761DF6001C94EA /* EfMobileTDL.xcdatamodeld */; };
-		731CFBC02D761DF6001C94EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731CFBBA2D761DF6001C94EA /* SceneDelegate.swift */; };
-		731CFBC12D761DF6001C94EA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731CFBBB2D761DF6001C94EA /* ViewController.swift */; };
-		731CFBC22D761DF6001C94EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 731CFBB32D761DF6001C94EA /* Assets.xcassets */; };
-		731CFBC42D761DF6001C94EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 731CFBB72D761DF6001C94EA /* LaunchScreen.storyboard */; };
-		731CFBC52D761DF6001C94EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 731CFBB92D761DF6001C94EA /* Main.storyboard */; };
+		7320859B2D7626110086525E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085982D7626110086525E /* AppDelegate.swift */; };
+		7320859C2D7626110086525E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085992D7626110086525E /* SceneDelegate.swift */; };
+		732085A62D76262F0086525E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7320859F2D76262F0086525E /* Assets.xcassets */; };
+		732085A82D76262F0086525E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 732085A22D76262F0086525E /* LaunchScreen.storyboard */; };
+		732085AD2D76263C0086525E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085AB2D76263C0086525E /* ViewController.swift */; };
+		732085B22D76264A0086525E /* EfMobileTDL.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 732085AF2D76264A0086525E /* EfMobileTDL.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,14 +39,13 @@
 		731CFBAA2D761DEF001C94EA /* EfMobileTDLUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EfMobileTDLUITests.swift; sourceTree = "<group>"; };
 		731CFBAB2D761DEF001C94EA /* EfMobileTDLUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EfMobileTDLUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		731CFBAF2D761DF3001C94EA /* EfMobileTDLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EfMobileTDLTests.swift; sourceTree = "<group>"; };
-		731CFBB22D761DF6001C94EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		731CFBB32D761DF6001C94EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		731CFBB52D761DF6001C94EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		731CFBB62D761DF6001C94EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		731CFBB82D761DF6001C94EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		731CFBBA2D761DF6001C94EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		731CFBBB2D761DF6001C94EA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		731CFBBD2D761DF6001C94EA /* EfMobileTDL.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EfMobileTDL.xcdatamodel; sourceTree = "<group>"; };
+		732085982D7626110086525E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		732085992D7626110086525E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		7320859F2D76262F0086525E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		732085A02D76262F0086525E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		732085A12D76262F0086525E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		732085AB2D76263C0086525E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		732085B12D76264A0086525E /* EfMobileTDL.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EfMobileTDL.xcdatamodel; sourceTree = "<group>"; };
 		7371B0B32D760D77004E6C73 /* EfMobileTDL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EfMobileTDL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0CC2D760D78004E6C73 /* EfMobileTDLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0D62D760D78004E6C73 /* EfMobileTDLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,16 +96,47 @@
 		731CFBBC2D761DF6001C94EA /* EfMobileTDL */ = {
 			isa = PBXGroup;
 			children = (
-				731CFBB22D761DF6001C94EA /* AppDelegate.swift */,
-				731CFBB32D761DF6001C94EA /* Assets.xcassets */,
-				731CFBB42D761DF6001C94EA /* EfMobileTDL.xcdatamodeld */,
-				731CFBB52D761DF6001C94EA /* Info.plist */,
-				731CFBB72D761DF6001C94EA /* LaunchScreen.storyboard */,
-				731CFBB92D761DF6001C94EA /* Main.storyboard */,
-				731CFBBA2D761DF6001C94EA /* SceneDelegate.swift */,
-				731CFBBB2D761DF6001C94EA /* ViewController.swift */,
+				7320859A2D7626110086525E /* App */,
+				732085B02D76264A0086525E /* CoreData */,
+				732085AC2D76263C0086525E /* Modules */,
+				732085A52D76262F0086525E /* Resources */,
 			);
 			path = EfMobileTDL;
+			sourceTree = "<group>";
+		};
+		7320859A2D7626110086525E /* App */ = {
+			isa = PBXGroup;
+			children = (
+				732085982D7626110086525E /* AppDelegate.swift */,
+				732085992D7626110086525E /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		732085A52D76262F0086525E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7320859F2D76262F0086525E /* Assets.xcassets */,
+				732085A02D76262F0086525E /* Info.plist */,
+				732085A22D76262F0086525E /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		732085AC2D76263C0086525E /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				732085AB2D76263C0086525E /* ViewController.swift */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		732085B02D76264A0086525E /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				732085AF2D76264A0086525E /* EfMobileTDL.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		7371B0AA2D760D77004E6C73 = {
@@ -241,9 +270,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				731CFBC22D761DF6001C94EA /* Assets.xcassets in Resources */,
-				731CFBC42D761DF6001C94EA /* LaunchScreen.storyboard in Resources */,
-				731CFBC52D761DF6001C94EA /* Main.storyboard in Resources */,
+				732085A62D76262F0086525E /* Assets.xcassets in Resources */,
+				732085A82D76262F0086525E /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,10 +296,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				731CFBBE2D761DF6001C94EA /* AppDelegate.swift in Sources */,
-				731CFBBF2D761DF6001C94EA /* EfMobileTDL.xcdatamodeld in Sources */,
-				731CFBC02D761DF6001C94EA /* SceneDelegate.swift in Sources */,
-				731CFBC12D761DF6001C94EA /* ViewController.swift in Sources */,
+				7320859B2D7626110086525E /* AppDelegate.swift in Sources */,
+				732085AD2D76263C0086525E /* ViewController.swift in Sources */,
+				7320859C2D7626110086525E /* SceneDelegate.swift in Sources */,
+				732085B22D76264A0086525E /* EfMobileTDL.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,20 +336,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		731CFBB72D761DF6001C94EA /* LaunchScreen.storyboard */ = {
+		732085A22D76262F0086525E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				731CFBB62D761DF6001C94EA /* Base */,
+				732085A12D76262F0086525E /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		731CFBB92D761DF6001C94EA /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				731CFBB82D761DF6001C94EA /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -336,10 +356,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7W278NP9KT;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = EfMobileTDL/Info.plist;
+				INFOPLIST_FILE = EfMobileTDL/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
@@ -369,10 +388,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7W278NP9KT;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = EfMobileTDL/Info.plist;
+				INFOPLIST_FILE = EfMobileTDL/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
@@ -626,12 +644,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		731CFBB42D761DF6001C94EA /* EfMobileTDL.xcdatamodeld */ = {
+		732085AF2D76264A0086525E /* EfMobileTDL.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				731CFBBD2D761DF6001C94EA /* EfMobileTDL.xcdatamodel */,
+				732085B12D76264A0086525E /* EfMobileTDL.xcdatamodel */,
 			);
-			currentVersion = 731CFBBD2D761DF6001C94EA /* EfMobileTDL.xcdatamodel */;
+			currentVersion = 732085B12D76264A0086525E /* EfMobileTDL.xcdatamodel */;
 			path = EfMobileTDL.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
