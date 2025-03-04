@@ -9,29 +9,15 @@ import UIKit
 
 final class TaskTableViewCell: UITableViewCell {
 
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = AppConstants.Fonts.regular16
-        label.textColor = AppConstants.Colors.white
-        return label
-    }()
+    // MARK: - UI Properties
+    private lazy var titleLabel = AppLabel(type: .title)
+    private lazy var subTitleLabel = AppLabel(type: .subtitle)
+    private lazy var dateLabel = AppLabel(type: .date)
+    private lazy var checkView = CheckmarkView()
 
-    private lazy var subTitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = AppConstants.Fonts.regular12
-        label.textColor = AppConstants.Colors.white
-        label.numberOfLines = 2
-        return label
-    }()
+    private lazy var textStack = AppStackView([titleLabel, subTitleLabel, dateLabel], axis: .vertical, spacing: 6)
 
-    private lazy var dateLabel: UILabel = {
-        let label = UILabel()
-        label.font = AppConstants.Fonts.regular12
-        label.textColor = AppConstants.Colors.gray
-        return label
-    }()
-
-    private lazy var contentStack = AppStackView([titleLabel, subTitleLabel, dateLabel], axis: .vertical, spacing: 6)
+    private lazy var contentStack = AppStackView([checkView, textStack], axis: .horizontal, spacing: 8)
 
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -58,7 +44,10 @@ private extension TaskTableViewCell {
     func setupCell() {
         backgroundColor = .clear
         contentView.addSubviews(contentStack)
+        setupLayout()
+    }
 
+    func setupLayout() {
         NSLayoutConstraint.activate([
             contentStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: AppConstants.Insets.small),
             contentStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),

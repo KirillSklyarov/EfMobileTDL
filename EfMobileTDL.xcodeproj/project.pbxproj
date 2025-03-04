@@ -25,6 +25,8 @@
 		732085E82D764BFB0086525E /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085E72D764BFB0086525E /* UITableView+Ext.swift */; };
 		732085EA2D764C630086525E /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085E92D764C630086525E /* TaskTableViewCell.swift */; };
 		732085EC2D764D240086525E /* AppStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085EB2D764D240086525E /* AppStackView.swift */; };
+		73FC330A2D76EA6D0098ABB9 /* AppLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33092D76EA6D0098ABB9 /* AppLabel.swift */; };
+		73FC330C2D76EE0F0098ABB9 /* CheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC330B2D76EE0F0098ABB9 /* CheckmarkView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		7371B0B32D760D77004E6C73 /* EfMobileTDL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EfMobileTDL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0CC2D760D78004E6C73 /* EfMobileTDLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0D62D760D78004E6C73 /* EfMobileTDLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		73FC33092D76EA6D0098ABB9 /* AppLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLabel.swift; sourceTree = "<group>"; };
+		73FC330B2D76EE0F0098ABB9 /* CheckmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +188,7 @@
 			children = (
 				732085DF2D7640570086525E /* AppButton.swift */,
 				732085EB2D764D240086525E /* AppStackView.swift */,
+				73FC33092D76EA6D0098ABB9 /* AppLabel.swift */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -194,6 +199,7 @@
 				732085E32D7643330086525E /* FooterView.swift */,
 				732085E52D764B8C0086525E /* TasksTableView.swift */,
 				732085E92D764C630086525E /* TaskTableViewCell.swift */,
+				73FC330B2D76EE0F0098ABB9 /* CheckmarkView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -365,8 +371,10 @@
 				732085DC2D76311A0086525E /* UIView+Ext.swift in Sources */,
 				732085E62D764B8C0086525E /* TasksTableView.swift in Sources */,
 				732085EA2D764C630086525E /* TaskTableViewCell.swift in Sources */,
+				73FC330A2D76EA6D0098ABB9 /* AppLabel.swift in Sources */,
 				732085B22D76264A0086525E /* EfMobileTDL.xcdatamodeld in Sources */,
 				732085B82D762D980086525E /* AppConstants.swift in Sources */,
+				73FC330C2D76EE0F0098ABB9 /* CheckmarkView.swift in Sources */,
 				732085E02D7640570086525E /* AppButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -60,6 +60,25 @@ final class TasksTableView: UITableView {
     }
 }
 
+// MARK: - Setup UI
+private extension TasksTableView {
+    func setupUI() {
+        showsVerticalScrollIndicator = false
+        backgroundColor = .clear
+        allowsSelection = false
+        separatorStyle = .singleLine
+        separatorColor = AppConstants.Colors.darkGray
+        estimatedRowHeight = 90/800
+        rowHeight = UITableView.automaticDimension
+        tableHeaderView = UIView()
+
+        registerCell(TaskTableViewCell.self)
+
+        dataSource = self
+        delegate = self
+    }
+}
+
 // MARK: - UITableViewDataSource, UITableViewDelegate
 extension TasksTableView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -71,23 +90,5 @@ extension TasksTableView: UITableViewDataSource, UITableViewDelegate {
         let item = data[indexPath.row]
         cell.configureCell(with: item)
         return cell
-    }
-}
-
-// MARK: - Setup UI
-private extension TasksTableView {
-    func setupUI() {
-        showsVerticalScrollIndicator = false
-        backgroundColor = .clear
-        allowsSelection = false
-        separatorStyle = .singleLine
-        separatorColor = AppConstants.Colors.darkGray
-        estimatedRowHeight = 50
-        rowHeight = UITableView.automaticDimension
-
-        registerCell(TaskTableViewCell.self)
-
-        dataSource = self
-        delegate = self
     }
 }

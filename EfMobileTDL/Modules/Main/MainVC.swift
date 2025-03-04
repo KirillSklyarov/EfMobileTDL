@@ -9,7 +9,22 @@ import UIKit
 
 final class MainViewController: UIViewController {
 
-    private lazy var searchController = UISearchController(searchResultsController: nil)
+    private lazy var searchController: UISearchController = {
+        let controller = UISearchController(searchResultsController: nil)
+        let searchTextField = controller.searchBar.searchTextField
+        searchTextField.backgroundColor = AppConstants.Colors.darkGray
+        searchTextField.leftView?.tintColor = AppConstants.Colors.gray
+
+        searchTextField.rightView = AppButton(style: .micro)
+        searchTextField.rightViewMode = .unlessEditing
+
+        searchTextField.attributedPlaceholder = NSAttributedString(string: "Search", attributes: [.foregroundColor: AppConstants.Colors.gray])
+
+        controller.hidesNavigationBarDuringPresentation = true
+        controller.searchBar.delegate = self
+        return controller
+    }()
+
     private lazy var tasksTableView = TasksTableView()
     private lazy var footerView = FooterView()
 
@@ -38,7 +53,19 @@ private extension MainViewController {
     func setupNavigationBar() {
         title = "Задачи"
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: AppConstants.Colors.white]
+
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = AppConstants.Colors.black
+        appearance.largeTitleTextAttributes = [.foregroundColor: AppConstants.Colors.white]
+        appearance.titleTextAttributes = [.foregroundColor: AppConstants.Colors.white]
+
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+
+        navigationItem.hidesSearchBarWhenScrolling = false
+
         navigationItem.searchController = searchController
     }
 }
@@ -73,15 +100,8 @@ private extension MainViewController {
 extension MainViewController: UISearchBarDelegate {
     func setupSearchController() {
         let searchTextField = searchController.searchBar.searchTextField
-        searchTextField.backgroundColor = AppConstants.Colors.darkGray
-        searchTextField.leftView?.tintColor = AppConstants.Colors.gray
-
         searchTextField.rightView = AppButton(style: .micro)
         searchTextField.rightViewMode = .unlessEditing
-
-        searchTextField.attributedPlaceholder = NSAttributedString(string: "Search", attributes: [.foregroundColor: AppConstants.Colors.gray])
-
-        searchController.searchBar.delegate = self
     }
 }
 
