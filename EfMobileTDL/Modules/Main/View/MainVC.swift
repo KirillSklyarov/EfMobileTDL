@@ -35,6 +35,11 @@ final class MainViewController: UIViewController {
         setupAction()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tasksTableView.reloadData()
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupSearchController()
@@ -60,10 +65,13 @@ private extension MainViewController {
         appearance.backgroundColor = AppConstants.Colors.black
         appearance.largeTitleTextAttributes = [.foregroundColor: AppConstants.Colors.white]
         appearance.titleTextAttributes = [.foregroundColor: AppConstants.Colors.white]
+        appearance.backButtonAppearance.normal.titleTextAttributes = [.foregroundColor: AppConstants.Colors.yellow]
 
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.tintColor = AppConstants.Colors.yellow
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
 
         navigationItem.hidesSearchBarWhenScrolling = false
 
@@ -111,6 +119,11 @@ private extension MainViewController {
     func setupAction() {
         tasksTableView.onShowShareScreen = { [weak self] activityVC in
             self?.present(activityVC, animated: true)
+        }
+
+        tasksTableView.onEditScreen = { [weak self] task in
+            let editVC = EditTaskViewController(with: task)
+            self?.navigationController?.pushViewController(editVC, animated: true)
         }
     }
 }

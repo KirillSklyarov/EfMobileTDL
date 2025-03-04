@@ -11,14 +11,15 @@ enum AppLabelType {
     case title
     case subtitle
     case date
+    case editTitle
 }
 
 final class AppLabel: UILabel {
 
     // MARK: - Init
-    init(type: AppLabelType) {
+    init(type: AppLabelType, numberOfLines: Int = 0) {
         super.init(frame: .zero)
-        configure(type)
+        configure(type, numberOfLines: numberOfLines)
     }
     
     required init?(coder: NSCoder) {
@@ -28,20 +29,24 @@ final class AppLabel: UILabel {
 
 // MARK: - Setup UI
 private extension AppLabel {
-    func configure(_ type: AppLabelType) {
+    func configure(_ type: AppLabelType, numberOfLines: Int) {
         switch type {
         case .title:
             font = AppConstants.Fonts.regular16
             textColor = AppConstants.Colors.white
-            numberOfLines = 0
+            self.numberOfLines = 0
         case .subtitle:
             font = AppConstants.Fonts.regular12
             textColor = AppConstants.Colors.white
-            numberOfLines = 2
+            self.numberOfLines = numberOfLines
         case .date:
             font = AppConstants.Fonts.regular12
             textColor = AppConstants.Colors.gray
-            numberOfLines = 0
+            self.numberOfLines = 0
+        case .editTitle:
+            font = AppConstants.Fonts.bold34
+            textColor = AppConstants.Colors.white
+            self.numberOfLines = 0
         }
     }
 }

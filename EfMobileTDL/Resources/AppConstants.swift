@@ -18,7 +18,7 @@ struct AppConstants {
     }
 
     enum Insets {
-        static let small: CGFloat = 12
+        static let small: CGFloat = 5
         static let medium: CGFloat = 20
     }
 
@@ -27,6 +27,10 @@ struct AppConstants {
         static let regular12: UIFont = .systemFont(ofSize: 12, weight: .regular)
         static let regular16: UIFont = .systemFont(ofSize: 16, weight: .regular)
 
+        static let bold34: UIFont = .systemFont(ofSize: 34, weight: .bold)
+    }
 
+    enum Height {
+        static let textField: CGFloat = 44
     }
 }

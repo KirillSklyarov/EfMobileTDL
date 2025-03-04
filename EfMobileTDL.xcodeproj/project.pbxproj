@@ -28,6 +28,8 @@
 		73FC33262D770B220098ABB9 /* TasksTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC331F2D770B220098ABB9 /* TasksTableView.swift */; };
 		73FC33272D770B220098ABB9 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33202D770B220098ABB9 /* TaskTableViewCell.swift */; };
 		73FC33282D770B220098ABB9 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33222D770B220098ABB9 /* MainVC.swift */; };
+		73FC33302D770F790098ABB9 /* EditTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC332E2D770F790098ABB9 /* EditTaskViewController.swift */; };
+		73FC33322D771F110098ABB9 /* AppTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33312D771F110098ABB9 /* AppTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +75,8 @@
 		73FC331F2D770B220098ABB9 /* TasksTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableView.swift; sourceTree = "<group>"; };
 		73FC33202D770B220098ABB9 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		73FC33222D770B220098ABB9 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		73FC332E2D770F790098ABB9 /* EditTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskViewController.swift; sourceTree = "<group>"; };
+		73FC33312D771F110098ABB9 /* AppTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				732085B52D762BBB0086525E /* Main */,
+				73FC332A2D770F610098ABB9 /* EditTask */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -191,6 +196,7 @@
 				732085DF2D7640570086525E /* AppButton.swift */,
 				732085EB2D764D240086525E /* AppStackView.swift */,
 				73FC33092D76EA6D0098ABB9 /* AppLabel.swift */,
+				73FC33312D771F110098ABB9 /* AppTextField.swift */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -239,6 +245,22 @@
 			children = (
 				73FC33222D770B220098ABB9 /* MainVC.swift */,
 				73FC33212D770B220098ABB9 /* Components */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		73FC332A2D770F610098ABB9 /* EditTask */ = {
+			isa = PBXGroup;
+			children = (
+				73FC332F2D770F790098ABB9 /* View */,
+			);
+			path = EditTask;
+			sourceTree = "<group>";
+		};
+		73FC332F2D770F790098ABB9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				73FC332E2D770F790098ABB9 /* EditTaskViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -383,6 +405,7 @@
 				732085E82D764BFB0086525E /* UITableView+Ext.swift in Sources */,
 				7320859B2D7626110086525E /* AppDelegate.swift in Sources */,
 				7320859C2D7626110086525E /* SceneDelegate.swift in Sources */,
+				73FC33302D770F790098ABB9 /* EditTaskViewController.swift in Sources */,
 				732085EC2D764D240086525E /* AppStackView.swift in Sources */,
 				73FC33242D770B220098ABB9 /* CheckmarkView.swift in Sources */,
 				73FC33252D770B220098ABB9 /* FooterView.swift in Sources */,
@@ -390,6 +413,7 @@
 				73FC33272D770B220098ABB9 /* TaskTableViewCell.swift in Sources */,
 				73FC33282D770B220098ABB9 /* MainVC.swift in Sources */,
 				732085DA2D762E8D0086525E /* UIColor+Ext.swift in Sources */,
+				73FC33322D771F110098ABB9 /* AppTextField.swift in Sources */,
 				732085DC2D76311A0086525E /* UIView+Ext.swift in Sources */,
 				73FC33122D770B160098ABB9 /* Task.swift in Sources */,
 				73FC330A2D76EA6D0098ABB9 /* AppLabel.swift in Sources */,

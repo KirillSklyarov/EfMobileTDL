@@ -11,7 +11,9 @@ final class TasksTableView: UITableView {
 
     var chosenCell: TaskTableViewCell?
     var onShowShareScreen: ((UIActivityViewController) -> Void)?
+    var onEditScreen: ((Task) -> Void)?
 
+    // MARK: - Init
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         setupUI()
@@ -61,13 +63,12 @@ extension TasksTableView: UITableViewDataSource, UITableViewDelegate {
 
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
 
-            let editAction = UIAction(title: "Редактировать", image: UIImage(systemName: "square.and.pencil")) { _ in
-                print("Edit")
+            let editAction = UIAction(title: "Редактировать", image: UIImage(systemName: "square.and.pencil")) { [weak self] _ in
+                self?.editTask(at: indexPath)
             }
 
             let shareAction = UIAction(title: "Поделиться", image: UIImage(systemName: "square.and.arrow.up")) { [weak self] _ in
-                let task = Task.data[indexPath.row]
-                self?.shareTask(task, from: cell)
+                self?.shareTask(at: indexPath)
             }
 
             let deleteAction = UIAction(title: "Удалить", image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] _ in
@@ -85,17 +86,24 @@ extension TasksTableView: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+// MARK: - Menu actions
 private extension TasksTableView {
+    func editTask(at indexPath: IndexPath) {
+        let task = Task.data[indexPath.row]
+        onEditScreen?(task)
+    }
+
+    func shareTask(at indexPath: IndexPath) {
+        let task = Task.data[indexPath.row]
+        let textToShare = "Задача: \(task.title)\nОписание: \(task.subtitle)\n"
+        let activityVC = UIActivityViewController(activityItems: [textToShare], applicationActivities: nil)
+        onShowShareScreen?(activityVC)
+    }
+
     func deleteTask(at indexPath: IndexPath) {
         Task.data.remove(at: indexPath.row)
         beginUpdates()
         deleteRows(at: [indexPath], with: .automatic)
         endUpdates()
-    }
-    
-    func shareTask(_ task: Task, from sourceView: UIView) {
-        let textToShare = "Задача: \(task.title)\nОписание: \(task.subtitle)\n"
-        let activityVC = UIActivityViewController(activityItems: [textToShare], applicationActivities: nil)
-        onShowShareScreen?(activityVC)
     }
 }

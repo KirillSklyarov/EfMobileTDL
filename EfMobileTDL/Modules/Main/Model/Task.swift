@@ -7,10 +7,14 @@
 
 import Foundation
 
-struct Task {
+struct Task: Equatable {
     var title: String
     var subtitle: String
     var date: String
+
+    static func editTask(_ newTask: Task, index: Int) {
+        data[index] = newTask
+    }
 
     static var data: [Task] = [
         Task(title: "Nice someone", subtitle: "Do something nice for someone you care about", date: "01/10/24"),

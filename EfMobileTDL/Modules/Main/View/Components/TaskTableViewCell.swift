@@ -11,7 +11,7 @@ final class TaskTableViewCell: UITableViewCell {
 
     // MARK: - UI Properties
     private lazy var titleLabel = AppLabel(type: .title)
-    private lazy var subTitleLabel = AppLabel(type: .subtitle)
+    private lazy var subTitleLabel = AppLabel(type: .subtitle, numberOfLines: 2)
     private lazy var dateLabel = AppLabel(type: .date)
     private lazy var checkView = CheckmarkView()
 
