@@ -10,14 +10,12 @@ import UIKit
 final class EditTaskViewController: UIViewController {
 
     private lazy var titleTextField = AppTextField(type: .title)
-    private lazy var subtitleTextField = AppTextField(type: .subtitle)
+    private lazy var subtitleTextField = AddTaskSubtitleView()
     private lazy var dateLabel = AppLabel(type: .date)
 
     private lazy var titleStack = AppStackView([titleTextField, dateLabel], axis: .vertical, spacing: 8)
 
-    private lazy var subTitleStack = AppStackView([subtitleTextField, UIView()], axis: .vertical, alignment: .leading)
-
-    private lazy var contentStack = AppStackView([titleStack, subTitleStack], axis: .vertical, spacing: 16)
+    private lazy var contentStack = AppStackView([titleStack, subtitleTextField], axis: .vertical, spacing: 16)
 
     private var task: Task
     private var index: Int?
@@ -57,26 +55,34 @@ private extension EditTaskViewController {
         setupLayout()
     }
 
-    func configure() {
-        index = Task.data.firstIndex { $0 == task }
-
-        titleTextField.text = task.title
-        subtitleTextField.text = task.subtitle
-        dateLabel.text = task.date
-    }
-
     func setupLayout() {
         NSLayoutConstraint.activate([
             contentStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: AppConstants.Insets.small),
             contentStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: AppConstants.Insets.medium),
             contentStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -AppConstants.Insets.medium),
-            contentStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+
+            subtitleTextField.heightAnchor.constraint(equalToConstant: AppConstants.Height.textField*5),
         ])
     }
 
     func setupTextFields() {
         titleTextField.delegate = self
-        subtitleTextField.delegate = self
+        subtitleTextField.setTextViewDelegate(self)
+
+        titleTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+    }
+}
+
+// MARK: - UITextViewDelegate
+extension EditTaskViewController: UITextViewDelegate {
+    func textViewDidEndEditing(_ textView: UITextView) {
+        guard let text = textView.text else { return }
+        if !text.isEmpty { task.subtitle = text }
+    }
+
+    func textViewDidChange(_ textView: UITextView) {
+        guard let text = textView.text else { return }
+        if !text.isEmpty { task.subtitle = text }
     }
 }
 
@@ -89,30 +95,34 @@ extension EditTaskViewController: UITextFieldDelegate {
 
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         guard let text = textField.text else { return }
-
-        switch textField {
-            case titleTextField:
-            if !text.isEmpty {
-                task.title = text
-            }
-        case subtitleTextField:
-            if !text.isEmpty {
-                task.subtitle = text
-            }
-        default: break
-        }
-
-        print(task)
+        if !text.isEmpty { task.title = text }
     }
 }
-
 
 // MARK: - Supporting methods
 private extension EditTaskViewController {
     func sendEditedTaskToStorage() {
         guard let index else { print("We can not edit task"); return }
+//        print("Send edited task to storage: \(task)")
         Task.editTask(task, index: index)
     }
+
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        if !text.isEmpty { task.title = text }
+//        print("Updated in real time: \(task)")
+    }
+
+    func configure() {
+        index = Task.data.firstIndex { $0 == task }
+
+        titleTextField.text = task.title
+        subtitleTextField.setTextViewText(task.subtitle)
+        subtitleTextField.setTextViewTextColor(AppConstants.Colors.white)
+
+        dateLabel.text = task.date
+    }
+
 }
 
 // MARK: - Hide keyboard by tap
@@ -126,4 +136,3 @@ private extension EditTaskViewController {
         view.endEditing(true)
     }
 }
-

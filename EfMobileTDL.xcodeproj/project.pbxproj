@@ -30,6 +30,8 @@
 		73FC33282D770B220098ABB9 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33222D770B220098ABB9 /* MainVC.swift */; };
 		73FC33302D770F790098ABB9 /* EditTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC332E2D770F790098ABB9 /* EditTaskViewController.swift */; };
 		73FC33322D771F110098ABB9 /* AppTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33312D771F110098ABB9 /* AppTextField.swift */; };
+		73FC333A2D772F6F0098ABB9 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33382D772F6F0098ABB9 /* AddTaskViewController.swift */; };
+		73FC333E2D773CB90098ABB9 /* AddTaskSubtitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC333D2D773CB90098ABB9 /* AddTaskSubtitleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +79,8 @@
 		73FC33222D770B220098ABB9 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		73FC332E2D770F790098ABB9 /* EditTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskViewController.swift; sourceTree = "<group>"; };
 		73FC33312D771F110098ABB9 /* AppTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTextField.swift; sourceTree = "<group>"; };
+		73FC33382D772F6F0098ABB9 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
+		73FC333D2D773CB90098ABB9 /* AddTaskSubtitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskSubtitleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				732085B52D762BBB0086525E /* Main */,
+				73FC33342D772F290098ABB9 /* AddTask */,
 				73FC332A2D770F610098ABB9 /* EditTask */,
 			);
 			path = Modules;
@@ -263,6 +268,31 @@
 				73FC332E2D770F790098ABB9 /* EditTaskViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		73FC33342D772F290098ABB9 /* AddTask */ = {
+			isa = PBXGroup;
+			children = (
+				73FC33392D772F6F0098ABB9 /* View */,
+			);
+			path = AddTask;
+			sourceTree = "<group>";
+		};
+		73FC33392D772F6F0098ABB9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				73FC33382D772F6F0098ABB9 /* AddTaskViewController.swift */,
+				73FC333C2D773CA50098ABB9 /* Components */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		73FC333C2D773CA50098ABB9 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				73FC333D2D773CB90098ABB9 /* AddTaskSubtitleView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -405,6 +435,7 @@
 				732085E82D764BFB0086525E /* UITableView+Ext.swift in Sources */,
 				7320859B2D7626110086525E /* AppDelegate.swift in Sources */,
 				7320859C2D7626110086525E /* SceneDelegate.swift in Sources */,
+				73FC333A2D772F6F0098ABB9 /* AddTaskViewController.swift in Sources */,
 				73FC33302D770F790098ABB9 /* EditTaskViewController.swift in Sources */,
 				732085EC2D764D240086525E /* AppStackView.swift in Sources */,
 				73FC33242D770B220098ABB9 /* CheckmarkView.swift in Sources */,
@@ -416,6 +447,7 @@
 				73FC33322D771F110098ABB9 /* AppTextField.swift in Sources */,
 				732085DC2D76311A0086525E /* UIView+Ext.swift in Sources */,
 				73FC33122D770B160098ABB9 /* Task.swift in Sources */,
+				73FC333E2D773CB90098ABB9 /* AddTaskSubtitleView.swift in Sources */,
 				73FC330A2D76EA6D0098ABB9 /* AppLabel.swift in Sources */,
 				732085B22D76264A0086525E /* EfMobileTDL.xcdatamodeld in Sources */,
 				732085B82D762D980086525E /* AppConstants.swift in Sources */,

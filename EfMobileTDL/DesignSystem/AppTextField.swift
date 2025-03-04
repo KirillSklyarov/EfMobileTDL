@@ -7,9 +7,11 @@
 
 import UIKit
 
-enum AppTextFieldType {
+enum AppTextFieldType: String {
     case title
     case subtitle
+    case addTaskTitle = "Введите тему задачи"
+    case addTaskSubtitle = "Введите описание задачи"
 }
 
 final class AppTextField: UITextField {
@@ -39,9 +41,30 @@ private extension AppTextField {
             font = AppConstants.Fonts.bold34
         case .subtitle:
             font = AppConstants.Fonts.regular16
+        case .addTaskTitle:
+            font = AppConstants.Fonts.regular18
+            backgroundColor = AppConstants.Colors.darkGray
+            setupPlaceholder(type)
+            borderStyle = .roundedRect
+        case .addTaskSubtitle:
+            font = AppConstants.Fonts.regular18
+            backgroundColor = AppConstants.Colors.darkGray
+            setupPlaceholder(type)
+            borderStyle = .roundedRect
         }
 
         setupLayout()
+    }
+
+    // Настраиваем плейсхолдер
+    func setupPlaceholder(_ type: AppTextFieldType) {
+        let placeholder = type.rawValue
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: AppConstants.Fonts.regular16,
+            .foregroundColor: AppConstants.Colors.gray
+        ]
+
+        attributedPlaceholder = NSAttributedString(string: placeholder, attributes: attributes)
     }
 
     func setupLayout() {

@@ -12,8 +12,29 @@ struct Task: Equatable {
     var subtitle: String
     var date: String
 
+    func getDate() -> Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yy"
+        return formatter.date(from: date) ?? Date.distantPast
+    }
+
+    static func sortDataByDate() {
+        data.sort { $0.getDate() > $1.getDate() }
+    }
+
     static func editTask(_ newTask: Task, index: Int) {
+//        print("Edited task \(newTask)")
         data[index] = newTask
+    }
+
+    static func addTask(_ newTask: Task) {
+        data.append(newTask)
+        sortDataByDate()
+    }
+
+    static func getData() -> [Task] {
+        sortDataByDate()
+        return data
     }
 
     static var data: [Task] = [

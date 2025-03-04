@@ -37,7 +37,7 @@ final class MainViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tasksTableView.reloadData()
+        tasksTableView.loadDataFromStorage()
     }
 
     override func viewDidLayoutSubviews() {
@@ -117,6 +117,11 @@ extension MainViewController: UISearchBarDelegate {
 // MARK: - Setup action
 private extension MainViewController {
     func setupAction() {
+        setupTasksTableViewAction()
+        setupAddTaskButtonAction()
+    }
+
+    func setupTasksTableViewAction() {
         tasksTableView.onShowShareScreen = { [weak self] activityVC in
             self?.present(activityVC, animated: true)
         }
@@ -124,6 +129,13 @@ private extension MainViewController {
         tasksTableView.onEditScreen = { [weak self] task in
             let editVC = EditTaskViewController(with: task)
             self?.navigationController?.pushViewController(editVC, animated: true)
+        }
+    }
+
+    func setupAddTaskButtonAction() {
+        footerView.onAddTaskButtonTapped = { [weak self] in
+            let addTaskVC = AddTaskViewController()
+            self?.navigationController?.pushViewController(addTaskVC, animated: true)
         }
     }
 }

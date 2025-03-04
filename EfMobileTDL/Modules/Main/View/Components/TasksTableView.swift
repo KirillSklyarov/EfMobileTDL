@@ -13,14 +13,25 @@ final class TasksTableView: UITableView {
     var onShowShareScreen: ((UIActivityViewController) -> Void)?
     var onEditScreen: ((Task) -> Void)?
 
+    private var data: [Task]?
+
     // MARK: - Init
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         setupUI()
+        loadDataFromStorage()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func loadDataFromStorage() {
+        self.data = Task.getData()
+//        print("Data first: \(data?.first)")
+//        sleep(1)
+//        print("Storage data first: \(Task.getData().first)")
+        reloadData()
     }
 }
 
@@ -46,7 +57,7 @@ private extension TasksTableView {
 // MARK: - UITableViewDataSource, UITableViewDelegate
 extension TasksTableView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        Task.data.count
+        data?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -102,6 +113,7 @@ private extension TasksTableView {
 
     func deleteTask(at indexPath: IndexPath) {
         Task.data.remove(at: indexPath.row)
+        data?.remove(at: indexPath.row)
         beginUpdates()
         deleteRows(at: [indexPath], with: .automatic)
         endUpdates()
