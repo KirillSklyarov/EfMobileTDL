@@ -32,6 +32,10 @@ struct Task: Equatable {
         sortDataByDate()
     }
 
+    static func removeTask(_ task: Task) {
+        data.removeAll { $0 == task }
+    }
+
     static func getData() -> [Task] {
         sortDataByDate()
         return data

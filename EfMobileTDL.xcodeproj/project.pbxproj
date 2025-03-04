@@ -32,6 +32,7 @@
 		73FC33322D771F110098ABB9 /* AppTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33312D771F110098ABB9 /* AppTextField.swift */; };
 		73FC333A2D772F6F0098ABB9 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33382D772F6F0098ABB9 /* AddTaskViewController.swift */; };
 		73FC333E2D773CB90098ABB9 /* AddTaskSubtitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC333D2D773CB90098ABB9 /* AddTaskSubtitleView.swift */; };
+		73FC33402D778B350098ABB9 /* AppSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC333F2D778B350098ABB9 /* AppSearchController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		73FC33312D771F110098ABB9 /* AppTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTextField.swift; sourceTree = "<group>"; };
 		73FC33382D772F6F0098ABB9 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		73FC333D2D773CB90098ABB9 /* AddTaskSubtitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskSubtitleView.swift; sourceTree = "<group>"; };
+		73FC333F2D778B350098ABB9 /* AppSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -291,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				73FC333D2D773CB90098ABB9 /* AddTaskSubtitleView.swift */,
+				73FC333F2D778B350098ABB9 /* AppSearchController.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 				73FC330A2D76EA6D0098ABB9 /* AppLabel.swift in Sources */,
 				732085B22D76264A0086525E /* EfMobileTDL.xcdatamodeld in Sources */,
 				732085B82D762D980086525E /* AppConstants.swift in Sources */,
+				73FC33402D778B350098ABB9 /* AppSearchController.swift in Sources */,
 				732085E02D7640570086525E /* AppButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

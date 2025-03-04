@@ -28,9 +28,20 @@ final class TasksTableView: UITableView {
 
     func loadDataFromStorage() {
         self.data = Task.getData()
-//        print("Data first: \(data?.first)")
-//        sleep(1)
-//        print("Storage data first: \(Task.getData().first)")
+        reloadData()
+    }
+
+    func filterData(by text: String) {
+//        print("text: \(text)")
+        self.data = Task.getData()
+
+        if !text.isEmpty {
+            self.data = Task.getData()
+            let filteredData = data?.filter { $0.title.lowercased().contains(text.lowercased()) }
+            self.data = filteredData
+//           print("data \(data)")
+        }
+
         reloadData()
     }
 }
@@ -62,7 +73,7 @@ extension TasksTableView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(indexPath) as TaskTableViewCell
-        let item = Task.data[indexPath.row]
+        guard let item = data?[indexPath.row] else { return cell }
         cell.configureCell(with: item)
         return cell
     }
@@ -100,19 +111,20 @@ extension TasksTableView: UITableViewDataSource, UITableViewDelegate {
 // MARK: - Menu actions
 private extension TasksTableView {
     func editTask(at indexPath: IndexPath) {
-        let task = Task.data[indexPath.row]
+        guard let task = data?[indexPath.row] else { print("We have problem with indexPath"); return }
         onEditScreen?(task)
     }
 
     func shareTask(at indexPath: IndexPath) {
-        let task = Task.data[indexPath.row]
+        guard let task = data?[indexPath.row] else { print("We have problem with indexPath"); return }
         let textToShare = "Задача: \(task.title)\nОписание: \(task.subtitle)\n"
         let activityVC = UIActivityViewController(activityItems: [textToShare], applicationActivities: nil)
         onShowShareScreen?(activityVC)
     }
 
     func deleteTask(at indexPath: IndexPath) {
-        Task.data.remove(at: indexPath.row)
+        guard let task = data?[indexPath.row] else { print("We have problem with indexPath"); return }
+        Task.removeTask(task)
         data?.remove(at: indexPath.row)
         beginUpdates()
         deleteRows(at: [indexPath], with: .automatic)

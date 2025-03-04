@@ -9,22 +9,8 @@ import UIKit
 
 final class MainViewController: UIViewController {
 
-    private lazy var searchController: UISearchController = {
-        let controller = UISearchController(searchResultsController: nil)
-        let searchTextField = controller.searchBar.searchTextField
-        searchTextField.backgroundColor = AppConstants.Colors.darkGray
-        searchTextField.leftView?.tintColor = AppConstants.Colors.gray
-
-        searchTextField.rightView = AppButton(style: .micro)
-        searchTextField.rightViewMode = .unlessEditing
-
-        searchTextField.attributedPlaceholder = NSAttributedString(string: "Search", attributes: [.foregroundColor: AppConstants.Colors.gray])
-
-        controller.hidesNavigationBarDuringPresentation = true
-        controller.searchBar.delegate = self
-        return controller
-    }()
-
+    // MARK: - Properties
+    private lazy var searchController = AppSearchController()
     private lazy var tasksTableView = TasksTableView()
     private lazy var footerView = FooterView()
 
@@ -35,14 +21,10 @@ final class MainViewController: UIViewController {
         setupAction()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewIsAppearing(_ animated: Bool) {
+        super.viewIsAppearing(animated)
         tasksTableView.loadDataFromStorage()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        setupSearchController()
+        searchController.additionalSearchControllerConfigure()
     }
 }
 
@@ -50,6 +32,8 @@ final class MainViewController: UIViewController {
 private extension MainViewController {
     func setupUI() {
         setupNavigationBar()
+        setupSearchController()
+
         view.backgroundColor = AppConstants.Colors.black
         view.addSubviews(tasksTableView, footerView)
 
@@ -105,12 +89,16 @@ private extension MainViewController {
     }
 }
 
-// MARK: - UISearchBarDelegate
-extension MainViewController: UISearchBarDelegate {
+// MARK: - UISearchBarDelegate, UISearchControllerDelegate
+extension MainViewController: UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
     func setupSearchController() {
-        let searchTextField = searchController.searchBar.searchTextField
-        searchTextField.rightView = AppButton(style: .micro)
-        searchTextField.rightViewMode = .unlessEditing
+        searchController.searchBar.delegate = self
+        searchController.searchResultsUpdater = self
+    }
+
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else { return }
+        tasksTableView.filterData(by: searchText)
     }
 }
 
@@ -127,6 +115,7 @@ private extension MainViewController {
         }
 
         tasksTableView.onEditScreen = { [weak self] task in
+            self?.resetSearchController()
             let editVC = EditTaskViewController(with: task)
             self?.navigationController?.pushViewController(editVC, animated: true)
         }
@@ -134,8 +123,13 @@ private extension MainViewController {
 
     func setupAddTaskButtonAction() {
         footerView.onAddTaskButtonTapped = { [weak self] in
+            self?.resetSearchController()
             let addTaskVC = AddTaskViewController()
             self?.navigationController?.pushViewController(addTaskVC, animated: true)
         }
+    }
+
+    func resetSearchController() {
+        searchController.searchBar.text = ""
     }
 }
