@@ -33,6 +33,7 @@ private extension AppLabel {
         case .title:
             font = AppConstants.Fonts.regular16
             textColor = AppConstants.Colors.white
+            numberOfLines = 0
         case .subtitle:
             font = AppConstants.Fonts.regular12
             textColor = AppConstants.Colors.white
@@ -40,6 +41,7 @@ private extension AppLabel {
         case .date:
             font = AppConstants.Fonts.regular12
             textColor = AppConstants.Colors.gray
+            numberOfLines = 0
         }
     }
 }

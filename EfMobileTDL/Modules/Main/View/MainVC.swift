@@ -32,6 +32,7 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupAction()
     }
 
     override func viewDidLayoutSubviews() {
@@ -105,8 +106,11 @@ extension MainViewController: UISearchBarDelegate {
     }
 }
 
+// MARK: - Setup action
 private extension MainViewController {
     func setupAction() {
-
+        tasksTableView.onShowShareScreen = { [weak self] activityVC in
+            self?.present(activityVC, animated: true)
+        }
     }
 }

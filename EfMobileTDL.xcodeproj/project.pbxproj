@@ -15,18 +15,19 @@
 		732085A62D76262F0086525E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7320859F2D76262F0086525E /* Assets.xcassets */; };
 		732085A82D76262F0086525E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 732085A22D76262F0086525E /* LaunchScreen.storyboard */; };
 		732085B22D76264A0086525E /* EfMobileTDL.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 732085AF2D76264A0086525E /* EfMobileTDL.xcdatamodeld */; };
-		732085B62D762BBB0086525E /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085B42D762BBB0086525E /* MainVC.swift */; };
 		732085B82D762D980086525E /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085B72D762D980086525E /* AppConstants.swift */; };
 		732085DA2D762E8D0086525E /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085D82D762E8D0086525E /* UIColor+Ext.swift */; };
 		732085DC2D76311A0086525E /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085DB2D76311A0086525E /* UIView+Ext.swift */; };
 		732085E02D7640570086525E /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085DF2D7640570086525E /* AppButton.swift */; };
-		732085E42D7643330086525E /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085E32D7643330086525E /* FooterView.swift */; };
-		732085E62D764B8C0086525E /* TasksTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085E52D764B8C0086525E /* TasksTableView.swift */; };
 		732085E82D764BFB0086525E /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085E72D764BFB0086525E /* UITableView+Ext.swift */; };
-		732085EA2D764C630086525E /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085E92D764C630086525E /* TaskTableViewCell.swift */; };
 		732085EC2D764D240086525E /* AppStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085EB2D764D240086525E /* AppStackView.swift */; };
 		73FC330A2D76EA6D0098ABB9 /* AppLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33092D76EA6D0098ABB9 /* AppLabel.swift */; };
-		73FC330C2D76EE0F0098ABB9 /* CheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC330B2D76EE0F0098ABB9 /* CheckmarkView.swift */; };
+		73FC33122D770B160098ABB9 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33102D770B160098ABB9 /* Task.swift */; };
+		73FC33242D770B220098ABB9 /* CheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC331D2D770B220098ABB9 /* CheckmarkView.swift */; };
+		73FC33252D770B220098ABB9 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC331E2D770B220098ABB9 /* FooterView.swift */; };
+		73FC33262D770B220098ABB9 /* TasksTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC331F2D770B220098ABB9 /* TasksTableView.swift */; };
+		73FC33272D770B220098ABB9 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33202D770B220098ABB9 /* TaskTableViewCell.swift */; };
+		73FC33282D770B220098ABB9 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33222D770B220098ABB9 /* MainVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,21 +57,22 @@
 		732085A02D76262F0086525E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		732085A12D76262F0086525E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		732085B12D76264A0086525E /* EfMobileTDL.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EfMobileTDL.xcdatamodel; sourceTree = "<group>"; };
-		732085B42D762BBB0086525E /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		732085B72D762D980086525E /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		732085D82D762E8D0086525E /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		732085DB2D76311A0086525E /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		732085DF2D7640570086525E /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
-		732085E32D7643330086525E /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
-		732085E52D764B8C0086525E /* TasksTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableView.swift; sourceTree = "<group>"; };
 		732085E72D764BFB0086525E /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
-		732085E92D764C630086525E /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		732085EB2D764D240086525E /* AppStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStackView.swift; sourceTree = "<group>"; };
 		7371B0B32D760D77004E6C73 /* EfMobileTDL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EfMobileTDL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0CC2D760D78004E6C73 /* EfMobileTDLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0D62D760D78004E6C73 /* EfMobileTDLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		73FC33092D76EA6D0098ABB9 /* AppLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLabel.swift; sourceTree = "<group>"; };
-		73FC330B2D76EE0F0098ABB9 /* CheckmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkView.swift; sourceTree = "<group>"; };
+		73FC33102D770B160098ABB9 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		73FC331D2D770B220098ABB9 /* CheckmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkView.swift; sourceTree = "<group>"; };
+		73FC331E2D770B220098ABB9 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
+		73FC331F2D770B220098ABB9 /* TasksTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableView.swift; sourceTree = "<group>"; };
+		73FC33202D770B220098ABB9 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		73FC33222D770B220098ABB9 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,8 +169,8 @@
 		732085B52D762BBB0086525E /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				732085B42D762BBB0086525E /* MainVC.swift */,
-				732085E22D7643290086525E /* Components */,
+				73FC33112D770B160098ABB9 /* Model */,
+				73FC33232D770B220098ABB9 /* View */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -193,17 +195,6 @@
 			path = DesignSystem;
 			sourceTree = "<group>";
 		};
-		732085E22D7643290086525E /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				732085E32D7643330086525E /* FooterView.swift */,
-				732085E52D764B8C0086525E /* TasksTableView.swift */,
-				732085E92D764C630086525E /* TaskTableViewCell.swift */,
-				73FC330B2D76EE0F0098ABB9 /* CheckmarkView.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
 		7371B0AA2D760D77004E6C73 = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +213,34 @@
 				7371B0D62D760D78004E6C73 /* EfMobileTDLUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		73FC33112D770B160098ABB9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				73FC33102D770B160098ABB9 /* Task.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		73FC33212D770B220098ABB9 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				73FC331D2D770B220098ABB9 /* CheckmarkView.swift */,
+				73FC331E2D770B220098ABB9 /* FooterView.swift */,
+				73FC331F2D770B220098ABB9 /* TasksTableView.swift */,
+				73FC33202D770B220098ABB9 /* TaskTableViewCell.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		73FC33232D770B220098ABB9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				73FC33222D770B220098ABB9 /* MainVC.swift */,
+				73FC33212D770B220098ABB9 /* Components */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -364,17 +383,18 @@
 				732085E82D764BFB0086525E /* UITableView+Ext.swift in Sources */,
 				7320859B2D7626110086525E /* AppDelegate.swift in Sources */,
 				7320859C2D7626110086525E /* SceneDelegate.swift in Sources */,
-				732085B62D762BBB0086525E /* MainVC.swift in Sources */,
-				732085E42D7643330086525E /* FooterView.swift in Sources */,
 				732085EC2D764D240086525E /* AppStackView.swift in Sources */,
+				73FC33242D770B220098ABB9 /* CheckmarkView.swift in Sources */,
+				73FC33252D770B220098ABB9 /* FooterView.swift in Sources */,
+				73FC33262D770B220098ABB9 /* TasksTableView.swift in Sources */,
+				73FC33272D770B220098ABB9 /* TaskTableViewCell.swift in Sources */,
+				73FC33282D770B220098ABB9 /* MainVC.swift in Sources */,
 				732085DA2D762E8D0086525E /* UIColor+Ext.swift in Sources */,
 				732085DC2D76311A0086525E /* UIView+Ext.swift in Sources */,
-				732085E62D764B8C0086525E /* TasksTableView.swift in Sources */,
-				732085EA2D764C630086525E /* TaskTableViewCell.swift in Sources */,
+				73FC33122D770B160098ABB9 /* Task.swift in Sources */,
 				73FC330A2D76EA6D0098ABB9 /* AppLabel.swift in Sources */,
 				732085B22D76264A0086525E /* EfMobileTDL.xcdatamodeld in Sources */,
 				732085B82D762D980086525E /* AppConstants.swift in Sources */,
-				73FC330C2D76EE0F0098ABB9 /* CheckmarkView.swift in Sources */,
 				732085E02D7640570086525E /* AppButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

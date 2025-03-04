@@ -15,7 +15,7 @@ final class TaskTableViewCell: UITableViewCell {
     private lazy var dateLabel = AppLabel(type: .date)
     private lazy var checkView = CheckmarkView()
 
-    private lazy var textStack = AppStackView([titleLabel, subTitleLabel, dateLabel], axis: .vertical, spacing: 6)
+    private lazy var textStack = AppStackView([titleLabel, subTitleLabel, dateLabel], axis: .vertical, spacing: 6, distribution: .equalSpacing)
 
     private lazy var contentStack = AppStackView([checkView, textStack], axis: .horizontal, spacing: 8)
 
@@ -37,12 +37,16 @@ extension TaskTableViewCell {
         subTitleLabel.text = task.subtitle
         dateLabel.text = task.date
     }
+
+    func isHideCheckmarkView(_ bool: Bool) {
+        checkView.alpha = bool ? 0 : 1
+    }
 }
 
 // MARK: - Configure cell
 private extension TaskTableViewCell {
     func setupCell() {
-        backgroundColor = .clear
+        backgroundColor = AppConstants.Colors.black
         contentView.addSubviews(contentStack)
         setupLayout()
     }

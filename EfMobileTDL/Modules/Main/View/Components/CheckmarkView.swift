@@ -9,6 +9,8 @@ import UIKit
 
 final class CheckmarkView: UIView {
 
+    private lazy var checkImageView = configureImageView()
+
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,9 +25,17 @@ final class CheckmarkView: UIView {
 // MARK: - Configure
 private extension CheckmarkView {
     func configure() {
-        let checkImageView = configureImageView()
         addSubviews(checkImageView)
-        widthAnchor.constraint(equalToConstant: 24).isActive = true
+        setupLayout()
+    }
+
+    func setupLayout() {
+        NSLayoutConstraint.activate([
+            widthAnchor.constraint(equalToConstant: 24),
+            checkImageView.topAnchor.constraint(equalTo: topAnchor),
+            checkImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            checkImageView.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
     }
 
     func configureImageView() -> UIImageView {
