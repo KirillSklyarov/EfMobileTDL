@@ -36,7 +36,7 @@ final class TaskTableViewCell: UITableViewCell {
 
 // MARK: - Public methods
 extension TaskTableViewCell {
-    func configureCell(with task: Task) {
+    func configureCell(with task: TaskOld) {
         titleTextHere = task.title
         subTitleLabel.text = task.subtitle
         dateLabel.text = task.date

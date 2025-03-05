@@ -17,11 +17,11 @@ final class EditTaskViewController: UIViewController {
 
     private lazy var contentStack = AppStackView([titleStack, subtitleTextField], axis: .vertical, spacing: 16)
 
-    private var task: Task
+    private var task: TaskOld
     private var index: Int?
 
     // MARK: - Init
-    init(with task: Task) {
+    init(with task: TaskOld) {
         self.task = task
         super.init(nibName: nil, bundle: nil)
         self.configure()
@@ -104,7 +104,7 @@ private extension EditTaskViewController {
     func sendEditedTaskToStorage() {
         guard let index else { print("We can not edit task"); return }
 //        print("Send edited task to storage: \(task)")
-        Task.editTask(task, index: index)
+        TaskOld.editTask(task, index: index)
     }
 
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -114,7 +114,7 @@ private extension EditTaskViewController {
     }
 
     func configure() {
-        index = Task.data.firstIndex { $0 == task }
+        index = TaskOld.data.firstIndex { $0 == task }
 
         titleTextField.text = task.title
         subtitleTextField.setTextViewText(task.subtitle)

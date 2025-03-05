@@ -11,9 +11,9 @@ final class TasksTableView: UITableView {
 
     var chosenCell: TaskTableViewCell?
     var onShowShareScreen: ((UIActivityViewController) -> Void)?
-    var onEditScreen: ((Task) -> Void)?
+    var onEditScreen: ((TaskOld) -> Void)?
 
-    private var data: [Task]?
+    private var data: [TaskOld]?
 
     // MARK: - Init
     override init(frame: CGRect, style: UITableView.Style) {
@@ -27,16 +27,16 @@ final class TasksTableView: UITableView {
     }
 
     func loadDataFromStorage() {
-        self.data = Task.getData()
+        self.data = TaskOld.getData()
         reloadData()
     }
 
     func filterData(by text: String) {
 //        print("text: \(text)")
-        self.data = Task.getData()
+        self.data = TaskOld.getData()
 
         if !text.isEmpty {
-            self.data = Task.getData()
+            self.data = TaskOld.getData()
             let filteredData = data?.filter { $0.title.lowercased().contains(text.lowercased()) }
             self.data = filteredData
 //           print("data \(data)")
@@ -77,7 +77,7 @@ extension TasksTableView: UITableViewDataSource, UITableViewDelegate {
         cell.configureCell(with: item)
 
         cell.onTaskStateChanged = { state in
-            Task.changeTaskState(item)
+            TaskOld.changeTaskState(item)
         }
 
         return cell
@@ -129,7 +129,7 @@ private extension TasksTableView {
 
     func deleteTask(at indexPath: IndexPath) {
         guard let task = data?[indexPath.row] else { print("We have problem with indexPath"); return }
-        Task.removeTask(task)
+        TaskOld.removeTask(task)
         data?.remove(at: indexPath.row)
         beginUpdates()
         deleteRows(at: [indexPath], with: .automatic)

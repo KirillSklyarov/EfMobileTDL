@@ -10,19 +10,25 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    private let di = DependencyContainer()
+    private var appStartManager: AppStartManager?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        showRootVC()
+        setupAppStartManager()
+        startApp()
     }
 }
 
 private extension SceneDelegate {
-    func showRootVC() {
-        let mainViewController = MainViewController()
-        window?.rootViewController = UINavigationController(rootViewController: mainViewController)
-        window?.makeKeyAndVisible()
+    func setupAppStartManager() {
+        appStartManager = di.startManager
+        appStartManager?.setWindow(window)
+    }
+
+    func startApp() {
+        appStartManager?.startApp()
     }
 }
 

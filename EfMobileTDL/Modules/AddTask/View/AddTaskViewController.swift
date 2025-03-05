@@ -17,7 +17,7 @@ final class AddTaskViewController: UIViewController {
 
     private lazy var contentStack = AppStackView([titleTextField, subTitleContainer, saveStack], axis: .vertical, spacing: 16)
 
-    private var task: Task?
+    private var task: TaskOld?
     private var textViewText: String?
 
     // MARK: - Life cycle
@@ -126,7 +126,7 @@ extension AddTaskViewController: UITextViewDelegate {
 private extension AddTaskViewController {
     func sendNewTaskToStorage() {
         guard let task else { return }
-        Task.addTask(task)
+        TaskOld.addTask(task)
     }
 
     func configureTask() {
@@ -134,7 +134,7 @@ private extension AddTaskViewController {
               let subtitle = textViewText else { print("We have empty fields"); return }
         let date = configureDate()
         let tempID = -UUID().hashValue
-        task = Task(id: tempID, title: title, subtitle: subtitle, date: date, completed: false)
+        task = TaskOld(id: tempID, title: title, subtitle: subtitle, date: date, completed: false)
     }
 
     func checkButton() {
