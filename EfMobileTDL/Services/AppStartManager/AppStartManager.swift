@@ -12,6 +12,9 @@ final class AppStartManager {
     private let storage: AppStorage
     private let networkService: NetworkService
     private var window: UIWindow?
+    private var mainViewController: MainViewController?
+
+    private var data: [TDL] = []
 
     // MARK: - Init
     init(storage: AppStorage, networkService: NetworkService) {
@@ -22,8 +25,11 @@ final class AppStartManager {
     // MARK: - Public methods
     func startApp() {
         showRootVC()
+        mainViewController?.loading()
+
         Task { await fetchData() }
     }
+
     // Принимаем окно из SceneDelegate
     func setWindow(_ window: UIWindow?) {
         self.window = window
@@ -33,16 +39,31 @@ final class AppStartManager {
 // MARK: - Fetch Data
 private extension AppStartManager {
     func fetchData() async {
+        let isFirstLaunch = !UserDefaults.standard.bool(forKey: "notFirstLaunch")
+
         do {
-            let isFirstLaunch = !UserDefaults.standard.bool(forKey: "notFirstLaunch")
             try await fetchDataIsFirstLaunch(isFirstLaunch)
+            await updateVC()
         } catch {
+            await setVCErrorState()
             print(error)
         }
     }
 
+    func updateVC() async {
+        await MainActor.run {
+            mainViewController?.configure(with: data)
+            print("Done")
+        }
+    }
+
+    func setVCErrorState() async {
+        await MainActor.run {
+            mainViewController?.error()
+        }
+    }
+
     func fetchDataIsFirstLaunch(_ isFirstLaunch: Bool) async throws {
-        var data: [TaskOld] = []
         if isFirstLaunch {
             data = try await networkService.fetchDataFirstTime()
             UserDefaults.standard.set(true, forKey: "notFirstLaunch")
@@ -51,14 +72,14 @@ private extension AppStartManager {
         }
 
         storage.setUserTasks(data)
-        print(storage.userTasks)
+        print(storage.data)
     }
 }
 
 private extension AppStartManager {
     func showRootVC() {
-        let mainViewController = MainViewController(storage: storage)
-        window?.rootViewController = UINavigationController(rootViewController: mainViewController)
+        mainViewController = MainViewController(storage: storage)
+        window?.rootViewController = UINavigationController(rootViewController: mainViewController!)
         window?.makeKeyAndVisible()
     }
 }

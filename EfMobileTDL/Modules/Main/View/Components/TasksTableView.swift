@@ -11,34 +11,45 @@ final class TasksTableView: UITableView {
 
     var chosenCell: TaskTableViewCell?
     var onShowShareScreen: ((UIActivityViewController) -> Void)?
-    var onEditScreen: ((TaskOld) -> Void)?
+    var onEditScreen: ((TDL) -> Void)?
 
-    private var data: [TaskOld]?
+    private var data: [TDL]?
+    private var filteredData: [TDL]?
+    private var isFiltering = false
+
+    var onRemoveTask: ((TDL) -> Void)?
+    var onChangeTDLState: ((TDL) -> Void)?
 
     // MARK: - Init
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         setupUI()
-        loadDataFromStorage()
+//        loadDataFromStorage()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func loadDataFromStorage() {
-        self.data = TaskOld.getData()
+    func getData(_ data: [TDL]) {
+        self.data = data
         reloadData()
     }
 
+//    func loadDataFromStorage() {
+//        self.data = TaskOld.getData()
+//        reloadData()
+//    }
+
     func filterData(by text: String) {
 //        print("text: \(text)")
-        self.data = TaskOld.getData()
+//        self.data = TaskOld.getData()
 
         if !text.isEmpty {
-            self.data = TaskOld.getData()
-            let filteredData = data?.filter { $0.title.lowercased().contains(text.lowercased()) }
-            self.data = filteredData
+//            self.data = TaskOld.getData()
+            filteredData = data?.filter { $0.title.lowercased().contains(text.lowercased()) }
+            isFiltering.toggle()
+//            self.data = filteredData
 //           print("data \(data)")
         }
 
@@ -68,7 +79,7 @@ private extension TasksTableView {
 // MARK: - UITableViewDataSource, UITableViewDelegate
 extension TasksTableView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        data?.count ?? 0
+        isFiltering ? filteredData?.count ?? 0 : data?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -76,8 +87,8 @@ extension TasksTableView: UITableViewDataSource, UITableViewDelegate {
         guard let item = data?[indexPath.row] else { return cell }
         cell.configureCell(with: item)
 
-        cell.onTaskStateChanged = { state in
-            TaskOld.changeTaskState(item)
+        cell.onTaskStateChanged = { [weak self] in
+            self?.onChangeTDLState?(item)
         }
 
         return cell
@@ -129,7 +140,9 @@ private extension TasksTableView {
 
     func deleteTask(at indexPath: IndexPath) {
         guard let task = data?[indexPath.row] else { print("We have problem with indexPath"); return }
-        TaskOld.removeTask(task)
+        onRemoveTask?(task)
+
+//        TaskOld.removeTask(task)
         data?.remove(at: indexPath.row)
         beginUpdates()
         deleteRows(at: [indexPath], with: .automatic)

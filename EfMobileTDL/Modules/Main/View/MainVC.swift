@@ -13,8 +13,10 @@ final class MainViewController: UIViewController {
     private lazy var searchController = AppSearchController()
     private lazy var tasksTableView = TasksTableView()
     private lazy var footerView = FooterView()
+    private lazy var activityIndicator = AppActivityIndicator()
 
     private let storage: AppStorage
+    private var data: [TDL] = []
 
     // MARK: - Init
     init(storage: AppStorage) {
@@ -29,13 +31,12 @@ final class MainViewController: UIViewController {
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
-        setupAction()
+        initialSetup()
     }
 
     override func viewIsAppearing(_ animated: Bool) {
         super.viewIsAppearing(animated)
-        tasksTableView.loadDataFromStorage()
+        updateData()
         searchController.additionalSearchControllerConfigure()
     }
 }
@@ -47,7 +48,7 @@ private extension MainViewController {
         setupSearchController()
 
         view.backgroundColor = AppConstants.Colors.black
-        view.addSubviews(tasksTableView, footerView)
+        view.addSubviews(tasksTableView, footerView, activityIndicator)
 
         setupLayout()
     }
@@ -80,6 +81,7 @@ private extension MainViewController {
     func setupLayout() {
         setupTableViewLayout()
         setupFooterViewLayout()
+        setupActivityIndicatorLayout()
     }
 
     func setupFooterViewLayout() {
@@ -98,6 +100,58 @@ private extension MainViewController {
             tasksTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -AppConstants.Insets.medium),
             tasksTableView.bottomAnchor.constraint(equalTo: footerView.topAnchor)
         ])
+    }
+
+    func setupActivityIndicatorLayout() {
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
+}
+
+// MARK: - State management
+extension MainViewController {
+    func initialSetup() {
+        setupUI()
+        setupAction()
+    }
+
+    func loading() {
+        isHideContent(true)
+        activityIndicator.startAnimating()
+    }
+
+    func configure(with data: [TDL]) {
+        self.data = data
+        isHideContent(false)
+        activityIndicator.stopAnimating()
+        tasksTableView.getData(data)
+    }
+
+    func error() {
+        activityIndicator.stopAnimating()
+        showAlert()
+    }
+
+    func showAlert() {
+        let alert = UIAlertController(title: "Ошибка загрузки данных", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+        present(alert, animated: true)
+        print("error")
+    }
+
+    func isHideContent(_ isHide: Bool) {
+        switch isHide {
+        case true:
+            tasksTableView.alpha = 0
+            footerView.alpha = 0
+//            navigationController?.setNavigationBarHidden(true, animated: false)
+        case false:
+            tasksTableView.alpha = 1
+            footerView.alpha = 1
+//            navigationController?.setNavigationBarHidden(false, animated: false)
+        }
     }
 }
 
@@ -127,21 +181,46 @@ private extension MainViewController {
         }
 
         tasksTableView.onEditScreen = { [weak self] task in
-            self?.resetSearchController()
-            let editVC = EditTaskViewController(with: task)
-            self?.navigationController?.pushViewController(editVC, animated: true)
+            guard let self else { return }
+            resetSearchController()
+            let editVC = EditTaskViewController(with: task, storage: storage)
+            navigationController?.pushViewController(editVC, animated: true)
+        }
+
+        tasksTableView.onRemoveTask = { [weak self] task in
+            guard let self else { return }
+            storage.removeTask(task)
+        }
+
+        tasksTableView.onChangeTDLState = { [weak self] task in
+            guard let self else { return }
+            storage.changeTaskState(task)
+            updateData()
         }
     }
 
     func setupAddTaskButtonAction() {
         footerView.onAddTaskButtonTapped = { [weak self] in
-            self?.resetSearchController()
-            let addTaskVC = AddTaskViewController()
-            self?.navigationController?.pushViewController(addTaskVC, animated: true)
+            guard let self else { return }
+            resetSearchController()
+            let addTaskVC = AddTaskViewController(storage: storage)
+            navigationController?.pushViewController(addTaskVC, animated: true)
         }
     }
 
     func resetSearchController() {
         searchController.searchBar.text = ""
+    }
+}
+
+// MARK: - Supporting methods
+private extension MainViewController {
+    func updateData() {
+        storage.getData { [weak self] data in
+            DispatchQueue.main.async {
+                self?.data = data
+                self?.tasksTableView.getData(data)
+            }
+        }
     }
 }

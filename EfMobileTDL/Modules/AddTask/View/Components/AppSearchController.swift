@@ -20,7 +20,8 @@ final class AppSearchController: UISearchController {
 
     func additionalSearchControllerConfigure() {
         if searchBar.searchTextField.rightView == nil {
-            searchBar.searchTextField.rightView = AppButton(style: .micro)
+            let button = AppButton(style: .micro)
+            searchBar.searchTextField.rightView = button
             searchBar.searchTextField.rightViewMode = .unlessEditing
             searchBar.searchTextField.textColor = .white
         }

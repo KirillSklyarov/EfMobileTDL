@@ -20,7 +20,7 @@ final class TaskTableViewCell: UITableViewCell {
     private lazy var contentStack = AppStackView([checkView, textStack], axis: .horizontal, spacing: 8)
 
     private var titleTextHere = ""
-    var onTaskStateChanged: ((Bool) -> Void)?
+    var onTaskStateChanged: (() -> Void)?
 
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -36,7 +36,7 @@ final class TaskTableViewCell: UITableViewCell {
 
 // MARK: - Public methods
 extension TaskTableViewCell {
-    func configureCell(with task: TaskOld) {
+    func configureCell(with task: TDL) {
         titleTextHere = task.title
         subTitleLabel.text = task.subtitle
         dateLabel.text = task.date
@@ -72,7 +72,7 @@ private extension TaskTableViewCell {
     func setupAction() {
         checkView.onDoneButtonTapped = { [weak self] isDone in
             self?.designCell(isDone)
-            self?.onTaskStateChanged?(isDone)
+            self?.onTaskStateChanged?()
         }
     }
 

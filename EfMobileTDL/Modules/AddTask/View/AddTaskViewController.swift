@@ -17,9 +17,21 @@ final class AddTaskViewController: UIViewController {
 
     private lazy var contentStack = AppStackView([titleTextField, subTitleContainer, saveStack], axis: .vertical, spacing: 16)
 
-    private var task: TaskOld?
+    private let storage: AppStorage
+
+    private var task: TDL?
     private var textViewText: String?
 
+    // MARK: - Init
+    init(storage: AppStorage) {
+        self.storage = storage
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,7 +138,8 @@ extension AddTaskViewController: UITextViewDelegate {
 private extension AddTaskViewController {
     func sendNewTaskToStorage() {
         guard let task else { return }
-        TaskOld.addTask(task)
+        storage.addTask(task)
+//        TaskOld.addTask(task)
     }
 
     func configureTask() {
@@ -134,7 +147,7 @@ private extension AddTaskViewController {
               let subtitle = textViewText else { print("We have empty fields"); return }
         let date = configureDate()
         let tempID = -UUID().hashValue
-        task = TaskOld(id: tempID, title: title, subtitle: subtitle, date: date, completed: false)
+        task = TDL(id: tempID, title: title, subtitle: subtitle, date: date, completed: false)
     }
 
     func checkButton() {
