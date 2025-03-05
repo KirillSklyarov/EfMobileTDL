@@ -75,6 +75,11 @@ extension TasksTableView: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueCell(indexPath) as TaskTableViewCell
         guard let item = data?[indexPath.row] else { return cell }
         cell.configureCell(with: item)
+
+        cell.onTaskStateChanged = { state in
+            Task.changeTaskState(item)
+        }
+
         return cell
     }
 

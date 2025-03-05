@@ -11,6 +11,7 @@ enum AppButtonStyle {
     case micro
     case addTask
     case save
+    case taskPoint
 }
 
 final class AppButton: UIButton {
@@ -29,22 +30,30 @@ final class AppButton: UIButton {
 
 private extension AppButton {
     func configure(_ style: AppButtonStyle) {
-        let image: UIImage?
-
         switch style {
         case .micro:
-            image = UIImage(systemName: "microphone.fill")
+            let image = UIImage(systemName: "microphone.fill")
             tintColor = AppConstants.Colors.gray
             contentMode = .scaleAspectFit
             setImage(image, for: .normal)
         case .addTask:
             let config = UIImage.SymbolConfiguration(pointSize: 24, weight: .regular)
-            image = UIImage(systemName: "square.and.pencil", withConfiguration: config)?
+            let image = UIImage(systemName: "square.and.pencil", withConfiguration: config)?
                 .withTintColor(AppConstants.Colors.yellow)
                 .withRenderingMode(.alwaysOriginal)
             setImage(image, for: .normal)
 
         case .save: setupSaveButton()
+        case .taskPoint:
+            let config = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular)
+            let image = UIImage(systemName: "circle", withConfiguration: config)?
+                .withTintColor(AppConstants.Colors.gray)
+                .withRenderingMode(.alwaysOriginal)
+            let selectedImage = UIImage(systemName: "checkmark.circle", withConfiguration: config)?
+                .withTintColor(AppConstants.Colors.yellow)
+                .withRenderingMode(.alwaysOriginal)
+            setImage(image, for: .normal)
+            setImage(selectedImage, for: .selected)
         }
         addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }

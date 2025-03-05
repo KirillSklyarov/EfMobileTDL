@@ -19,10 +19,14 @@ final class TaskTableViewCell: UITableViewCell {
 
     private lazy var contentStack = AppStackView([checkView, textStack], axis: .horizontal, spacing: 8)
 
+    private var titleTextHere = ""
+    var onTaskStateChanged: ((Bool) -> Void)?
+
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupCell()
+        setupAction()
     }
     
     required init?(coder: NSCoder) {
@@ -33,9 +37,11 @@ final class TaskTableViewCell: UITableViewCell {
 // MARK: - Public methods
 extension TaskTableViewCell {
     func configureCell(with task: Task) {
-        titleLabel.text = task.title
+        titleTextHere = task.title
         subTitleLabel.text = task.subtitle
         dateLabel.text = task.date
+        checkView.setState(task.completed)
+        designCell(task.completed)
     }
 
     func isHideCheckmarkView(_ bool: Bool) {
@@ -58,5 +64,35 @@ private extension TaskTableViewCell {
             contentStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             contentStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -AppConstants.Insets.small)
         ])
+    }
+}
+
+// MARK: - Setup Action
+private extension TaskTableViewCell {
+    func setupAction() {
+        checkView.onDoneButtonTapped = { [weak self] isDone in
+            self?.designCell(isDone)
+            self?.onTaskStateChanged?(isDone)
+        }
+    }
+
+    func designCell(_ isDone: Bool) {
+        isDone ? designDoneTaskCell() : designUndoneTaskCell()
+    }
+
+    func designDoneTaskCell() {
+        titleLabel.textColor = AppConstants.Colors.gray
+        subTitleLabel.textColor = AppConstants.Colors.gray
+        let attributedString = NSAttributedString(
+            string: titleTextHere,
+            attributes: [.strikethroughStyle: NSUnderlineStyle.single.rawValue])
+        titleLabel.attributedText = attributedString
+    }
+
+    func designUndoneTaskCell() {
+        titleLabel.textColor = AppConstants.Colors.white
+        subTitleLabel.textColor = AppConstants.Colors.white
+        titleLabel.attributedText = nil
+        titleLabel.text = titleTextHere
     }
 }

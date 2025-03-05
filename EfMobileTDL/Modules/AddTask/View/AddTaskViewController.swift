@@ -133,7 +133,8 @@ private extension AddTaskViewController {
         guard let title = titleTextField.text,
               let subtitle = textViewText else { print("We have empty fields"); return }
         let date = configureDate()
-        task = Task(title: title, subtitle: subtitle, date: date)
+        let tempID = -UUID().hashValue
+        task = Task(id: tempID, title: title, subtitle: subtitle, date: date, completed: false)
     }
 
     func checkButton() {

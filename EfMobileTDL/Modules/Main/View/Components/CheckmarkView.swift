@@ -9,42 +9,48 @@ import UIKit
 
 final class CheckmarkView: UIView {
 
-    private lazy var checkImageView = configureImageView()
+    private lazy var checkButton = AppButton(style: .taskPoint)
+    var onDoneButtonTapped: ((Bool) -> Void)?
 
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
+        setupAction()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: - Public methods
+extension CheckmarkView {
+    func setState(_ state: Bool) {
+        checkButton.isSelected = state
     }
 }
 
 // MARK: - Configure
 private extension CheckmarkView {
     func configure() {
-        addSubviews(checkImageView)
+        contentMode = .scaleAspectFit
+        addSubviews(checkButton)
         setupLayout()
     }
 
     func setupLayout() {
-        NSLayoutConstraint.activate([
-            widthAnchor.constraint(equalToConstant: 24),
-            checkImageView.topAnchor.constraint(equalTo: topAnchor),
-            checkImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            checkImageView.trailingAnchor.constraint(equalTo: trailingAnchor)
-        ])
+        widthAnchor.constraint(equalToConstant: 24).isActive = true
     }
+}
 
-    func configureImageView() -> UIImageView {
-        let image = UIImage(systemName: "circle")?
-            .withTintColor(AppConstants.Colors.gray)
-            .withRenderingMode(.alwaysOriginal)
-        let imageView = UIImageView(image: image)
-        imageView.heightAnchor.constraint(equalToConstant: 24).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 24).isActive = true
-        return imageView
+// MARK: - Setup action
+private extension CheckmarkView {
+    func setupAction() {
+        checkButton.onButtonTapped = { [weak self] in
+            guard let self else { return }
+            checkButton.isSelected.toggle()
+            onDoneButtonTapped?(checkButton.isSelected)
+        }
     }
 }
