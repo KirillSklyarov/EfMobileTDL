@@ -9,22 +9,19 @@ import UIKit
 
 final class TasksTableView: UITableView {
 
-    var chosenCell: TaskTableViewCell?
+    private var chosenCell: TaskTableViewCell?
+    private var data: [TDL]?
+
     var onShowShareScreen: ((UIActivityViewController) -> Void)?
     var onEditScreen: ((TDL) -> Void)?
-
-    private var data: [TDL]?
-    private var filteredData: [TDL]?
-    private var isFiltering = false
-
     var onRemoveTask: ((TDL) -> Void)?
     var onChangeTDLState: ((TDL) -> Void)?
+    var onGetFilteredData: ((String) -> Void)?
 
     // MARK: - Init
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         setupUI()
-//        loadDataFromStorage()
     }
     
     required init?(coder: NSCoder) {
@@ -36,24 +33,9 @@ final class TasksTableView: UITableView {
         reloadData()
     }
 
-//    func loadDataFromStorage() {
-//        self.data = TaskOld.getData()
-//        reloadData()
-//    }
-
     func filterData(by text: String) {
-//        print("text: \(text)")
-//        self.data = TaskOld.getData()
-
-        if !text.isEmpty {
-//            self.data = TaskOld.getData()
-            filteredData = data?.filter { $0.title.lowercased().contains(text.lowercased()) }
-            isFiltering.toggle()
-//            self.data = filteredData
-//           print("data \(data)")
-        }
-
-        reloadData()
+        print("text: \(text)")
+        onGetFilteredData?(text)
     }
 }
 
@@ -79,12 +61,14 @@ private extension TasksTableView {
 // MARK: - UITableViewDataSource, UITableViewDelegate
 extension TasksTableView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        isFiltering ? filteredData?.count ?? 0 : data?.count ?? 0
+        data?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(indexPath) as TaskTableViewCell
-        guard let item = data?[indexPath.row] else { return cell }
+        let item = data?[indexPath.row]
+
+        guard let item else { return cell }
         cell.configureCell(with: item)
 
         cell.onTaskStateChanged = { [weak self] in

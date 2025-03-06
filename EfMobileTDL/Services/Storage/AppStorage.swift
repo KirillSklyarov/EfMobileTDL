@@ -33,6 +33,15 @@ extension AppStorage {
         }
     }
 
+    func filterData(by string: String) -> [TDL] {
+        if string.isEmpty {
+            return data
+        } else {
+            let filteredData = data.filter { $0.subtitle.lowercased().contains(string.lowercased()) }
+            return filteredData
+        }
+    }
+
     func sortDataByDate() {
         data.sort { $0.getDate() > $1.getDate() }
     }

@@ -197,6 +197,12 @@ private extension MainViewController {
             storage.changeTaskState(task)
             updateData()
         }
+
+        tasksTableView.onGetFilteredData = { [weak self] string in
+            guard let self else { return }
+            let filteredData = storage.filterData(by: string)
+            tasksTableView.getData(filteredData)
+        }
     }
 
     func setupAddTaskButtonAction() {

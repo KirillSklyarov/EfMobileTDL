@@ -72,7 +72,7 @@ private extension AppStartManager {
         }
 
         storage.setUserTasks(data)
-        print(storage.data)
+//        print(storage.data)
     }
 }
 
