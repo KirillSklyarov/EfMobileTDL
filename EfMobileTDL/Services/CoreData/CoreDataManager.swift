@@ -8,10 +8,13 @@
 import Foundation
 import CoreData
 
-final class CoreDataManager {
-    static let shared = CoreDataManager()
+protocol CoreDataManagerProtocol {
+    func updateTaskInCoreData(_ item: TDLItem)
+}
 
-    private init() {}
+final class CoreDataManager {
+
+    private(set) var itemToEdit: TDLItem?
 
     // MARK: - Core Data stack
     lazy var persistentContainer: NSPersistentContainer = {
@@ -39,8 +42,8 @@ extension CoreDataManager {
         let existingItemsDict = getExistingItemsIds(from: existingItems)
 
         for item in tdlItems {
-            if let existingItem = existingItemsDict[item.id] {
-                updateTDL(existingItem, with: item)
+            if existingItemsDict[item.id] != nil {
+                updateTask(item)
             } else {
                 createTDL(from: item)
             }
@@ -50,18 +53,30 @@ extension CoreDataManager {
         printAllTDL()
     }
 
+    func setItemToEdit(_ item: TDLItem) {
+        itemToEdit = item
+        print(itemToEdit ?? "ItemToEdit is nil")
+    }
+
+    func getItemToEdit() -> TDLItem? {
+        itemToEdit
+    }
+
     // Обновление данных в coreData
-    func updateTDL(_ tdlObject: TDL, with item: TDLItem) {
+    func updateTask(_ item: TDLItem) {
+        guard let task: TDL = getTask(with: item.id) else { print("Ooops"); return }
+
         // Проверка, изменились ли данные
-        let needsUpdate = isNeedUpdate(tdlObject, with: item)
+        let needsUpdate = isNeedUpdate(task, with: item)
 
         if needsUpdate {
-            tdlObject.title = item.title
-            tdlObject.subtitle = item.subtitle
-            tdlObject.date = item.date
-            tdlObject.completed = item.completed
-            print("🔄 Обновлена запись с ID: \(item.id)")
+            task.title = item.title
+            task.subtitle = item.subtitle
+            task.date = item.date
+            task.completed = item.completed
+            print("✅ Запись успешно обновлена")
         }
+        saveContext()
     }
 
     // Создание нового объекта TDL в CoreData
@@ -94,6 +109,32 @@ extension CoreDataManager {
     func getCorrectDataFromCoreData() -> [TDLItem] {
         let allTDL = getAllTDL()
         return dataMapping(allTDL)
+    }
+
+    func getTask(with id: Int) -> [TDLItem]? {
+        let fetchRequest = TDL.fetchRequest()
+
+        do {
+            let allData = try context.fetch(fetchRequest)
+            let task = allData.filter { $0.id == Int64(id) }
+            return dataMapping(task)
+        } catch {
+            print("❌ Ошибка при поиске объекта по ID: \(error.localizedDescription)")
+            return nil
+        }
+    }
+
+    func getTask(with id: Int) -> TDL? {
+        let fetchRequest = TDL.fetchRequest()
+
+        do {
+            let allData = try context.fetch(fetchRequest)
+            let task = allData.filter { $0.id == Int64(id) }.first
+            return task
+        } catch {
+            print("❌ Ошибка при поиске объекта по ID: \(error.localizedDescription)")
+            return nil
+        }
     }
 }
 
@@ -161,10 +202,14 @@ extension CoreDataManager {
 // MARK: - Supporting methods
 private extension CoreDataManager {
     func isNeedUpdate(_ tdlObject: TDL, with item: TDLItem) -> Bool {
-        return tdlObject.title != item.title ||
-        tdlObject.subtitle != item.subtitle ||
-        tdlObject.date != item.date ||
-        tdlObject.completed != item.completed
+        return !areEqual(tdlObject, item)
+    }
+
+    func areEqual(_ lhs: TDL, _ rhs: TDLItem) -> Bool {
+        return lhs.title == rhs.title &&
+               lhs.subtitle != rhs.subtitle &&
+               lhs.date != rhs.date &&
+               lhs.completed != rhs.completed
     }
 
     func getExistingItemsIds(from existingItems: [TDL]) -> [Int: TDL] {

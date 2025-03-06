@@ -38,11 +38,14 @@
 		73FC335D2D78580F0098ABB9 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC335C2D78580F0098ABB9 /* NetworkService.swift */; };
 		73FC335F2D7863BA0098ABB9 /* JsonResponce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC335E2D7863BA0098ABB9 /* JsonResponce.swift */; };
 		73FC33652D78729C0098ABB9 /* AppStartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33632D78729C0098ABB9 /* AppStartManager.swift */; };
-		73FC33692D7872ED0098ABB9 /* AppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33682D7872ED0098ABB9 /* AppStorage.swift */; };
+		73FC33692D7872ED0098ABB9 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33682D7872ED0098ABB9 /* Interactor.swift */; };
 		73FC336D2D7874B90098ABB9 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC336C2D7874B90098ABB9 /* DependencyContainer.swift */; };
 		73FC336F2D787CB70098ABB9 /* AppActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC336E2D787CB70098ABB9 /* AppActivityIndicator.swift */; };
 		73FC33732D797FE50098ABB9 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33722D797FE50098ABB9 /* AppRouter.swift */; };
 		73FC33752D798C560098ABB9 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33742D798C560098ABB9 /* CoreDataManager.swift */; };
+		73FC33A32D79C6A50098ABB9 /* EditTaskInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33A22D79C6A50098ABB9 /* EditTaskInteractor.swift */; };
+		73FC33A52D7A1C9E0098ABB9 /* EditPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33A42D7A1C9E0098ABB9 /* EditPresenter.swift */; };
+		73FC33A72D7A292C0098ABB9 /* AppAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33A62D7A292C0098ABB9 /* AppAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,11 +101,14 @@
 		73FC335C2D78580F0098ABB9 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		73FC335E2D7863BA0098ABB9 /* JsonResponce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonResponce.swift; sourceTree = "<group>"; };
 		73FC33632D78729C0098ABB9 /* AppStartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartManager.swift; sourceTree = "<group>"; };
-		73FC33682D7872ED0098ABB9 /* AppStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorage.swift; sourceTree = "<group>"; };
+		73FC33682D7872ED0098ABB9 /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		73FC336C2D7874B90098ABB9 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 		73FC336E2D787CB70098ABB9 /* AppActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActivityIndicator.swift; sourceTree = "<group>"; };
 		73FC33722D797FE50098ABB9 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		73FC33742D798C560098ABB9 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		73FC33A22D79C6A50098ABB9 /* EditTaskInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskInteractor.swift; sourceTree = "<group>"; };
+		73FC33A42D7A1C9E0098ABB9 /* EditPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPresenter.swift; sourceTree = "<group>"; };
+		73FC33A62D7A292C0098ABB9 /* AppAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +233,7 @@
 				73FC33092D76EA6D0098ABB9 /* AppLabel.swift */,
 				73FC33312D771F110098ABB9 /* AppTextField.swift */,
 				73FC336E2D787CB70098ABB9 /* AppActivityIndicator.swift */,
+				73FC33A62D7A292C0098ABB9 /* AppAlert.swift */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -283,6 +290,8 @@
 			isa = PBXGroup;
 			children = (
 				73FC332F2D770F790098ABB9 /* View */,
+				73FC33A02D79C6710098ABB9 /* Interactor */,
+				73FC33A12D79C6730098ABB9 /* Presenter */,
 			);
 			path = EditTask;
 			sourceTree = "<group>";
@@ -327,7 +336,7 @@
 				73FC33642D78729C0098ABB9 /* AppStartManager */,
 				732085B02D76264A0086525E /* CoreData */,
 				73FC33712D797F8C0098ABB9 /* Router */,
-				73FC33672D7872D80098ABB9 /* Storage */,
+				73FC33672D7872D80098ABB9 /* Interactor */,
 				73FC33552D78575A0098ABB9 /* NetworkLayer */,
 			);
 			path = Services;
@@ -368,12 +377,12 @@
 			path = AppStartManager;
 			sourceTree = "<group>";
 		};
-		73FC33672D7872D80098ABB9 /* Storage */ = {
+		73FC33672D7872D80098ABB9 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
-				73FC33682D7872ED0098ABB9 /* AppStorage.swift */,
+				73FC33682D7872ED0098ABB9 /* Interactor.swift */,
 			);
-			path = Storage;
+			path = Interactor;
 			sourceTree = "<group>";
 		};
 		73FC336B2D7874AE0098ABB9 /* DI */ = {
@@ -390,6 +399,22 @@
 				73FC33722D797FE50098ABB9 /* AppRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		73FC33A02D79C6710098ABB9 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				73FC33A22D79C6A50098ABB9 /* EditTaskInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		73FC33A12D79C6730098ABB9 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				73FC33A42D7A1C9E0098ABB9 /* EditPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -536,6 +561,7 @@
 				73FC335B2D7857890098ABB9 /* NetworkLayerClient.swift in Sources */,
 				7320859C2D7626110086525E /* SceneDelegate.swift in Sources */,
 				73FC333A2D772F6F0098ABB9 /* AddTaskViewController.swift in Sources */,
+				73FC33A32D79C6A50098ABB9 /* EditTaskInteractor.swift in Sources */,
 				73FC33302D770F790098ABB9 /* EditTaskViewController.swift in Sources */,
 				73FC33652D78729C0098ABB9 /* AppStartManager.swift in Sources */,
 				732085EC2D764D240086525E /* AppStackView.swift in Sources */,
@@ -545,10 +571,12 @@
 				73FC33252D770B220098ABB9 /* FooterView.swift in Sources */,
 				73FC335D2D78580F0098ABB9 /* NetworkService.swift in Sources */,
 				73FC33262D770B220098ABB9 /* TasksTableView.swift in Sources */,
+				73FC33A52D7A1C9E0098ABB9 /* EditPresenter.swift in Sources */,
 				73FC33272D770B220098ABB9 /* TaskTableViewCell.swift in Sources */,
 				73FC33282D770B220098ABB9 /* MainVC.swift in Sources */,
 				732085DA2D762E8D0086525E /* UIColor+Ext.swift in Sources */,
 				73FC33322D771F110098ABB9 /* AppTextField.swift in Sources */,
+				73FC33A72D7A292C0098ABB9 /* AppAlert.swift in Sources */,
 				732085DC2D76311A0086525E /* UIView+Ext.swift in Sources */,
 				73FC33122D770B160098ABB9 /* TDLItem.swift in Sources */,
 				73FC336D2D7874B90098ABB9 /* DependencyContainer.swift in Sources */,
@@ -557,7 +585,7 @@
 				73FC330A2D76EA6D0098ABB9 /* AppLabel.swift in Sources */,
 				732085B22D76264A0086525E /* EfMobileTDL.xcdatamodeld in Sources */,
 				732085B82D762D980086525E /* AppConstants.swift in Sources */,
-				73FC33692D7872ED0098ABB9 /* AppStorage.swift in Sources */,
+				73FC33692D7872ED0098ABB9 /* Interactor.swift in Sources */,
 				73FC33402D778B350098ABB9 /* AppSearchController.swift in Sources */,
 				732085E02D7640570086525E /* AppButton.swift in Sources */,
 			);

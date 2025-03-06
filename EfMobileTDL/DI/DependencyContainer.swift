@@ -9,7 +9,7 @@ import Foundation
 
 final class DependencyContainer {
 
-    let storage: AppStorage
+    let interactor: Interactor
     let startManager: AppStartManager
     let decoder: JSONDecoder
     let encoder: JSONEncoder
@@ -23,16 +23,16 @@ final class DependencyContainer {
         decoder = JSONDecoder()
         encoder = JSONEncoder()
         session = URLSession(configuration: .default)
-        storage = AppStorage()
-        
+        interactor = Interactor()
+
         networkClient = NetworkClient(decoder: decoder, encoder: encoder, session: session)
         networkService = NetworkService(networkClient: networkClient)
 
         router = AppRouter()
 
-        coreDataManager = CoreDataManager.shared
+        coreDataManager = CoreDataManager()
 
-        startManager = AppStartManager(storage: storage, networkService: networkService, router: router, coreDataManager: coreDataManager)
+        startManager = AppStartManager(interactor: interactor, networkService: networkService, router: router, coreDataManager: coreDataManager)
 
     }
 }

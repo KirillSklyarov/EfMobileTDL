@@ -56,6 +56,6 @@ extension SceneDelegate {
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
-        CoreDataManager.shared.saveContext()
+        di.coreDataManager.saveContext()
     }
 }

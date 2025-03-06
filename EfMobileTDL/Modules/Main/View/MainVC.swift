@@ -15,14 +15,17 @@ final class MainViewController: UIViewController {
     private lazy var footerView = FooterView()
     private lazy var activityIndicator = AppActivityIndicator()
 
-    private let storage: AppStorage
+    private let interactor: InteractorProtocol
     private let router: AppRouter
+    private let dataManager: CoreDataManager
+
     private var data: [TDLItem] = []
 
     // MARK: - Init
-    init(storage: AppStorage, router: AppRouter) {
-        self.storage = storage
+    init(interactor: InteractorProtocol, router: AppRouter, dataManager: CoreDataManager) {
+        self.interactor = interactor
         self.router = router
+        self.dataManager = dataManager
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -185,25 +188,33 @@ private extension MainViewController {
 
         tasksTableView.onEditScreen = { [weak self] task in
             guard let self else { return }
+            dataManager.setItemToEdit(task)
             resetSearchController()
-            let editVC = EditTaskViewController(with: task, storage: storage)
-            router.push(to: editVC)
+
+            let editInteractor = EditTaskInteractor(dataManager: dataManager)
+            let editPresenter = EditPresenter(interactor: editInteractor)
+            let editViewController = EditTaskViewController(output: editPresenter)
+
+            editInteractor.presenter = editPresenter
+            editPresenter.view = editViewController
+
+            router.push(to: editViewController)
         }
 
         tasksTableView.onRemoveTask = { [weak self] task in
             guard let self else { return }
-            storage.removeTask(task)
+            interactor.removeTask(task)
         }
 
         tasksTableView.onChangeTDLState = { [weak self] task in
             guard let self else { return }
-            storage.changeTaskState(task)
+            interactor.changeTaskState(task)
             updateData()
         }
 
         tasksTableView.onGetFilteredData = { [weak self] string in
             guard let self else { return }
-            let filteredData = storage.filterData(by: string)
+            let filteredData = interactor.filterData(by: string)
             tasksTableView.getData(filteredData)
         }
     }
@@ -212,7 +223,7 @@ private extension MainViewController {
         footerView.onAddTaskButtonTapped = { [weak self] in
             guard let self else { return }
             resetSearchController()
-            let addTaskVC = AddTaskViewController(storage: storage, router: router)
+            let addTaskVC = AddTaskViewController(interactor: interactor, router: router)
             router.push(to: addTaskVC)
         }
     }
@@ -225,7 +236,7 @@ private extension MainViewController {
 // MARK: - Supporting methods
 private extension MainViewController {
     func updateData() {
-        storage.getData { [weak self] data in
+        interactor.getData { [weak self] data in
             DispatchQueue.main.async {
                 self?.data = data
                 self?.tasksTableView.getData(data)

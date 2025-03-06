@@ -9,7 +9,7 @@ import UIKit
 
 final class AppStartManager {
 
-    private let storage: AppStorage
+    private let interactor: Interactor
     private let networkService: NetworkService
     private let router: AppRouter
     private let coreDataManager: CoreDataManager
@@ -22,8 +22,8 @@ final class AppStartManager {
     private var data: [TDLItem] = []
 
     // MARK: - Init
-    init(storage: AppStorage, networkService: NetworkService, router: AppRouter, coreDataManager: CoreDataManager) {
-        self.storage = storage
+    init(interactor: Interactor, networkService: NetworkService, router: AppRouter, coreDataManager: CoreDataManager) {
+        self.interactor = interactor
         self.networkService = networkService
         self.router = router
         self.coreDataManager = coreDataManager
@@ -60,7 +60,6 @@ private extension AppStartManager {
     func updateVC() async {
         await MainActor.run {
             mainViewController?.configure(with: data)
-            print("Done")
         }
     }
 
@@ -73,21 +72,21 @@ private extension AppStartManager {
     func fetchDataIsFirstLaunch(_ isFirstLaunch: Bool) async throws {
         if isFirstLaunch {
             data = try await networkService.fetchDataFromServer()
-            print("Data fetched from server")
+            print("🌐 Data fetched from server")
             userDefaults.set(true, forKey: "hasLaunchedBefore")
             coreDataManager.saveDataInCoreData(tdlItems: data)
         } else {
             data = coreDataManager.getCorrectDataFromCoreData()
-            print("Data fetched from CoreData")
+            print("📦 Data fetched from CoreData")
         }
 
-        storage.setUserTasks(data)
+        interactor.setUserTasks(data)
     }
 }
 
 private extension AppStartManager {
     func showRootVC() {
-        mainViewController = MainViewController(storage: storage, router: router)
+        mainViewController = MainViewController(interactor: interactor, router: router, dataManager: coreDataManager)
         setupRootNavigation()
         showRootScreen()
     }

@@ -17,15 +17,15 @@ final class AddTaskViewController: UIViewController {
 
     private lazy var contentStack = AppStackView([titleTextField, subTitleContainer, saveStack], axis: .vertical, spacing: 16)
 
-    private let storage: AppStorage
+    private let interactor: InteractorProtocol
     private let router: AppRouter
 
     private var task: TDLItem?
     private var textViewText: String?
 
     // MARK: - Init
-    init(storage: AppStorage, router: AppRouter) {
-        self.storage = storage
+    init(interactor: InteractorProtocol, router: AppRouter) {
+        self.interactor = interactor
         self.router = router
         super.init(nibName: nil, bundle: nil)
     }
@@ -141,7 +141,7 @@ extension AddTaskViewController: UITextViewDelegate {
 private extension AddTaskViewController {
     func sendNewTaskToStorage() {
         guard let task else { return }
-        storage.addTask(task)
+        interactor.addTask(task)
 //        TaskOld.addTask(task)
     }
 

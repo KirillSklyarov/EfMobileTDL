@@ -7,8 +7,17 @@
 
 import UIKit
 
+protocol EditTaskViewInput: AnyObject {
+    func setupInitialState()
+    func showLoading()
+    func configure(with task: TDLItem)
+    func showError()
+}
+
+
 final class EditTaskViewController: UIViewController {
 
+    // MARK: - UI Properties
     private lazy var titleTextField = AppTextField(type: .title)
     private lazy var subtitleTextField = AddTaskSubtitleView()
     private lazy var dateLabel = AppLabel(type: .date)
@@ -17,17 +26,15 @@ final class EditTaskViewController: UIViewController {
 
     private lazy var contentStack = AppStackView([titleStack, subtitleTextField], axis: .vertical, spacing: 16)
 
-    private let storage: AppStorage
+    private lazy var activityIndicator = AppActivityIndicator()
 
-    private var task: TDLItem
-    private var index: Int?
+    // MARK: - Other properties
+    private let output: EditTaskViewOutput
 
     // MARK: - Init
-    init(with task: TDLItem, storage: AppStorage) {
-        self.storage = storage
-        self.task = task
+    init(output: EditTaskViewOutput) {
+        self.output = output
         super.init(nibName: nil, bundle: nil)
-        self.configure()
     }
     
     required init?(coder: NSCoder) {
@@ -37,14 +44,43 @@ final class EditTaskViewController: UIViewController {
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        output.viewLoaded()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        output.viewWillDisappear()
+    }
+}
+
+// MARK: - EditTaskViewInput
+extension EditTaskViewController: EditTaskViewInput {
+    func setupInitialState() {
         setupUI()
         setupTextFields()
         setupGestureToDissmissKeyboard()
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        sendEditedTaskToStorage()
+    func showLoading() {
+        isShowContent(false)
+        activityIndicator.startAnimating()
+    }
+
+    func configure(with task: TDLItem) {
+        isShowContent(true)
+        activityIndicator.stopAnimating()
+        updateUI(with: task)
+    }
+
+    func showError() {
+        activityIndicator.stopAnimating()
+        showAlert()
+    }
+
+    func showAlert() {
+        activityIndicator.stopAnimating()
+        let alert = AppAlert.create()
+        present(alert, animated: true)
     }
 }
 
@@ -55,17 +91,29 @@ private extension EditTaskViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
 
         view.backgroundColor = AppConstants.Colors.black
-        view.addSubviews(contentStack)
+        view.addSubviews(contentStack, activityIndicator)
         setupLayout()
     }
 
     func setupLayout() {
+        setupContentStackLayout()
+        setupActivityIndicatorLayout()
+    }
+
+    func setupContentStackLayout() {
         NSLayoutConstraint.activate([
             contentStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: AppConstants.Insets.small),
             contentStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: AppConstants.Insets.medium),
             contentStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -AppConstants.Insets.medium),
 
             subtitleTextField.heightAnchor.constraint(equalToConstant: AppConstants.Height.textField*5),
+        ])
+    }
+
+    func setupActivityIndicatorLayout() {
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
     }
 
@@ -79,14 +127,9 @@ private extension EditTaskViewController {
 
 // MARK: - UITextViewDelegate
 extension EditTaskViewController: UITextViewDelegate {
-    func textViewDidEndEditing(_ textView: UITextView) {
-        guard let text = textView.text else { return }
-        if !text.isEmpty { task.subtitle = text }
-    }
-
     func textViewDidChange(_ textView: UITextView) {
         guard let text = textView.text else { return }
-        if !text.isEmpty { task.subtitle = text }
+        output.didUpdateTaskSubTitle(text)
     }
 }
 
@@ -96,38 +139,25 @@ extension EditTaskViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        guard let text = textField.text else { return }
-        if !text.isEmpty { task.title = text }
-    }
 }
 
 // MARK: - Supporting methods
 private extension EditTaskViewController {
-    func sendEditedTaskToStorage() {
-        guard let index else { print("We can not edit task"); return }
-//        print("Send edited task to storage: \(task)")
-//        TaskOld.editTask(task, index: index)
-        storage.editTask(task, index: index)
-    }
-
     @objc func textFieldDidChange(_ textField: UITextField) {
         guard let text = textField.text else { return }
-        if !text.isEmpty { task.title = text }
-//        print("Updated in real time: \(task)")
+        output.didUpdateTaskTitle(text)
     }
 
-    func configure() {
-        index = storage.data.firstIndex { $0 == task }
+    func isShowContent(_ isShow: Bool) {
+        contentStack.alpha = isShow ? 1 : 0
+    }
 
+    func updateUI(with task: TDLItem) {
         titleTextField.text = task.title
         subtitleTextField.setTextViewText(task.subtitle)
         subtitleTextField.setTextViewTextColor(AppConstants.Colors.white)
-
         dateLabel.text = task.date
     }
-
 }
 
 // MARK: - Hide keyboard by tap

@@ -7,19 +7,35 @@
 
 import Foundation
 
-final class AppStorage {
+protocol InteractorProtocol {
+    func getData(completion: @escaping ([TDLItem]) -> Void)
+    func setUserTasks(_ tasks: [TDLItem])
+    func addTask(_ newTask: TDLItem)
+    func removeTask(_ task: TDLItem)
+    func updateTask(_ task: TDLItem, at index: Int)
+    func editTask(_ newTask: TDLItem, index: Int)
+    func filterData(by string: String) -> [TDLItem]
+    func changeTaskState(_ task: TDLItem)
+    func getIndex(of task: TDLItem) -> Int?
+}
+
+final class Interactor: InteractorProtocol {
     private(set) var data: [TDLItem] = []
 
     let queue = DispatchQueue(label: "efmobile.tdl.appstorage", qos: .userInteractive)
 }
 
 // MARK: - CRUD
-extension AppStorage {
+extension Interactor {
     func getData(completion: @escaping ([TDLItem]) -> Void) {
         queue.async { [weak self] in
             guard let self else { completion([]); return }
             completion(data)
         }
+    }
+
+    func getIndex(of task: TDLItem) -> Int? {
+        return data.firstIndex { $0 == task }
     }
 
     func setUserTasks(_ tasks: [TDLItem]) {
@@ -65,5 +81,9 @@ extension AppStorage {
             data[index].completed.toggle()
             print(data[index])
         }
+    }
+
+    func updateTask(_ task: TDLItem, at index: Int) {
+//        
     }
 }
