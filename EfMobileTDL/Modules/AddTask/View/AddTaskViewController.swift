@@ -18,13 +18,15 @@ final class AddTaskViewController: UIViewController {
     private lazy var contentStack = AppStackView([titleTextField, subTitleContainer, saveStack], axis: .vertical, spacing: 16)
 
     private let storage: AppStorage
+    private let router: AppRouter
 
     private var task: TDL?
     private var textViewText: String?
 
     // MARK: - Init
-    init(storage: AppStorage) {
+    init(storage: AppStorage, router: AppRouter) {
         self.storage = storage
+        self.router = router
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -99,9 +101,10 @@ private extension AddTaskViewController {
 private extension AddTaskViewController {
     func setupAction() {
         saveButton.onButtonTapped = { [weak self] in
-            self?.configureTask()
-            self?.sendNewTaskToStorage()
-            self?.navigationController?.popViewController(animated: true)
+            guard let self = self else { return }
+            configureTask()
+            sendNewTaskToStorage()
+            router.pop()
         }
     }
 }

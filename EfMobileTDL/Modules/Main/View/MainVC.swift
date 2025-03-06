@@ -39,6 +39,7 @@ final class MainViewController: UIViewController {
     override func viewIsAppearing(_ animated: Bool) {
         super.viewIsAppearing(animated)
         updateData()
+        setNavBarLargeTitle()
         searchController.additionalSearchControllerConfigure()
     }
 }
@@ -57,8 +58,8 @@ private extension MainViewController {
 
     func setupNavigationBar() {
         title = "Задачи"
-        navigationController?.navigationBar.prefersLargeTitles = true
-
+        setNavBarLargeTitle()
+        
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = AppConstants.Colors.black
@@ -187,7 +188,6 @@ private extension MainViewController {
             resetSearchController()
             let editVC = EditTaskViewController(with: task, storage: storage)
             router.push(to: editVC)
-//            navigationController?.pushViewController(editVC, animated: true)
         }
 
         tasksTableView.onRemoveTask = { [weak self] task in
@@ -212,8 +212,8 @@ private extension MainViewController {
         footerView.onAddTaskButtonTapped = { [weak self] in
             guard let self else { return }
             resetSearchController()
-            let addTaskVC = AddTaskViewController(storage: storage)
-            navigationController?.pushViewController(addTaskVC, animated: true)
+            let addTaskVC = AddTaskViewController(storage: storage, router: router)
+            router.push(to: addTaskVC)
         }
     }
 
@@ -231,5 +231,9 @@ private extension MainViewController {
                 self?.tasksTableView.getData(data)
             }
         }
+    }
+
+    func setNavBarLargeTitle() {
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
 }

@@ -51,6 +51,7 @@ final class EditTaskViewController: UIViewController {
 // MARK: - Setup UI
 private extension EditTaskViewController {
     func setupUI() {
+        title = "Редактировать задачи"
         navigationController?.navigationBar.prefersLargeTitles = false
 
         view.backgroundColor = AppConstants.Colors.black

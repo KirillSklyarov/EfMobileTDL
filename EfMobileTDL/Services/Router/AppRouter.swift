@@ -10,21 +10,22 @@ import UIKit
 final class AppRouter {
 
     // MARK: - Properties
-    private let navigationController: UINavigationController
+    private(set) var navigationController: UINavigationController?
 
-    // MARK: - Init
-    init() {
-        self.navigationController = UINavigationController()
+    func setupRootViewController(with vc: UIViewController) -> UINavigationController {
+        let navigationController = UINavigationController(rootViewController: vc)
+        self.navigationController = navigationController
+        return navigationController
     }
 }
 
 // MARK: - Push&Pop
 extension AppRouter {
     func push(to view: UIViewController) {
-        navigationController.pushViewController(view, animated: true)
+        navigationController?.pushViewController(view, animated: true)
     }
 
     func pop() {
-        navigationController.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
 }

@@ -15,6 +15,7 @@ final class AppStartManager {
 
     private var window: UIWindow?
     private var mainViewController: MainViewController?
+    private var rootNavigationController: UINavigationController?
 
     private var data: [TDL] = []
 
@@ -82,7 +83,17 @@ private extension AppStartManager {
 private extension AppStartManager {
     func showRootVC() {
         mainViewController = MainViewController(storage: storage, router: router)
-        window?.rootViewController = UINavigationController(rootViewController: mainViewController!)
+        setupRootNavigation()
+        showRootScreen()
+    }
+
+    func setupRootNavigation() {
+        guard let mainViewController else { print("No mainViewController"); return }
+        rootNavigationController = router.setupRootViewController(with: mainViewController)
+    }
+
+    func showRootScreen() {
+        window?.rootViewController = rootNavigationController
         window?.makeKeyAndVisible()
     }
 }
