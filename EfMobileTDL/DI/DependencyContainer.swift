@@ -16,6 +16,7 @@ final class DependencyContainer {
     let session: URLSession
     let networkClient: NetworkClient
     let networkService: NetworkService
+    let router: AppRouter
 
     init() {
         decoder = JSONDecoder()
@@ -26,6 +27,9 @@ final class DependencyContainer {
         networkClient = NetworkClient(decoder: decoder, encoder: encoder, session: session)
         networkService = NetworkService(networkClient: networkClient)
 
-        startManager = AppStartManager(storage: storage, networkService: networkService)
+        router = AppRouter()
+
+        startManager = AppStartManager(storage: storage, networkService: networkService, router: router)
+
     }
 }

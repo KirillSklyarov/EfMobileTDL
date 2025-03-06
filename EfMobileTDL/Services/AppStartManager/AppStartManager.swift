@@ -11,15 +11,18 @@ final class AppStartManager {
 
     private let storage: AppStorage
     private let networkService: NetworkService
+    private let router: AppRouter
+
     private var window: UIWindow?
     private var mainViewController: MainViewController?
 
     private var data: [TDL] = []
 
     // MARK: - Init
-    init(storage: AppStorage, networkService: NetworkService) {
+    init(storage: AppStorage, networkService: NetworkService, router: AppRouter) {
         self.storage = storage
         self.networkService = networkService
+        self.router = router
     }
 
     // MARK: - Public methods
@@ -78,7 +81,7 @@ private extension AppStartManager {
 
 private extension AppStartManager {
     func showRootVC() {
-        mainViewController = MainViewController(storage: storage)
+        mainViewController = MainViewController(storage: storage, router: router)
         window?.rootViewController = UINavigationController(rootViewController: mainViewController!)
         window?.makeKeyAndVisible()
     }

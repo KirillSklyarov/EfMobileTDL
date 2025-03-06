@@ -41,6 +41,7 @@
 		73FC33692D7872ED0098ABB9 /* AppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33682D7872ED0098ABB9 /* AppStorage.swift */; };
 		73FC336D2D7874B90098ABB9 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC336C2D7874B90098ABB9 /* DependencyContainer.swift */; };
 		73FC336F2D787CB70098ABB9 /* AppActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC336E2D787CB70098ABB9 /* AppActivityIndicator.swift */; };
+		73FC33732D797FE50098ABB9 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33722D797FE50098ABB9 /* AppRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,7 @@
 		73FC33682D7872ED0098ABB9 /* AppStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorage.swift; sourceTree = "<group>"; };
 		73FC336C2D7874B90098ABB9 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 		73FC336E2D787CB70098ABB9 /* AppActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActivityIndicator.swift; sourceTree = "<group>"; };
+		73FC33722D797FE50098ABB9 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -320,9 +322,10 @@
 			isa = PBXGroup;
 			children = (
 				73FC33642D78729C0098ABB9 /* AppStartManager */,
+				732085B02D76264A0086525E /* CoreData */,
+				73FC33712D797F8C0098ABB9 /* Router */,
 				73FC33672D7872D80098ABB9 /* Storage */,
 				73FC33552D78575A0098ABB9 /* NetworkLayer */,
-				732085B02D76264A0086525E /* CoreData */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -376,6 +379,14 @@
 				73FC336C2D7874B90098ABB9 /* DependencyContainer.swift */,
 			);
 			path = DI;
+			sourceTree = "<group>";
+		};
+		73FC33712D797F8C0098ABB9 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				73FC33722D797FE50098ABB9 /* AppRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -537,6 +548,7 @@
 				732085DC2D76311A0086525E /* UIView+Ext.swift in Sources */,
 				73FC33122D770B160098ABB9 /* TDL.swift in Sources */,
 				73FC336D2D7874B90098ABB9 /* DependencyContainer.swift in Sources */,
+				73FC33732D797FE50098ABB9 /* AppRouter.swift in Sources */,
 				73FC333E2D773CB90098ABB9 /* AddTaskSubtitleView.swift in Sources */,
 				73FC330A2D76EA6D0098ABB9 /* AppLabel.swift in Sources */,
 				732085B22D76264A0086525E /* EfMobileTDL.xcdatamodeld in Sources */,

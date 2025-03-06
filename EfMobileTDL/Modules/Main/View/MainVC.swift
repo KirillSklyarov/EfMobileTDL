@@ -16,11 +16,13 @@ final class MainViewController: UIViewController {
     private lazy var activityIndicator = AppActivityIndicator()
 
     private let storage: AppStorage
+    private let router: AppRouter
     private var data: [TDL] = []
 
     // MARK: - Init
-    init(storage: AppStorage) {
+    init(storage: AppStorage, router: AppRouter) {
         self.storage = storage
+        self.router = router
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -184,7 +186,8 @@ private extension MainViewController {
             guard let self else { return }
             resetSearchController()
             let editVC = EditTaskViewController(with: task, storage: storage)
-            navigationController?.pushViewController(editVC, animated: true)
+            router.push(to: editVC)
+//            navigationController?.pushViewController(editVC, animated: true)
         }
 
         tasksTableView.onRemoveTask = { [weak self] task in
