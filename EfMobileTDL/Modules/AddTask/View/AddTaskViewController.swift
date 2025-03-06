@@ -20,7 +20,7 @@ final class AddTaskViewController: UIViewController {
     private let storage: AppStorage
     private let router: AppRouter
 
-    private var task: TDL?
+    private var task: TDLItem?
     private var textViewText: String?
 
     // MARK: - Init
@@ -150,7 +150,7 @@ private extension AddTaskViewController {
               let subtitle = textViewText else { print("We have empty fields"); return }
         let date = configureDate()
         let tempID = -UUID().hashValue
-        task = TDL(id: tempID, title: title, subtitle: subtitle, date: date, completed: false)
+        task = TDLItem(id: tempID, title: title, subtitle: subtitle, date: date, completed: false)
     }
 
     func checkButton() {

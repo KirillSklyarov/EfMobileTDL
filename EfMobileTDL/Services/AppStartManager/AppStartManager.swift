@@ -12,18 +12,21 @@ final class AppStartManager {
     private let storage: AppStorage
     private let networkService: NetworkService
     private let router: AppRouter
+    private let coreDataManager: CoreDataManager
 
     private var window: UIWindow?
     private var mainViewController: MainViewController?
     private var rootNavigationController: UINavigationController?
 
-    private var data: [TDL] = []
+    private let userDefaults = UserDefaults.standard
+    private var data: [TDLItem] = []
 
     // MARK: - Init
-    init(storage: AppStorage, networkService: NetworkService, router: AppRouter) {
+    init(storage: AppStorage, networkService: NetworkService, router: AppRouter, coreDataManager: CoreDataManager) {
         self.storage = storage
         self.networkService = networkService
         self.router = router
+        self.coreDataManager = coreDataManager
     }
 
     // MARK: - Public methods
@@ -43,7 +46,7 @@ final class AppStartManager {
 // MARK: - Fetch Data
 private extension AppStartManager {
     func fetchData() async {
-        let isFirstLaunch = !UserDefaults.standard.bool(forKey: "notFirstLaunch")
+        let isFirstLaunch = !userDefaults.bool(forKey: "hasLaunchedBefore")
 
         do {
             try await fetchDataIsFirstLaunch(isFirstLaunch)
@@ -69,14 +72,16 @@ private extension AppStartManager {
 
     func fetchDataIsFirstLaunch(_ isFirstLaunch: Bool) async throws {
         if isFirstLaunch {
-            data = try await networkService.fetchDataFirstTime()
-            UserDefaults.standard.set(true, forKey: "notFirstLaunch")
+            data = try await networkService.fetchDataFromServer()
+            print("Data fetched from server")
+            userDefaults.set(true, forKey: "hasLaunchedBefore")
+            coreDataManager.saveDataInCoreData(tdlItems: data)
         } else {
-            data = try await networkService.fetchData()
+            data = coreDataManager.getCorrectDataFromCoreData()
+            print("Data fetched from CoreData")
         }
 
         storage.setUserTasks(data)
-//        print(storage.data)
     }
 }
 

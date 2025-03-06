@@ -19,11 +19,11 @@ final class EditTaskViewController: UIViewController {
 
     private let storage: AppStorage
 
-    private var task: TDL
+    private var task: TDLItem
     private var index: Int?
 
     // MARK: - Init
-    init(with task: TDL, storage: AppStorage) {
+    init(with task: TDLItem, storage: AppStorage) {
         self.storage = storage
         self.task = task
         super.init(nibName: nil, bundle: nil)

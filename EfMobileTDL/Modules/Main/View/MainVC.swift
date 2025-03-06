@@ -17,7 +17,7 @@ final class MainViewController: UIViewController {
 
     private let storage: AppStorage
     private let router: AppRouter
-    private var data: [TDL] = []
+    private var data: [TDLItem] = []
 
     // MARK: - Init
     init(storage: AppStorage, router: AppRouter) {
@@ -125,7 +125,7 @@ extension MainViewController {
         activityIndicator.startAnimating()
     }
 
-    func configure(with data: [TDL]) {
+    func configure(with data: [TDLItem]) {
         self.data = data
         isHideContent(false)
         activityIndicator.stopAnimating()

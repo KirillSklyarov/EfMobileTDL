@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct TDL: Equatable, Codable {
+struct TDLItem: Equatable, Codable {
     let id: Int
     var title: String
     var subtitle: String
     let date: String
     var completed: Bool
     
-    static func == (lhs: TDL, rhs: TDL) -> Bool {
+    static func == (lhs: TDLItem, rhs: TDLItem) -> Bool {
         return lhs.id == rhs.id
     }
     

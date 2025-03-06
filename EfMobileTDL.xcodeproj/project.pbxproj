@@ -22,7 +22,7 @@
 		732085E82D764BFB0086525E /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085E72D764BFB0086525E /* UITableView+Ext.swift */; };
 		732085EC2D764D240086525E /* AppStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085EB2D764D240086525E /* AppStackView.swift */; };
 		73FC330A2D76EA6D0098ABB9 /* AppLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33092D76EA6D0098ABB9 /* AppLabel.swift */; };
-		73FC33122D770B160098ABB9 /* TDL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33102D770B160098ABB9 /* TDL.swift */; };
+		73FC33122D770B160098ABB9 /* TDLItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33102D770B160098ABB9 /* TDLItem.swift */; };
 		73FC33242D770B220098ABB9 /* CheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC331D2D770B220098ABB9 /* CheckmarkView.swift */; };
 		73FC33252D770B220098ABB9 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC331E2D770B220098ABB9 /* FooterView.swift */; };
 		73FC33262D770B220098ABB9 /* TasksTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC331F2D770B220098ABB9 /* TasksTableView.swift */; };
@@ -42,6 +42,7 @@
 		73FC336D2D7874B90098ABB9 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC336C2D7874B90098ABB9 /* DependencyContainer.swift */; };
 		73FC336F2D787CB70098ABB9 /* AppActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC336E2D787CB70098ABB9 /* AppActivityIndicator.swift */; };
 		73FC33732D797FE50098ABB9 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33722D797FE50098ABB9 /* AppRouter.swift */; };
+		73FC33752D798C560098ABB9 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33742D798C560098ABB9 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,7 +82,7 @@
 		7371B0CC2D760D78004E6C73 /* EfMobileTDLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0D62D760D78004E6C73 /* EfMobileTDLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		73FC33092D76EA6D0098ABB9 /* AppLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLabel.swift; sourceTree = "<group>"; };
-		73FC33102D770B160098ABB9 /* TDL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDL.swift; sourceTree = "<group>"; };
+		73FC33102D770B160098ABB9 /* TDLItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDLItem.swift; sourceTree = "<group>"; };
 		73FC331D2D770B220098ABB9 /* CheckmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkView.swift; sourceTree = "<group>"; };
 		73FC331E2D770B220098ABB9 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
 		73FC331F2D770B220098ABB9 /* TasksTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableView.swift; sourceTree = "<group>"; };
@@ -101,6 +102,7 @@
 		73FC336C2D7874B90098ABB9 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 		73FC336E2D787CB70098ABB9 /* AppActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActivityIndicator.swift; sourceTree = "<group>"; };
 		73FC33722D797FE50098ABB9 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
+		73FC33742D798C560098ABB9 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +194,7 @@
 		732085B02D76264A0086525E /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				73FC33742D798C560098ABB9 /* CoreDataManager.swift */,
 				732085AF2D76264A0086525E /* EfMobileTDL.xcdatamodeld */,
 			);
 			path = CoreData;
@@ -251,7 +254,7 @@
 		73FC33112D770B160098ABB9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				73FC33102D770B160098ABB9 /* TDL.swift */,
+				73FC33102D770B160098ABB9 /* TDLItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 				73FC33652D78729C0098ABB9 /* AppStartManager.swift in Sources */,
 				732085EC2D764D240086525E /* AppStackView.swift in Sources */,
 				73FC336F2D787CB70098ABB9 /* AppActivityIndicator.swift in Sources */,
+				73FC33752D798C560098ABB9 /* CoreDataManager.swift in Sources */,
 				73FC33242D770B220098ABB9 /* CheckmarkView.swift in Sources */,
 				73FC33252D770B220098ABB9 /* FooterView.swift in Sources */,
 				73FC335D2D78580F0098ABB9 /* NetworkService.swift in Sources */,
@@ -546,7 +550,7 @@
 				732085DA2D762E8D0086525E /* UIColor+Ext.swift in Sources */,
 				73FC33322D771F110098ABB9 /* AppTextField.swift in Sources */,
 				732085DC2D76311A0086525E /* UIView+Ext.swift in Sources */,
-				73FC33122D770B160098ABB9 /* TDL.swift in Sources */,
+				73FC33122D770B160098ABB9 /* TDLItem.swift in Sources */,
 				73FC336D2D7874B90098ABB9 /* DependencyContainer.swift in Sources */,
 				73FC33732D797FE50098ABB9 /* AppRouter.swift in Sources */,
 				73FC333E2D773CB90098ABB9 /* AddTaskSubtitleView.swift in Sources */,

@@ -26,7 +26,7 @@ struct ToDoItem: Codable {
         return formatter.string(from: Date())
     }
 
-    func toTask() -> TDL {
-        TDL(id: id, title: "1", subtitle: todo, date: getDate(), completed: completed)
+    func toTask() -> TDLItem {
+        TDLItem(id: id, title: "1", subtitle: todo, date: getDate(), completed: completed)
     }
 }

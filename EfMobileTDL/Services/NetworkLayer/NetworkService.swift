@@ -19,13 +19,13 @@ struct NetworkService {
     }
 
     // MARK: - Fetch methods
-    func fetchData() async throws -> [TDL] {
+    func fetchDataFromServer() async throws -> [TDLItem] {
         let response = try await networkClient.fetchData(.dummy, type: JsonResponce.self)
         let tasksData = response.todos.map { $0.toTask() }
         return tasksData
     }
 
-    func fetchDataFirstTime() async throws -> [TDL] {
+    func fetchDataFirstTime() async throws -> [TDLItem] {
         let response = try await networkClient.fetchData(.google, type: JsonResponce.self)
         let tasksData = response.todos.map { $0.toTask() }
         return tasksData

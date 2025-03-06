@@ -10,12 +10,12 @@ import UIKit
 final class TasksTableView: UITableView {
 
     private var chosenCell: TaskTableViewCell?
-    private var data: [TDL]?
+    private var data: [TDLItem]?
 
     var onShowShareScreen: ((UIActivityViewController) -> Void)?
-    var onEditScreen: ((TDL) -> Void)?
-    var onRemoveTask: ((TDL) -> Void)?
-    var onChangeTDLState: ((TDL) -> Void)?
+    var onEditScreen: ((TDLItem) -> Void)?
+    var onRemoveTask: ((TDLItem) -> Void)?
+    var onChangeTDLState: ((TDLItem) -> Void)?
     var onGetFilteredData: ((String) -> Void)?
 
     // MARK: - Init
@@ -28,7 +28,7 @@ final class TasksTableView: UITableView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func getData(_ data: [TDL]) {
+    func getData(_ data: [TDLItem]) {
         self.data = data
         reloadData()
     }

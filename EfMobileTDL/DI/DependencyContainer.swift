@@ -17,6 +17,7 @@ final class DependencyContainer {
     let networkClient: NetworkClient
     let networkService: NetworkService
     let router: AppRouter
+    let coreDataManager: CoreDataManager
 
     init() {
         decoder = JSONDecoder()
@@ -29,7 +30,9 @@ final class DependencyContainer {
 
         router = AppRouter()
 
-        startManager = AppStartManager(storage: storage, networkService: networkService, router: router)
+        coreDataManager = CoreDataManager.shared
+
+        startManager = AppStartManager(storage: storage, networkService: networkService, router: router, coreDataManager: coreDataManager)
 
     }
 }
