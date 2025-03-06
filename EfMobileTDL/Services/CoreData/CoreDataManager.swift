@@ -67,7 +67,7 @@ extension CoreDataManager {
     // Создание нового объекта TDL в CoreData
     func createTDL(from item: TDLItem) {
         let tdlObject = TDL(context: context)
-        tdlObject.id = Int16(item.id)
+        tdlObject.id = Int64(item.id)
         tdlObject.title = item.title
         tdlObject.subtitle = item.subtitle
         tdlObject.date = item.date
@@ -108,7 +108,7 @@ extension CoreDataManager {
             print("📊 Всего записей до очистки: \(allItems.count)")
 
             // Создаем словарь для отслеживания уникальных ID
-            var uniqueIds: [Int16: TDL] = [:]
+            var uniqueIds: [Int64: TDL] = [:]
             var duplicatesToRemove: [TDL] = []
 
             // Находим дубликаты
