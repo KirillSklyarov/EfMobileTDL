@@ -54,6 +54,7 @@
 		73FC33C92D7AD6750098ABB9 /* AddItemBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33C82D7AD6750098ABB9 /* AddItemBuilder.swift */; };
 		73FC33CD2D7AD9F00098ABB9 /* AddItemRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33CC2D7AD9F00098ABB9 /* AddItemRouter.swift */; };
 		73FC33D32D7ADFBA0098ABB9 /* RouterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33D12D7ADFBA0098ABB9 /* RouterFactory.swift */; };
+		73FC33D72D7AE5750098ABB9 /* EditItemRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33D62D7AE5750098ABB9 /* EditItemRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +126,7 @@
 		73FC33C82D7AD6750098ABB9 /* AddItemBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemBuilder.swift; sourceTree = "<group>"; };
 		73FC33CC2D7AD9F00098ABB9 /* AddItemRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemRouter.swift; sourceTree = "<group>"; };
 		73FC33D12D7ADFBA0098ABB9 /* RouterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterFactory.swift; sourceTree = "<group>"; };
+		73FC33D62D7AE5750098ABB9 /* EditItemRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,7 +227,7 @@
 		732085B52D762BBB0086525E /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				73FC33112D770B160098ABB9 /* Model */,
+				73FC33112D770B160098ABB9 /* Entity */,
 				73FC33232D770B220098ABB9 /* View */,
 				73FC33B92D7A432C0098ABB9 /* Router */,
 			);
@@ -275,12 +277,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		73FC33112D770B160098ABB9 /* Model */ = {
+		73FC33112D770B160098ABB9 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
 				73FC33102D770B160098ABB9 /* TDLItem.swift */,
 			);
-			path = Model;
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		73FC33212D770B220098ABB9 /* Components */ = {
@@ -309,6 +311,7 @@
 				73FC332F2D770F790098ABB9 /* View */,
 				73FC33A02D79C6710098ABB9 /* Interactor */,
 				73FC33A12D79C6730098ABB9 /* Presenter */,
+				73FC33D52D7AE56A0098ABB9 /* Router */,
 				73FC33AE2D7A3D160098ABB9 /* Builder */,
 			);
 			path = EditItem;
@@ -505,6 +508,14 @@
 			path = RouterFactory;
 			sourceTree = "<group>";
 		};
+		73FC33D52D7AE56A0098ABB9 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				73FC33D62D7AE5750098ABB9 /* EditItemRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -663,6 +674,7 @@
 				73FC335D2D78580F0098ABB9 /* NetworkService.swift in Sources */,
 				73FC33262D770B220098ABB9 /* TasksTableView.swift in Sources */,
 				73FC33A52D7A1C9E0098ABB9 /* EditPresenter.swift in Sources */,
+				73FC33D72D7AE5750098ABB9 /* EditItemRouter.swift in Sources */,
 				73FC33CD2D7AD9F00098ABB9 /* AddItemRouter.swift in Sources */,
 				73FC33272D770B220098ABB9 /* TaskTableViewCell.swift in Sources */,
 				73FC33282D770B220098ABB9 /* MainVC.swift in Sources */,

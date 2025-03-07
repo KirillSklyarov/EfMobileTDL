@@ -35,11 +35,8 @@ extension RouterFactory: RouterFactoryProtocol {
 
 // MARK: - Supporting methods
 private extension RouterFactory {
-    func makeEditItemRouter() -> AddItemRouter {
-        return AddItemRouter(navigationController: navigationController)
-
-//        let builder = EditModuleBuilder(dataManager: dataManager)
-//        return builder.build()
+    func makeEditItemRouter() -> EditItemRouter {
+        return EditItemRouter(navigationController: navigationController)
     }
 
     func makeAddItemModule() -> AddItemRouter {
