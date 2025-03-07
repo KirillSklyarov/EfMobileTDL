@@ -34,7 +34,6 @@ final class TasksTableView: UITableView {
     }
 
     func filterData(by text: String) {
-//        print("text: \(text)")
         onGetFilteredData?(text)
     }
 }

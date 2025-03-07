@@ -13,7 +13,7 @@ final class FooterView: UIView {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .center
-        label.font = AppConstants.Fonts.regular11
+        label.font = AppConstants.Fonts.regular12
         label.text = "7 задач"
         return label
     }()
@@ -30,6 +30,10 @@ final class FooterView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func updateUI(with itemsCount: Int) {
+        tasksLabel.text = "\(itemsCount) задач"
     }
 }
 

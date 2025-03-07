@@ -9,7 +9,7 @@ import Foundation
 
 protocol EditTaskViewOutput: AnyObject {
     func viewLoaded()
-    func loadData()
+//    func loadData()
     func checkDataAndUpdateView()
     func isDataValid() -> Bool
     func updateView()

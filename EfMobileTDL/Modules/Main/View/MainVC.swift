@@ -7,6 +7,14 @@
 
 import UIKit
 
+protocol MainViewInput: AnyObject {
+    func setupInitialState()
+    func loading()
+    func configure(with data: [TDLItem])
+    func showError()
+    func updateUI(with data: [TDLItem])
+}
+
 final class MainViewController: UIViewController {
 
     // MARK: - Properties
@@ -15,17 +23,13 @@ final class MainViewController: UIViewController {
     private lazy var footerView = FooterView()
     private lazy var activityIndicator = AppActivityIndicator()
 
-    private let interactor: InteractorProtocol
-    private let router: AppRouterProtocol
-    private let dataManager: CoreDataManager
+    private let output: MainViewOutput
 
     private var data: [TDLItem] = []
 
     // MARK: - Init
-    init(interactor: InteractorProtocol, router: AppRouterProtocol, dataManager: CoreDataManager) {
-        self.interactor = interactor
-        self.router = router
-        self.dataManager = dataManager
+    init(output: MainViewOutput) {
+        self.output = output
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -36,12 +40,12 @@ final class MainViewController: UIViewController {
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialSetup()
+        output.viewLoaded()
     }
 
     override func viewIsAppearing(_ animated: Bool) {
         super.viewIsAppearing(animated)
-        updateData()
+        output.viewIsAppearing()
         setNavBarLargeTitle()
         searchController.additionalSearchControllerConfigure()
     }
@@ -116,16 +120,19 @@ private extension MainViewController {
     }
 }
 
-// MARK: - State management
-extension MainViewController {
-    func initialSetup() {
+// MARK: - MainViewInput
+extension MainViewController: MainViewInput {
+    func setupInitialState() {
         setupUI()
         setupAction()
     }
 
     func loading() {
-        isHideContent(true)
-        activityIndicator.startAnimating()
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            isHideContent(true)
+            activityIndicator.startAnimating()
+        }
     }
 
     func configure(with data: [TDLItem]) {
@@ -133,11 +140,90 @@ extension MainViewController {
         isHideContent(false)
         activityIndicator.stopAnimating()
         tasksTableView.getData(data)
+        footerView.updateUI(with: data.count)
     }
 
-    func error() {
-        activityIndicator.stopAnimating()
-        showAlert()
+    func showError() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            activityIndicator.stopAnimating()
+            showAlert()
+        }
+    }
+
+    func updateUI(with data: [TDLItem]) {
+        tasksTableView.getData(data)
+    }
+}
+
+// MARK: - UISearchBarDelegate, UISearchControllerDelegate
+extension MainViewController: UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
+    func setupSearchController() {
+        searchController.searchBar.delegate = self
+        searchController.searchResultsUpdater = self
+    }
+
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else { return }
+        tasksTableView.filterData(by: searchText)
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        output.viewIsAppearing()
+    }
+}
+
+// MARK: - Setup action
+private extension MainViewController {
+    func setupAction() {
+        setupTasksTableViewAction()
+        setupAddTaskButtonAction()
+    }
+
+    func setupTasksTableViewAction() {
+        tasksTableView.onShowShareScreen = { [weak self] activityVC in
+            self?.present(activityVC, animated: true)
+        }
+
+        tasksTableView.onEditScreen = { [weak self] task in
+            guard let self else { return }
+            output.selectItemForEditing(task)
+            resetSearchController()
+        }
+
+        tasksTableView.onRemoveTask = { [weak self] task in
+            guard let self else { return }
+            output.removeItemTapped(task)
+        }
+
+        tasksTableView.onChangeTDLState = { [weak self] task in
+            guard let self else { return }
+            output.changeItemState(task)
+        }
+
+        tasksTableView.onGetFilteredData = { [weak self] string in
+            guard let self else { return }
+            output.filterData(by: string)
+        }
+    }
+
+    func setupAddTaskButtonAction() {
+        footerView.onAddTaskButtonTapped = { [weak self] in
+            guard let self else { return }
+            resetSearchController()
+            output.addNewTaskButtonTapped()
+        }
+    }
+
+    func resetSearchController() {
+        searchController.searchBar.text = ""
+    }
+}
+
+// MARK: - Supporting methods
+private extension MainViewController {
+    func setNavBarLargeTitle() {
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
 
     func showAlert() {
@@ -158,86 +244,5 @@ extension MainViewController {
             footerView.alpha = 1
 //            navigationController?.setNavigationBarHidden(false, animated: false)
         }
-    }
-}
-
-// MARK: - UISearchBarDelegate, UISearchControllerDelegate
-extension MainViewController: UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
-    func setupSearchController() {
-        searchController.searchBar.delegate = self
-        searchController.searchResultsUpdater = self
-    }
-
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let searchText = searchController.searchBar.text else { return }
-        tasksTableView.filterData(by: searchText)
-    }
-}
-
-// MARK: - Setup action
-private extension MainViewController {
-    func setupAction() {
-        setupTasksTableViewAction()
-        setupAddTaskButtonAction()
-    }
-
-    func setupTasksTableViewAction() {
-        tasksTableView.onShowShareScreen = { [weak self] activityVC in
-            self?.present(activityVC, animated: true)
-        }
-
-        tasksTableView.onEditScreen = { [weak self] task in
-            guard let self else { return }
-            dataManager.setItemToEdit(task)
-            resetSearchController()
-
-            router.goToEditItemModule()
-        }
-
-        tasksTableView.onRemoveTask = { [weak self] task in
-            guard let self else { return }
-            interactor.removeTask(task)
-        }
-
-        tasksTableView.onChangeTDLState = { [weak self] task in
-            guard let self else { return }
-            interactor.changeTaskState(task)
-            updateData()
-        }
-
-        tasksTableView.onGetFilteredData = { [weak self] string in
-            guard let self else { return }
-            let filteredData = interactor.filterData(by: string)
-            tasksTableView.getData(filteredData)
-        }
-    }
-
-    func setupAddTaskButtonAction() {
-        footerView.onAddTaskButtonTapped = { [weak self] in
-            guard let self else { return }
-            resetSearchController()
-
-            router.goToAddItemModule()
-        }
-    }
-
-    func resetSearchController() {
-        searchController.searchBar.text = ""
-    }
-}
-
-// MARK: - Supporting methods
-private extension MainViewController {
-    func updateData() {
-        interactor.getData { [weak self] data in
-            DispatchQueue.main.async {
-                self?.data = data
-                self?.tasksTableView.getData(data)
-            }
-        }
-    }
-
-    func setNavBarLargeTitle() {
-        navigationController?.navigationBar.prefersLargeTitles = true
     }
 }

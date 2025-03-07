@@ -33,6 +33,11 @@ final class AddItemPresenter {
 
 // MARK: - AddItemViewOutput
 extension AddItemPresenter: AddItemViewOutput {
+    func viewLoaded() {
+        view?.setupInitialState()
+        checkButton()
+    }
+
     func addedItemSubtitle(_ subtitle: String) {
         self.subtitle = subtitle
         checkButton()
@@ -40,11 +45,6 @@ extension AddItemPresenter: AddItemViewOutput {
     
     func addedItemTitle(_ title: String) {
         self.title = title
-        checkButton()
-    }
-    
-    func viewLoaded() {
-        view?.setupInitialState()
         checkButton()
     }
 
@@ -60,7 +60,7 @@ private extension AddItemPresenter {
     func configureTask() {
         guard let title, let subtitle else { print("We have empty fields"); return }
         let date = configureDate()
-        let tempID = -UUID().hashValue
+        let tempID = abs(UUID().hashValue % 1_000_000)
         task = TDLItem(id: tempID, title: title, subtitle: subtitle, date: date, completed: false)
     }
 

@@ -35,12 +35,14 @@ final class DependencyContainer {
 
         coreDataManager = CoreDataManager()
 
-        routerFactory = RouterFactory(dataManager: coreDataManager, navigationController: navigationController)
+        routerFactory = RouterFactory(navigationController: navigationController)
 
-        moduleFactory = ModuleFactory(dataManager: coreDataManager, routerFactory: routerFactory)
+        moduleFactory = ModuleFactory(dataManager: coreDataManager, routerFactory: routerFactory, networkService: networkService)
+
+        routerFactory.setModuleFactory(moduleFactory)
 
         router = AppRouter(moduleFactory: moduleFactory, navigationController: navigationController)
 
-        startManager = AppStartManager(interactor: interactor, networkService: networkService, router: router, coreDataManager: coreDataManager)
+        startManager = AppStartManager(interactor: interactor, networkService: networkService, router: router, coreDataManager: coreDataManager, moduleFactory: moduleFactory)
     }
 }

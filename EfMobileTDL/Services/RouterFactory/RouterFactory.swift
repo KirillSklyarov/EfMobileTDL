@@ -8,28 +8,41 @@
 
 import UIKit
 
-protocol RouterFactoryProtocol {
+protocol RouterFactoryProtocol: AnyObject {
     func makeRouter(_ module: AppModule) -> RouterProtocol
+    func makeMainRouter() -> MainRouterProtocol
+    func setModuleFactory(_ moduleFactory: ModuleFactoryProtocol?)
 }
 
 // Класс фабрика экранов отвечает за создание экранов
-final class RouterFactory {
+final class RouterFactory: RouterFactoryProtocol {
+
     // MARK: - Properties
     private let navigationController: UINavigationController
+    weak var moduleFactory: ModuleFactoryProtocol?
 
     // MARK: - Init
-    init(dataManager: CoreDataManagerProtocol, navigationController: UINavigationController) {
+    init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+    }
+
+    func setModuleFactory(_ moduleFactory: ModuleFactoryProtocol?) {
+        self.moduleFactory = moduleFactory
     }
 }
 
 // MARK: - ProfileScreenFactoryProtocol
-extension RouterFactory: RouterFactoryProtocol {
+extension RouterFactory {
     func makeRouter(_ module: AppModule) -> RouterProtocol {
         switch module {
+        case .main: makeMainRouter()
         case .editItem: makeEditItemRouter()
         case .addItem: makeAddItemModule()
         }
+    }
+
+    func makeMainRouter() -> MainRouterProtocol {
+        return MainRouter(moduleFactory: moduleFactory!, navigationController: navigationController)
     }
 }
 
@@ -43,4 +56,3 @@ private extension RouterFactory {
         return AddItemRouter(navigationController: navigationController)
     }
 }
-

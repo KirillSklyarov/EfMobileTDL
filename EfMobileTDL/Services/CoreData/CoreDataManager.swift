@@ -10,8 +10,13 @@ import CoreData
 
 protocol CoreDataManagerProtocol {
     func getItemToEdit() -> TDLItem?
+    func setItemToEdit(_ item: TDLItem)
+
     func updateItem(_ item: TDLItem)
     func addNewItem(_ item: TDLItem)
+    func saveDataInCoreData(tdlItems: [TDLItem])
+    func fetchData() -> [TDL]
+    func removeItem(_ item: TDLItem)
 }
 
 final class CoreDataManager: CoreDataManagerProtocol {
@@ -24,7 +29,7 @@ final class CoreDataManager: CoreDataManagerProtocol {
             if let error = error as NSError? {
                 print("🔴 Unresolved error \(error), \(error.userInfo)")
             } else {
-                print("✅ CoreDate upload successfully")
+                print("✅ CoreData upload successfully")
             }
         })
         return container
@@ -39,7 +44,7 @@ final class CoreDataManager: CoreDataManagerProtocol {
 extension CoreDataManager {
     // Метод для сохранения данных из AppStorage в CoreData
     func saveDataInCoreData(tdlItems: [TDLItem]) {
-        let existingItems = getAllTDL()
+        let existingItems = fetchData()
         let existingItemsDict = getExistingItemsIds(from: existingItems)
 
         for item in tdlItems {
@@ -54,9 +59,20 @@ extension CoreDataManager {
         printAllTDL()
     }
 
+    // Получить все объекты TDL в виде массива
+    func fetchData() -> [TDL] {
+        let fetchRequest = TDL.fetchRequest()
+
+        do {
+            return try context.fetch(fetchRequest)
+        } catch {
+            print("❌ Ошибка при получении данных: \(error.localizedDescription)")
+            return []
+        }
+    }
+
     func setItemToEdit(_ item: TDLItem) {
         itemToEdit = item
-        print(itemToEdit ?? "ItemToEdit is nil")
     }
 
     func getItemToEdit() -> TDLItem? {
@@ -71,19 +87,29 @@ extension CoreDataManager {
         let needsUpdate = isNeedUpdate(task, with: item)
 
         if needsUpdate {
-            task.title = item.title
-            task.subtitle = item.subtitle
-            task.date = item.date
-            task.completed = item.completed
-            print("✅ Запись успешно обновлена")
+            update(task: task, with: item)
+        } else {
+            print("ℹ️ Данные не изменились, обновление не требуется")
         }
-        saveContext()
     }
 
     // Добавление новой записи
     func addNewItem(_ item: TDLItem) {
         createNewItem(from: item)
+        print("✅ Новая запись успешно добавлена")
         saveContext()
+    }
+
+    func removeItem(_ item: TDLItem) {
+        guard let task: TDL = getTask(with: item.id) else { print("Ooops"); return }
+
+        do {
+            context.delete(task)
+            print("✅ Запись успешно удалена")
+            try context.save()
+        } catch {
+            print("❌ Ошибка при получении данных: \(error.localizedDescription)")
+        }
     }
 
     func printAllTDL() {
@@ -102,18 +128,13 @@ extension CoreDataManager {
         }
     }
 
-    func getCorrectDataFromCoreData() -> [TDLItem] {
-        let allTDL = getAllTDL()
-        return dataMapping(allTDL)
-    }
-
-    func getTask(with id: Int) -> [TDLItem]? {
+    func getTask(with id: Int) -> [TDL]? {
         let fetchRequest = TDL.fetchRequest()
 
         do {
             let allData = try context.fetch(fetchRequest)
             let task = allData.filter { $0.id == Int64(id) }
-            return dataMapping(task)
+            return task
         } catch {
             print("❌ Ошибка при поиске объекта по ID: \(error.localizedDescription)")
             return nil
@@ -122,11 +143,12 @@ extension CoreDataManager {
 
     func getTask(with id: Int) -> TDL? {
         let fetchRequest = TDL.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %d", Int64(id))
+        fetchRequest.fetchLimit = 1
 
         do {
-            let allData = try context.fetch(fetchRequest)
-            let task = allData.filter { $0.id == Int64(id) }.first
-            return task
+            let task = try context.fetch(fetchRequest)
+            return task.first
         } catch {
             print("❌ Ошибка при поиске объекта по ID: \(error.localizedDescription)")
             return nil
@@ -202,10 +224,21 @@ private extension CoreDataManager {
     }
 
     func areEqual(_ lhs: TDL, _ rhs: TDLItem) -> Bool {
-        return lhs.title == rhs.title &&
-               lhs.subtitle != rhs.subtitle &&
-               lhs.date != rhs.date &&
-               lhs.completed != rhs.completed
+        let title = lhs.title ?? ""
+        let subtitle = lhs.subtitle ?? ""
+        return title == rhs.title &&
+               subtitle == rhs.subtitle &&
+               lhs.date == rhs.date &&
+               lhs.completed == rhs.completed
+    }
+
+    func update(task: TDL, with item: TDLItem) {
+        task.title = item.title
+        task.subtitle = item.subtitle
+        task.date = item.date
+        task.completed = item.completed
+        print("✅ Запись успешно обновлена")
+        saveContext()
     }
 
     func getExistingItemsIds(from existingItems: [TDL]) -> [Int: TDL] {
@@ -216,35 +249,6 @@ private extension CoreDataManager {
         return existingItemsDict
     }
 
-    func dataMapping(_ items: [TDL]) -> [TDLItem] {
-        let array = items.compactMap { item in
-            return TDLItem(id: Int(item.id),
-                           title: item.title ?? "",
-                           subtitle: item.subtitle ?? "",
-                           date: item.date ?? "",
-                           completed: item.completed)
-        }
-
-        return sortData(array)
-    }
-
-    // Сортируем массив по датам
-    func sortData(_ items: [TDLItem]) -> [TDLItem] {
-        return items.sorted { $0.getDate() > $1.getDate() }
-    }
-
-    // Получить все объекты TDL в виде массива
-    func getAllTDL() -> [TDL] {
-        let fetchRequest = TDL.fetchRequest()
-
-        do {
-            return try context.fetch(fetchRequest)
-        } catch {
-            print("❌ Ошибка при получении данных: \(error.localizedDescription)")
-            return []
-        }
-    }
-
     // Создание нового объекта TDL в CoreData
     func createNewItem(from item: TDLItem) {
         let newItem = TDL(context: context)
@@ -253,7 +257,5 @@ private extension CoreDataManager {
         newItem.subtitle = item.subtitle
         newItem.date = item.date
         newItem.completed = item.completed
-
-        print("✅ Новая запись успешно добавлена")
     }
 }

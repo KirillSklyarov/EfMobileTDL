@@ -8,7 +8,8 @@
 import UIKit
 
 protocol MainRouterProtocol: RouterProtocol {
-    func goToEditVC()
+    func goToEditItemModule()
+    func goToAddItemModule()
 }
 
 final class MainRouter: MainRouterProtocol {
@@ -22,8 +23,13 @@ final class MainRouter: MainRouterProtocol {
         self.navigationController = navigationController
     }
 
-    func goToEditVC() {
+    func goToEditItemModule() {
         let editVC = moduleFactory.makeModule(.editItem)
         push(to: editVC)
+    }
+
+    func goToAddItemModule() {
+        let addItemVC = moduleFactory.makeModule(.addItem)
+        push(to: addItemVC)
     }
 }
