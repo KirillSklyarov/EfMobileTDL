@@ -28,8 +28,10 @@ extension RouterProtocol {
 
 
 protocol RouterFactoryProtocol: AnyObject {
-    func makeRouter(_ module: AppModule) -> RouterProtocol
     func makeMainRouter() -> MainRouterProtocol
+    func makeEditItemRouter() -> EditItemRouter
+    func makeAddItemModule() -> AddItemRouter
+
     func setModuleFactory(_ moduleFactory: ModuleFactoryProtocol?)
 }
 
@@ -52,21 +54,10 @@ final class RouterFactory: RouterFactoryProtocol {
 
 // MARK: - ProfileScreenFactoryProtocol
 extension RouterFactory {
-    func makeRouter(_ module: AppModule) -> RouterProtocol {
-        switch module {
-        case .main: makeMainRouter()
-        case .editItem: makeEditItemRouter()
-        case .addItem: makeAddItemModule()
-        }
-    }
-
     func makeMainRouter() -> MainRouterProtocol {
         return MainRouter(moduleFactory: moduleFactory!, navigationController: navigationController)
     }
-}
 
-// MARK: - Supporting methods
-private extension RouterFactory {
     func makeEditItemRouter() -> EditItemRouter {
         return EditItemRouter(navigationController: navigationController)
     }

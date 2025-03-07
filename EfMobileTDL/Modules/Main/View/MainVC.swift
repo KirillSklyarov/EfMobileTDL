@@ -18,14 +18,12 @@ protocol MainViewInput: AnyObject {
 final class MainViewController: UIViewController {
 
     // MARK: - Properties
-    private lazy var searchController = AppSearchController()
-    private lazy var tasksTableView = TasksTableView()
-    private lazy var footerView = FooterView()
-    private lazy var activityIndicator = AppActivityIndicator()
+    lazy var searchController = AppSearchController()
+    lazy var tasksTableView = TasksTableView()
+    lazy var footerView = FooterView()
+    lazy var activityIndicator = AppActivityIndicator()
 
-    private let output: MainViewOutput
-
-    private var data: [TDLItem] = []
+    let output: MainViewOutput
 
     // MARK: - Init
     init(output: MainViewOutput) {
@@ -128,15 +126,14 @@ extension MainViewController: MainViewInput {
     }
 
     func loading() {
+        activityIndicator.startAnimating()
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             isHideContent(true)
-            activityIndicator.startAnimating()
         }
     }
 
     func configure(with data: [TDLItem]) {
-        self.data = data
         isHideContent(false)
         activityIndicator.stopAnimating()
         tasksTableView.getData(data)
@@ -174,7 +171,7 @@ extension MainViewController: UISearchBarDelegate, UISearchResultsUpdating, UISe
 }
 
 // MARK: - Setup action
-private extension MainViewController {
+extension MainViewController {
     func setupAction() {
         setupTasksTableViewAction()
         setupAddTaskButtonAction()

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct JsonResponce: Codable {
+struct JsonResponse: Codable {
     let todos: [ToDoItem]
     let total: Int
     let skip: Int

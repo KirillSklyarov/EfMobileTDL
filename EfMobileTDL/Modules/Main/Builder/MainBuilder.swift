@@ -12,10 +12,10 @@ final class MainModuleBuilder {
     // MARK: - Properties
     private let dataManager: CoreDataManagerProtocol
     private let routerFactory: RouterFactoryProtocol
-    private let networkService: NetworkService
+    private let networkService: NetworkServiceProtocol
 
     // MARK: - Init
-    init(dataManager: CoreDataManagerProtocol, routerFactory: RouterFactoryProtocol, networkService: NetworkService) {
+    init(dataManager: CoreDataManagerProtocol, routerFactory: RouterFactoryProtocol, networkService: NetworkServiceProtocol) {
         self.dataManager = dataManager
         self.routerFactory = routerFactory
         self.networkService = networkService

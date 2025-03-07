@@ -8,11 +8,9 @@
 import Foundation
 
 protocol MainInteractorInput: AnyObject {
-    func getData(completion: @escaping ([TDLItem]) -> Void)
     func setUserTasks(_ tasks: [TDLItem])
     func addTask(_ newTask: TDLItem)
     func removeTask(_ task: TDLItem)
-    func updateTask(_ task: TDLItem, at index: Int)
     func editTask(_ newTask: TDLItem, index: Int)
     func filterData(by string: String) -> [TDLItem]
     func changeTaskState(_ task: TDLItem)
@@ -25,16 +23,16 @@ protocol MainInteractorInput: AnyObject {
 
 final class MainInteractor {
     private let dataManager: CoreDataManagerProtocol
-    private let networkService: NetworkService
+    private let networkService: NetworkServiceProtocol
     weak var output: MainViewOutput?
 
-    private(set) var data: [TDLItem] = []
+    var data: [TDLItem] = []
 
     private let queue = DispatchQueue(label: "efmobile.tdl.appstorage", qos: .userInteractive)
 
     private let userDefaults = UserDefaults.standard
 
-    init(dataManager: CoreDataManagerProtocol, networkService: NetworkService) {
+    init(dataManager: CoreDataManagerProtocol, networkService: NetworkServiceProtocol) {
         self.dataManager = dataManager
         self.networkService = networkService
     }
@@ -93,14 +91,6 @@ extension MainInteractor: MainInteractorInput {
 
 // MARK: - CRUD
 extension MainInteractor {
-    
-    func getData(completion: @escaping ([TDLItem]) -> Void) {
-        queue.async { [weak self] in
-            guard let self else { completion([]); return }
-            completion(data)
-        }
-    }
-
     func getIndex(of task: TDLItem) -> Int? {
         return data.firstIndex { $0 == task }
     }
@@ -133,10 +123,6 @@ extension MainInteractor {
         queue.async { [weak self] in
             self?.data[index] = newTask
         }
-    }
-
-    func updateTask(_ task: TDLItem, at index: Int) {
-//
     }
 }
 

@@ -21,7 +21,7 @@ final class AddItemModuleBuilder {
     // MARK: - Methods
     func build() -> AddItemViewController {
         let interactor = AddItemInteractor(dataManager: dataManager)
-        let router = routerFactory.makeRouter(.addItem)
+        let router = routerFactory.makeAddItemModule()
         let presenter = AddItemPresenter(interactor: interactor, router: router)
         let view = AddItemViewController(output: presenter)
 

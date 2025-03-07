@@ -7,8 +7,12 @@
 
 import Foundation
 
-// Сетевой сервис, который отвечает за выполнение сетевых запросов
-struct NetworkService {
+protocol NetworkServiceProtocol {
+    func fetchDataFromServer() async throws -> [TDLItem]
+    func fetchDataFirstTime() async throws -> [TDLItem]
+}
+
+struct NetworkService: NetworkServiceProtocol {
 
     // MARK: - Network Client
     let networkClient: NetworkClient
@@ -20,14 +24,18 @@ struct NetworkService {
 
     // MARK: - Fetch methods
     func fetchDataFromServer() async throws -> [TDLItem] {
-        let response = try await networkClient.fetchData(.dummy, type: JsonResponce.self)
-        let tasksData = response.todos.map { $0.toTask() }
+        let response = try await networkClient.fetchData(.dummy, type: JsonResponse.self)
+        let tasksData = responseMapping(response)
         return tasksData
     }
 
     func fetchDataFirstTime() async throws -> [TDLItem] {
-        let response = try await networkClient.fetchData(.google, type: JsonResponce.self)
-        let tasksData = response.todos.map { $0.toTask() }
+        let response = try await networkClient.fetchData(.google, type: JsonResponse.self)
+        let tasksData = responseMapping(response)
         return tasksData
+    }
+
+    func responseMapping(_ response: JsonResponse) -> [TDLItem] {
+        return response.todos.map { $0.toTask() }
     }
 }
