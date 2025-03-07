@@ -238,11 +238,9 @@ private extension MainViewController {
         case true:
             tasksTableView.alpha = 0
             footerView.alpha = 0
-//            navigationController?.setNavigationBarHidden(true, animated: false)
         case false:
             tasksTableView.alpha = 1
             footerView.alpha = 1
-//            navigationController?.setNavigationBarHidden(false, animated: false)
         }
     }
 }

@@ -19,8 +19,6 @@ struct TDLItem: Equatable, Codable {
     }
     
     func getDate() -> Date {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yy"
-        return formatter.date(from: date) ?? Date.distantPast
+        return DependencyContainer.dateFormatter.date(from: date) ?? Date.distantPast
     }
 }

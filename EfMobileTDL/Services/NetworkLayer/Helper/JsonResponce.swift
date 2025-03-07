@@ -21,9 +21,7 @@ struct ToDoItem: Codable {
     let userId: Int
 
     func getDate() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yy"
-        return formatter.string(from: Date())
+        return DependencyContainer.dateFormatter.string(from: Date())
     }
 
     func toTask() -> TDLItem {

@@ -22,8 +22,6 @@ struct NetworkClient: Sendable {
     }
 
     // MARK: - Methods
-
-    // Это базовый get-запрос с использованием дженериков, которым мы потом будем использовать в конкретной реализации
     func fetchData<T: Codable>(_ typeOfData: endPoint, type: T.Type) async throws -> T {
         guard let url = typeOfData.url else {
             throw NetworkError.invalidURL
