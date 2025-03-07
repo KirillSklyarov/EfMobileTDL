@@ -7,7 +7,9 @@
 
 import Foundation
 
-final class EditModuleBuilder {
+final class EditModuleBuilder: BuilderProtocol {
+    typealias Screen = EditItemViewController
+
     // MARK: - Properties
     private let dataManager: CoreDataManagerProtocol
 

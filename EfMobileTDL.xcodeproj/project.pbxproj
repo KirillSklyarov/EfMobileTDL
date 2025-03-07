@@ -30,6 +30,7 @@
 		73455BB82D7B5F3B008FDF5C /* MainBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73455BAD2D7B5F3B008FDF5C /* MainBuilderTests.swift */; };
 		73455BB92D7B5F3B008FDF5C /* MainInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73455BAE2D7B5F3B008FDF5C /* MainInteractorTests.swift */; };
 		73455BBA2D7B5F3B008FDF5C /* MainRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73455BB02D7B5F3B008FDF5C /* MainRouterTests.swift */; };
+		73455BBC2D7B7BF9008FDF5C /* BuilderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73455BBB2D7B7BF9008FDF5C /* BuilderProtocol.swift */; };
 		73FC330A2D76EA6D0098ABB9 /* AppLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33092D76EA6D0098ABB9 /* AppLabel.swift */; };
 		73FC33122D770B160098ABB9 /* TDLItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33102D770B160098ABB9 /* TDLItem.swift */; };
 		73FC33242D770B220098ABB9 /* CheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC331D2D770B220098ABB9 /* CheckmarkView.swift */; };
@@ -112,6 +113,7 @@
 		73455BB02D7B5F3B008FDF5C /* MainRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouterTests.swift; sourceTree = "<group>"; };
 		73455BB12D7B5F3B008FDF5C /* MainViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewTests.swift; sourceTree = "<group>"; };
 		73455BB32D7B5F3B008FDF5C /* MainSpyObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSpyObjects.swift; sourceTree = "<group>"; };
+		73455BBB2D7B7BF9008FDF5C /* BuilderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderProtocol.swift; sourceTree = "<group>"; };
 		7371B0B32D760D77004E6C73 /* EfMobileTDL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EfMobileTDL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0CC2D760D78004E6C73 /* EfMobileTDLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0D62D760D78004E6C73 /* EfMobileTDLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -598,6 +600,7 @@
 			children = (
 				73FC33ED2D7B2DC10098ABB9 /* ViewOutputProtocol.swift */,
 				73FC33EF2D7B301F0098ABB9 /* InteractorInputProtocol.swift */,
+				73455BBB2D7B7BF9008FDF5C /* BuilderProtocol.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -785,6 +788,7 @@
 				73FC333E2D773CB90098ABB9 /* AddTaskSubtitleView.swift in Sources */,
 				73FC330A2D76EA6D0098ABB9 /* AppLabel.swift in Sources */,
 				732085B22D76264A0086525E /* EfMobileTDL.xcdatamodeld in Sources */,
+				73455BBC2D7B7BF9008FDF5C /* BuilderProtocol.swift in Sources */,
 				73FC33F02D7B301F0098ABB9 /* InteractorInputProtocol.swift in Sources */,
 				732085B82D762D980086525E /* AppConstants.swift in Sources */,
 				73FC33DE2D7AE7960098ABB9 /* MainInteractor.swift in Sources */,

@@ -7,7 +7,9 @@
 
 import Foundation
 
-final class AddItemModuleBuilder {
+final class AddItemModuleBuilder: BuilderProtocol {
+    typealias Screen = AddItemViewController
+
     // MARK: - Properties
     private let dataManager: CoreDataManagerProtocol
     private let routerFactory: RouterFactoryProtocol

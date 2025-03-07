@@ -5,10 +5,11 @@
 //  Created by Kirill Sklyarov on 07.03.2025.
 //
 
-
 import Foundation
 
-final class MainModuleBuilder {
+final class MainModuleBuilder: BuilderProtocol {
+    typealias Screen = MainViewController
+
     // MARK: - Properties
     private let dataManager: CoreDataManagerProtocol
     private let routerFactory: RouterFactoryProtocol
