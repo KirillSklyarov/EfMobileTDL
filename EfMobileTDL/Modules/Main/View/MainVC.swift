@@ -16,13 +16,13 @@ final class MainViewController: UIViewController {
     private lazy var activityIndicator = AppActivityIndicator()
 
     private let interactor: InteractorProtocol
-    private let router: AppRouter
+    private let router: AppRouterProtocol
     private let dataManager: CoreDataManager
 
     private var data: [TDLItem] = []
 
     // MARK: - Init
-    init(interactor: InteractorProtocol, router: AppRouter, dataManager: CoreDataManager) {
+    init(interactor: InteractorProtocol, router: AppRouterProtocol, dataManager: CoreDataManager) {
         self.interactor = interactor
         self.router = router
         self.dataManager = dataManager
@@ -191,14 +191,7 @@ private extension MainViewController {
             dataManager.setItemToEdit(task)
             resetSearchController()
 
-            let editInteractor = EditTaskInteractor(dataManager: dataManager)
-            let editPresenter = EditPresenter(interactor: editInteractor)
-            let editViewController = EditTaskViewController(output: editPresenter)
-
-            editInteractor.presenter = editPresenter
-            editPresenter.view = editViewController
-
-            router.push(to: editViewController)
+            router.goToEditItemModule()
         }
 
         tasksTableView.onRemoveTask = { [weak self] task in
@@ -223,8 +216,8 @@ private extension MainViewController {
         footerView.onAddTaskButtonTapped = { [weak self] in
             guard let self else { return }
             resetSearchController()
-            let addTaskVC = AddTaskViewController(interactor: interactor, router: router)
-            router.push(to: addTaskVC)
+
+            router.goToAddItemModule()
         }
     }
 

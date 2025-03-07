@@ -9,11 +9,12 @@ import Foundation
 import CoreData
 
 protocol CoreDataManagerProtocol {
-    func updateTaskInCoreData(_ item: TDLItem)
+    func getItemToEdit() -> TDLItem?
+    func updateItem(_ item: TDLItem)
+    func addNewItem(_ item: TDLItem)
 }
 
-final class CoreDataManager {
-
+final class CoreDataManager: CoreDataManagerProtocol {
     private(set) var itemToEdit: TDLItem?
 
     // MARK: - Core Data stack
@@ -43,9 +44,9 @@ extension CoreDataManager {
 
         for item in tdlItems {
             if existingItemsDict[item.id] != nil {
-                updateTask(item)
+                updateItem(item)
             } else {
-                createTDL(from: item)
+                createNewItem(from: item)
             }
         }
 
@@ -63,7 +64,7 @@ extension CoreDataManager {
     }
 
     // Обновление данных в coreData
-    func updateTask(_ item: TDLItem) {
+    func updateItem(_ item: TDLItem) {
         guard let task: TDL = getTask(with: item.id) else { print("Ooops"); return }
 
         // Проверка, изменились ли данные
@@ -79,16 +80,11 @@ extension CoreDataManager {
         saveContext()
     }
 
-    // Создание нового объекта TDL в CoreData
-    func createTDL(from item: TDLItem) {
-        let tdlObject = TDL(context: context)
-        tdlObject.id = Int64(item.id)
-        tdlObject.title = item.title
-        tdlObject.subtitle = item.subtitle
-        tdlObject.date = item.date
-        tdlObject.completed = item.completed
+    // Добавление новой записи
+    func addNewItem(_ item: TDLItem) {
+        createNewItem(from: item)
+        saveContext()
     }
-
 
     func printAllTDL() {
         let fetchRequest = TDL.fetchRequest()
@@ -221,13 +217,20 @@ private extension CoreDataManager {
     }
 
     func dataMapping(_ items: [TDL]) -> [TDLItem] {
-        return items.compactMap { item in
+        let array = items.compactMap { item in
             return TDLItem(id: Int(item.id),
                            title: item.title ?? "",
                            subtitle: item.subtitle ?? "",
                            date: item.date ?? "",
                            completed: item.completed)
         }
+
+        return sortData(array)
+    }
+
+    // Сортируем массив по датам
+    func sortData(_ items: [TDLItem]) -> [TDLItem] {
+        return items.sorted { $0.getDate() > $1.getDate() }
     }
 
     // Получить все объекты TDL в виде массива
@@ -240,5 +243,17 @@ private extension CoreDataManager {
             print("❌ Ошибка при получении данных: \(error.localizedDescription)")
             return []
         }
+    }
+
+    // Создание нового объекта TDL в CoreData
+    func createNewItem(from item: TDLItem) {
+        let newItem = TDL(context: context)
+        newItem.id = Int64(item.id)
+        newItem.title = item.title
+        newItem.subtitle = item.subtitle
+        newItem.date = item.date
+        newItem.completed = item.completed
+
+        print("✅ Новая запись успешно добавлена")
     }
 }

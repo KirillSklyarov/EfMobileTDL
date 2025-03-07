@@ -16,13 +16,13 @@ protocol EditTaskInteractorInput {
 final class EditTaskInteractor {
 
     // MARK: - Properties
-    private let dataManager: CoreDataManager
+    private let dataManager: CoreDataManagerProtocol
     weak var presenter: EditPresenter?
 
     private var taskToEdit: TDLItem?
 
     // MARK: - Init
-    init(dataManager: CoreDataManager) {
+    init(dataManager: CoreDataManagerProtocol) {
         self.dataManager = dataManager
         setTaskToEdit()
     }
@@ -37,7 +37,7 @@ extension EditTaskInteractor: EditTaskInteractorInput {
         taskToEdit
     }
 
-    func updateTask(_ task: TDLItem) {
-        dataManager.updateTask(task)
+    func updateTask(_ item: TDLItem) {
+        dataManager.updateItem(item)
     }
 }

@@ -23,7 +23,7 @@ final class EditPresenter {
 
     // MARK: - Properties
     private let interactor: EditTaskInteractorInput
-    weak var view: EditTaskViewInput?
+    weak var view: EditItemViewInput?
 
     private var taskToEdit: TDLItem?
 

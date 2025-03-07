@@ -28,9 +28,9 @@
 		73FC33262D770B220098ABB9 /* TasksTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC331F2D770B220098ABB9 /* TasksTableView.swift */; };
 		73FC33272D770B220098ABB9 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33202D770B220098ABB9 /* TaskTableViewCell.swift */; };
 		73FC33282D770B220098ABB9 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33222D770B220098ABB9 /* MainVC.swift */; };
-		73FC33302D770F790098ABB9 /* EditTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC332E2D770F790098ABB9 /* EditTaskViewController.swift */; };
+		73FC33302D770F790098ABB9 /* EditItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC332E2D770F790098ABB9 /* EditItemViewController.swift */; };
 		73FC33322D771F110098ABB9 /* AppTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33312D771F110098ABB9 /* AppTextField.swift */; };
-		73FC333A2D772F6F0098ABB9 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33382D772F6F0098ABB9 /* AddTaskViewController.swift */; };
+		73FC333A2D772F6F0098ABB9 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33382D772F6F0098ABB9 /* AddItemViewController.swift */; };
 		73FC333E2D773CB90098ABB9 /* AddTaskSubtitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC333D2D773CB90098ABB9 /* AddTaskSubtitleView.swift */; };
 		73FC33402D778B350098ABB9 /* AppSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC333F2D778B350098ABB9 /* AppSearchController.swift */; };
 		73FC33562D78575A0098ABB9 /* NetworkLayerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33532D78575A0098ABB9 /* NetworkLayerHelper.swift */; };
@@ -46,6 +46,14 @@
 		73FC33A32D79C6A50098ABB9 /* EditTaskInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33A22D79C6A50098ABB9 /* EditTaskInteractor.swift */; };
 		73FC33A52D7A1C9E0098ABB9 /* EditPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33A42D7A1C9E0098ABB9 /* EditPresenter.swift */; };
 		73FC33A72D7A292C0098ABB9 /* AppAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33A62D7A292C0098ABB9 /* AppAlert.swift */; };
+		73FC33AF2D7A3D160098ABB9 /* EditModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33AD2D7A3D160098ABB9 /* EditModuleBuilder.swift */; };
+		73FC33B72D7A3F1E0098ABB9 /* ModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33B52D7A3F1E0098ABB9 /* ModuleFactory.swift */; };
+		73FC33BB2D7A43D60098ABB9 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33BA2D7A43D60098ABB9 /* MainRouter.swift */; };
+		73FC33C52D7ACE950098ABB9 /* AddItemInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33C42D7ACE950098ABB9 /* AddItemInteractor.swift */; };
+		73FC33C72D7ACEC80098ABB9 /* AddItemPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33C62D7ACEC80098ABB9 /* AddItemPresenter.swift */; };
+		73FC33C92D7AD6750098ABB9 /* AddItemBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33C82D7AD6750098ABB9 /* AddItemBuilder.swift */; };
+		73FC33CD2D7AD9F00098ABB9 /* AddItemRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33CC2D7AD9F00098ABB9 /* AddItemRouter.swift */; };
+		73FC33D32D7ADFBA0098ABB9 /* RouterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33D12D7ADFBA0098ABB9 /* RouterFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,9 +99,9 @@
 		73FC331F2D770B220098ABB9 /* TasksTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableView.swift; sourceTree = "<group>"; };
 		73FC33202D770B220098ABB9 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		73FC33222D770B220098ABB9 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
-		73FC332E2D770F790098ABB9 /* EditTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskViewController.swift; sourceTree = "<group>"; };
+		73FC332E2D770F790098ABB9 /* EditItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemViewController.swift; sourceTree = "<group>"; };
 		73FC33312D771F110098ABB9 /* AppTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTextField.swift; sourceTree = "<group>"; };
-		73FC33382D772F6F0098ABB9 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
+		73FC33382D772F6F0098ABB9 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		73FC333D2D773CB90098ABB9 /* AddTaskSubtitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskSubtitleView.swift; sourceTree = "<group>"; };
 		73FC333F2D778B350098ABB9 /* AppSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchController.swift; sourceTree = "<group>"; };
 		73FC33532D78575A0098ABB9 /* NetworkLayerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayerHelper.swift; sourceTree = "<group>"; };
@@ -109,6 +117,14 @@
 		73FC33A22D79C6A50098ABB9 /* EditTaskInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskInteractor.swift; sourceTree = "<group>"; };
 		73FC33A42D7A1C9E0098ABB9 /* EditPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPresenter.swift; sourceTree = "<group>"; };
 		73FC33A62D7A292C0098ABB9 /* AppAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAlert.swift; sourceTree = "<group>"; };
+		73FC33AD2D7A3D160098ABB9 /* EditModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditModuleBuilder.swift; sourceTree = "<group>"; };
+		73FC33B52D7A3F1E0098ABB9 /* ModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleFactory.swift; sourceTree = "<group>"; };
+		73FC33BA2D7A43D60098ABB9 /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
+		73FC33C42D7ACE950098ABB9 /* AddItemInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemInteractor.swift; sourceTree = "<group>"; };
+		73FC33C62D7ACEC80098ABB9 /* AddItemPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemPresenter.swift; sourceTree = "<group>"; };
+		73FC33C82D7AD6750098ABB9 /* AddItemBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemBuilder.swift; sourceTree = "<group>"; };
+		73FC33CC2D7AD9F00098ABB9 /* AddItemRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemRouter.swift; sourceTree = "<group>"; };
+		73FC33D12D7ADFBA0098ABB9 /* RouterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,7 +208,7 @@
 			children = (
 				732085B52D762BBB0086525E /* Main */,
 				73FC33342D772F290098ABB9 /* AddTask */,
-				73FC332A2D770F610098ABB9 /* EditTask */,
+				73FC332A2D770F610098ABB9 /* EditItem */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -211,6 +227,7 @@
 			children = (
 				73FC33112D770B160098ABB9 /* Model */,
 				73FC33232D770B220098ABB9 /* View */,
+				73FC33B92D7A432C0098ABB9 /* Router */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -286,20 +303,21 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		73FC332A2D770F610098ABB9 /* EditTask */ = {
+		73FC332A2D770F610098ABB9 /* EditItem */ = {
 			isa = PBXGroup;
 			children = (
 				73FC332F2D770F790098ABB9 /* View */,
 				73FC33A02D79C6710098ABB9 /* Interactor */,
 				73FC33A12D79C6730098ABB9 /* Presenter */,
+				73FC33AE2D7A3D160098ABB9 /* Builder */,
 			);
-			path = EditTask;
+			path = EditItem;
 			sourceTree = "<group>";
 		};
 		73FC332F2D770F790098ABB9 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				73FC332E2D770F790098ABB9 /* EditTaskViewController.swift */,
+				73FC332E2D770F790098ABB9 /* EditItemViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -308,6 +326,10 @@
 			isa = PBXGroup;
 			children = (
 				73FC33392D772F6F0098ABB9 /* View */,
+				73FC33C12D7ACE460098ABB9 /* Interactor */,
+				73FC33C22D7ACE460098ABB9 /* Presenter */,
+				73FC33CB2D7AD9E30098ABB9 /* Router */,
+				73FC33C32D7ACE460098ABB9 /* Builder */,
 			);
 			path = AddTask;
 			sourceTree = "<group>";
@@ -315,7 +337,7 @@
 		73FC33392D772F6F0098ABB9 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				73FC33382D772F6F0098ABB9 /* AddTaskViewController.swift */,
+				73FC33382D772F6F0098ABB9 /* AddItemViewController.swift */,
 				73FC333C2D773CA50098ABB9 /* Components */,
 			);
 			path = View;
@@ -333,6 +355,8 @@
 		73FC33422D7856710098ABB9 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				73FC33D22D7ADFBA0098ABB9 /* RouterFactory */,
+				73FC33B62D7A3F1E0098ABB9 /* ModuleFactory */,
 				73FC33642D78729C0098ABB9 /* AppStartManager */,
 				732085B02D76264A0086525E /* CoreData */,
 				73FC33712D797F8C0098ABB9 /* Router */,
@@ -415,6 +439,70 @@
 				73FC33A42D7A1C9E0098ABB9 /* EditPresenter.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		73FC33AE2D7A3D160098ABB9 /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				73FC33AD2D7A3D160098ABB9 /* EditModuleBuilder.swift */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
+		73FC33B62D7A3F1E0098ABB9 /* ModuleFactory */ = {
+			isa = PBXGroup;
+			children = (
+				73FC33B52D7A3F1E0098ABB9 /* ModuleFactory.swift */,
+			);
+			path = ModuleFactory;
+			sourceTree = "<group>";
+		};
+		73FC33B92D7A432C0098ABB9 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				73FC33BA2D7A43D60098ABB9 /* MainRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		73FC33C12D7ACE460098ABB9 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				73FC33C42D7ACE950098ABB9 /* AddItemInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		73FC33C22D7ACE460098ABB9 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				73FC33C62D7ACEC80098ABB9 /* AddItemPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		73FC33C32D7ACE460098ABB9 /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				73FC33C82D7AD6750098ABB9 /* AddItemBuilder.swift */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
+		73FC33CB2D7AD9E30098ABB9 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				73FC33CC2D7AD9F00098ABB9 /* AddItemRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		73FC33D22D7ADFBA0098ABB9 /* RouterFactory */ = {
+			isa = PBXGroup;
+			children = (
+				73FC33D12D7ADFBA0098ABB9 /* RouterFactory.swift */,
+			);
+			path = RouterFactory;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -560,18 +648,22 @@
 				7320859B2D7626110086525E /* AppDelegate.swift in Sources */,
 				73FC335B2D7857890098ABB9 /* NetworkLayerClient.swift in Sources */,
 				7320859C2D7626110086525E /* SceneDelegate.swift in Sources */,
-				73FC333A2D772F6F0098ABB9 /* AddTaskViewController.swift in Sources */,
+				73FC333A2D772F6F0098ABB9 /* AddItemViewController.swift in Sources */,
 				73FC33A32D79C6A50098ABB9 /* EditTaskInteractor.swift in Sources */,
-				73FC33302D770F790098ABB9 /* EditTaskViewController.swift in Sources */,
+				73FC33302D770F790098ABB9 /* EditItemViewController.swift in Sources */,
 				73FC33652D78729C0098ABB9 /* AppStartManager.swift in Sources */,
 				732085EC2D764D240086525E /* AppStackView.swift in Sources */,
 				73FC336F2D787CB70098ABB9 /* AppActivityIndicator.swift in Sources */,
 				73FC33752D798C560098ABB9 /* CoreDataManager.swift in Sources */,
+				73FC33AF2D7A3D160098ABB9 /* EditModuleBuilder.swift in Sources */,
 				73FC33242D770B220098ABB9 /* CheckmarkView.swift in Sources */,
+				73FC33C52D7ACE950098ABB9 /* AddItemInteractor.swift in Sources */,
+				73FC33C72D7ACEC80098ABB9 /* AddItemPresenter.swift in Sources */,
 				73FC33252D770B220098ABB9 /* FooterView.swift in Sources */,
 				73FC335D2D78580F0098ABB9 /* NetworkService.swift in Sources */,
 				73FC33262D770B220098ABB9 /* TasksTableView.swift in Sources */,
 				73FC33A52D7A1C9E0098ABB9 /* EditPresenter.swift in Sources */,
+				73FC33CD2D7AD9F00098ABB9 /* AddItemRouter.swift in Sources */,
 				73FC33272D770B220098ABB9 /* TaskTableViewCell.swift in Sources */,
 				73FC33282D770B220098ABB9 /* MainVC.swift in Sources */,
 				732085DA2D762E8D0086525E /* UIColor+Ext.swift in Sources */,
@@ -581,13 +673,17 @@
 				73FC33122D770B160098ABB9 /* TDLItem.swift in Sources */,
 				73FC336D2D7874B90098ABB9 /* DependencyContainer.swift in Sources */,
 				73FC33732D797FE50098ABB9 /* AppRouter.swift in Sources */,
+				73FC33BB2D7A43D60098ABB9 /* MainRouter.swift in Sources */,
+				73FC33B72D7A3F1E0098ABB9 /* ModuleFactory.swift in Sources */,
 				73FC333E2D773CB90098ABB9 /* AddTaskSubtitleView.swift in Sources */,
 				73FC330A2D76EA6D0098ABB9 /* AppLabel.swift in Sources */,
 				732085B22D76264A0086525E /* EfMobileTDL.xcdatamodeld in Sources */,
 				732085B82D762D980086525E /* AppConstants.swift in Sources */,
 				73FC33692D7872ED0098ABB9 /* Interactor.swift in Sources */,
 				73FC33402D778B350098ABB9 /* AppSearchController.swift in Sources */,
+				73FC33C92D7AD6750098ABB9 /* AddItemBuilder.swift in Sources */,
 				732085E02D7640570086525E /* AppButton.swift in Sources */,
+				73FC33D32D7ADFBA0098ABB9 /* RouterFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

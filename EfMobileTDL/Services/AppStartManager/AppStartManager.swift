@@ -11,7 +11,7 @@ final class AppStartManager {
 
     private let interactor: Interactor
     private let networkService: NetworkService
-    private let router: AppRouter
+    private let router: AppRouterProtocol
     private let coreDataManager: CoreDataManager
 
     private var window: UIWindow?
@@ -22,7 +22,7 @@ final class AppStartManager {
     private var data: [TDLItem] = []
 
     // MARK: - Init
-    init(interactor: Interactor, networkService: NetworkService, router: AppRouter, coreDataManager: CoreDataManager) {
+    init(interactor: Interactor, networkService: NetworkService, router: AppRouterProtocol, coreDataManager: CoreDataManager) {
         self.interactor = interactor
         self.networkService = networkService
         self.router = router

@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol EditTaskViewInput: AnyObject {
+protocol EditItemViewInput: AnyObject {
     func setupInitialState()
     func showLoading()
     func configure(with task: TDLItem)
@@ -15,7 +15,7 @@ protocol EditTaskViewInput: AnyObject {
 }
 
 
-final class EditTaskViewController: UIViewController {
+final class EditItemViewController: UIViewController {
 
     // MARK: - UI Properties
     private lazy var titleTextField = AppTextField(type: .title)
@@ -54,7 +54,7 @@ final class EditTaskViewController: UIViewController {
 }
 
 // MARK: - EditTaskViewInput
-extension EditTaskViewController: EditTaskViewInput {
+extension EditItemViewController: EditItemViewInput {
     func setupInitialState() {
         setupUI()
         setupTextFields()
@@ -85,7 +85,7 @@ extension EditTaskViewController: EditTaskViewInput {
 }
 
 // MARK: - Setup UI
-private extension EditTaskViewController {
+private extension EditItemViewController {
     func setupUI() {
         title = "Редактировать задачи"
         navigationController?.navigationBar.prefersLargeTitles = false
@@ -126,7 +126,7 @@ private extension EditTaskViewController {
 }
 
 // MARK: - UITextViewDelegate
-extension EditTaskViewController: UITextViewDelegate {
+extension EditItemViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         guard let text = textView.text else { return }
         output.didUpdateTaskSubTitle(text)
@@ -134,7 +134,7 @@ extension EditTaskViewController: UITextViewDelegate {
 }
 
 // MARK: - UITextFieldDelegate
-extension EditTaskViewController: UITextFieldDelegate {
+extension EditItemViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -142,7 +142,7 @@ extension EditTaskViewController: UITextFieldDelegate {
 }
 
 // MARK: - Supporting methods
-private extension EditTaskViewController {
+private extension EditItemViewController {
     @objc func textFieldDidChange(_ textField: UITextField) {
         guard let text = textField.text else { return }
         output.didUpdateTaskTitle(text)
@@ -161,7 +161,7 @@ private extension EditTaskViewController {
 }
 
 // MARK: - Hide keyboard by tap
-private extension EditTaskViewController {
+private extension EditItemViewController {
     func setupGestureToDissmissKeyboard() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
