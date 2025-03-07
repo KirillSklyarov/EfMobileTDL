@@ -16,7 +16,7 @@ protocol AddItemViewOutput: AnyObject {
 
 final class AddItemPresenter {
 
-    private let interactor: AddItemInteractor
+    private let interactor: AddItemInteractorInput
     private let router: RouterProtocol
     weak var view: AddItemViewInput?
 
@@ -25,7 +25,7 @@ final class AddItemPresenter {
     private var title: String?
 
     // MARK: - Init
-    init(interactor: AddItemInteractor, router: RouterProtocol) {
+    init(interactor: AddItemInteractorInput, router: RouterProtocol) {
         self.interactor = interactor
         self.router = router
     }

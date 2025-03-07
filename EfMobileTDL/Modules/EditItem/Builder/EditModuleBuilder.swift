@@ -18,11 +18,11 @@ final class EditModuleBuilder {
 
     // MARK: - Methods
     func build() -> EditItemViewController {
-        let interactor = EditTaskInteractor(dataManager: dataManager)
+        let interactor = EditItemInteractor(dataManager: dataManager)
         let presenter = EditPresenter(interactor: interactor)
         let view = EditItemViewController(output: presenter)
 
-        interactor.presenter = presenter
+        interactor.output = presenter
         presenter.view = view
 
         return view

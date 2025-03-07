@@ -12,6 +12,7 @@ protocol EditItemViewInput: AnyObject {
     func showLoading()
     func configure(with task: TDLItem)
     func showError()
+    func textFieldDidChange(_ textField: UITextField)
 }
 
 final class EditItemViewController: UIViewController {
@@ -28,10 +29,10 @@ final class EditItemViewController: UIViewController {
     private lazy var activityIndicator = AppActivityIndicator()
 
     // MARK: - Other properties
-    private let output: EditTaskViewOutput
+    private let output: EditItemViewOutput
 
     // MARK: - Init
-    init(output: EditTaskViewOutput) {
+    init(output: EditItemViewOutput) {
         self.output = output
         super.init(nibName: nil, bundle: nil)
     }
@@ -74,12 +75,6 @@ extension EditItemViewController: EditItemViewInput {
     func showError() {
         activityIndicator.stopAnimating()
         showAlert()
-    }
-
-    func showAlert() {
-        activityIndicator.stopAnimating()
-        let alert = AppAlert.create()
-        present(alert, animated: true)
     }
 }
 
@@ -130,6 +125,11 @@ extension EditItemViewController: UITextViewDelegate {
         guard let text = textView.text else { return }
         output.didUpdateTaskSubTitle(text)
     }
+
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        output.didUpdateTaskTitle(text)
+    }
 }
 
 // MARK: - UITextFieldDelegate
@@ -142,11 +142,6 @@ extension EditItemViewController: UITextFieldDelegate {
 
 // MARK: - Supporting methods
 private extension EditItemViewController {
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        guard let text = textField.text else { return }
-        output.didUpdateTaskTitle(text)
-    }
-
     func isShowContent(_ isShow: Bool) {
         contentStack.alpha = isShow ? 1 : 0
     }
@@ -156,6 +151,12 @@ private extension EditItemViewController {
         subtitleTextField.setTextViewText(task.subtitle)
         subtitleTextField.setTextViewTextColor(AppConstants.Colors.white)
         dateLabel.text = task.date
+    }
+
+    func showAlert() {
+        activityIndicator.stopAnimating()
+        let alert = AppAlert.create()
+        present(alert, animated: true)
     }
 }
 

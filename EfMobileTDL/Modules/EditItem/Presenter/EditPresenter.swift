@@ -7,9 +7,10 @@
 
 import Foundation
 
-protocol EditTaskViewOutput: AnyObject {
+protocol EditItemViewOutput: ViewOutputProtocol {
+    var itemToEdit: TDLItem? { get set }
+
     func viewLoaded()
-//    func loadData()
     func checkDataAndUpdateView()
     func isDataValid() -> Bool
     func updateView()
@@ -22,19 +23,19 @@ protocol EditTaskViewOutput: AnyObject {
 final class EditPresenter {
 
     // MARK: - Properties
-    private let interactor: EditTaskInteractorInput
+    var interactor: EditItemInteractorInput
     weak var view: EditItemViewInput?
 
-    private var taskToEdit: TDLItem?
+    var itemToEdit: TDLItem?
 
     // MARK: - Init
-    init(interactor: EditTaskInteractorInput) {
+    init(interactor: EditItemInteractorInput) {
         self.interactor = interactor
     }
 }
 
 // MARK: - EditTaskViewOutput
-extension EditPresenter: EditTaskViewOutput {
+extension EditPresenter: EditItemViewOutput {
     func viewLoaded() {
         view?.setupInitialState()
         loadData()
@@ -56,14 +57,14 @@ extension EditPresenter: EditTaskViewOutput {
 
     // Проверяем на nil все данные, если где-то будет nil, то это ошибка
     func isDataValid() -> Bool {
-        let data: [Any?] = [taskToEdit]
+        let data: [Any?] = [itemToEdit]
         return data.allSatisfy { $0 != nil }
     }
 
     // Прокидываем данные на view и формируем ее
     func updateView() {
-        guard let taskToEdit else { return }
-        view?.configure(with: taskToEdit)
+        guard let itemToEdit else { return }
+        view?.configure(with: itemToEdit)
     }
 
     func setErrorState() {
@@ -71,26 +72,26 @@ extension EditPresenter: EditTaskViewOutput {
     }
 
     func didUpdateTaskTitle(_ title: String) {
-        if !title.isEmpty && title != taskToEdit?.title {
-            taskToEdit?.title = title
+        if !title.isEmpty && title != itemToEdit?.title {
+            itemToEdit?.title = title
         }
     }
 
     func didUpdateTaskSubTitle(_ subtitle: String) {
-        if !subtitle.isEmpty && subtitle != taskToEdit?.subtitle {
-            taskToEdit?.subtitle = subtitle
+        if !subtitle.isEmpty && subtitle != itemToEdit?.subtitle {
+            itemToEdit?.subtitle = subtitle
         }
     }
 
     func viewWillDisappear() {
-        guard let taskToEdit else { return }
-        interactor.updateTask(taskToEdit)
+        guard let itemToEdit else { return }
+        interactor.updateItem(itemToEdit)
     }
 }
 
 // MARK: - Supporting methods
 private extension EditPresenter {
     func getDataFromInteractor() {
-        taskToEdit = interactor.getTaskToEdit()
+        itemToEdit = interactor.getTaskToEdit()
     }
 }

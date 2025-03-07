@@ -7,19 +7,21 @@
 
 import Foundation
 
-protocol EditTaskInteractorInput {
+protocol EditItemInteractorInput: InteractorInputProtocol {
+    var itemToEdit: TDLItem? { get set }
+
     func setTaskToEdit()
     func getTaskToEdit() -> TDLItem?
-    func updateTask(_ task: TDLItem)
+    func updateItem(_ item: TDLItem)
 }
 
-final class EditTaskInteractor {
+final class EditItemInteractor {
 
     // MARK: - Properties
     private let dataManager: CoreDataManagerProtocol
-    weak var presenter: EditPresenter?
+    weak var output: ViewOutputProtocol?
 
-    private var taskToEdit: TDLItem?
+    var itemToEdit: TDLItem?
 
     // MARK: - Init
     init(dataManager: CoreDataManagerProtocol) {
@@ -28,16 +30,17 @@ final class EditTaskInteractor {
     }
 }
 
-extension EditTaskInteractor: EditTaskInteractorInput {
+// MARK: - EditItemInteractorInput
+extension EditItemInteractor: EditItemInteractorInput {
     func setTaskToEdit() {
-        taskToEdit = dataManager.getItemToEdit()
+        itemToEdit = dataManager.getItemToEdit()
     }
 
     func getTaskToEdit() -> TDLItem? {
-        taskToEdit
+        itemToEdit
     }
 
-    func updateTask(_ item: TDLItem) {
+    func updateItem(_ item: TDLItem) {
         dataManager.updateItem(item)
     }
 }
