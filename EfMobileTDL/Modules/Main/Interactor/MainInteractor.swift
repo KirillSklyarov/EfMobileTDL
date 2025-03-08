@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import rswift
 
 protocol MainInteractorInput: AnyObject {
     func setUserTasks(_ tasks: [TDLItem])
@@ -57,14 +58,14 @@ extension MainInteractor: MainInteractorInput {
     func fetchDataIsFirstLaunch(_ isFirstLaunch: Bool) async throws {
         if isFirstLaunch {
             data = try await networkService.fetchDataFromServer()
-            print("dataFromServer".localized)
+            print(AppConstants.L.dataFromServer())
             userDefaults.set(true, forKey: "hasLaunchedBefore")
             dataManager.saveDataInCoreData(tdlItems: data)
             print(#function)
             output?.dataLoaded(data)
         } else {
             getNewDataFromCD()
-            print("dataFromCoreData".localized)
+            print(AppConstants.L.dataFromCoreData())
         }
     }
 

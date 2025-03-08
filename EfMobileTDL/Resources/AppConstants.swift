@@ -6,8 +6,20 @@
 //
 
 import UIKit
+import rswift
 
 struct AppConstants {
+
+    static let L = R.string.localizable
+
+    enum SystemImages {
+        static let edit = UIImage(systemName: "square.and.pencil")
+        static let share = UIImage(systemName: "square.and.arrow.up")
+        static let delete = UIImage(systemName: "trash")
+        static let microphone = UIImage(systemName: "microphone.fill")
+        static let taskCompleted = UIImage(systemName: "checkmark.circle")
+        static let taskNotCompleted = UIImage(systemName: "circle")
+    }
 
     enum Colors {
         static let black = UIColor(hex: "040404")

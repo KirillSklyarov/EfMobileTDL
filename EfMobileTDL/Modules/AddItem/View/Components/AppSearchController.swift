@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import rswift
 
 final class AppSearchController: UISearchController {
 
@@ -33,7 +34,7 @@ private extension AppSearchController {
         let searchTextField = searchBar.searchTextField
         searchTextField.backgroundColor = AppConstants.Colors.darkGray
         searchTextField.leftView?.tintColor = AppConstants.Colors.gray
-        searchTextField.attributedPlaceholder = NSAttributedString(string: "search".localized, attributes: [.foregroundColor: AppConstants.Colors.gray])
+        searchTextField.attributedPlaceholder = NSAttributedString(string: AppConstants.L.search(), attributes: [.foregroundColor: AppConstants.Colors.gray])
 
         hidesNavigationBarDuringPresentation = true
     }

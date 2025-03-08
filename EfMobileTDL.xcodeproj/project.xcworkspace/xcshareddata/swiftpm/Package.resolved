@@ -1,13 +1,31 @@
 {
-  "originHash" : "f471c3f4ae598ad1e4f4208450246915f2682d16c78d15236d19d80c3030becd",
+  "originHash" : "9e31fd168df35ebdc5bbd3df832d40d1c281abb1af4e45c8fa0c9667b6d50c0e",
   "pins" : [
     {
-      "identity" : "swiftgenplugin",
+      "identity" : "r.swift",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SwiftGen/SwiftGenPlugin",
+      "location" : "https://github.com/mac-cain13/R.swift.git",
       "state" : {
-        "revision" : "879b85a470cacd70c19e22eb7e11a3aed66f4068",
-        "version" : "6.6.2"
+        "revision" : "a9abc6b0afe0fc4a5a71e1d7d2872143dff2d2f1",
+        "version" : "7.8.0"
+      }
+    },
+    {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser",
+      "state" : {
+        "revision" : "41982a3656a71c768319979febd796c6fd111d5c",
+        "version" : "1.5.0"
+      }
+    },
+    {
+      "identity" : "xcodeedit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tomlokhorst/XcodeEdit",
+      "state" : {
+        "revision" : "9bc684439d16c07d7bede66ae43bb577a25d6bb1",
+        "version" : "2.12.0"
       }
     }
   ],

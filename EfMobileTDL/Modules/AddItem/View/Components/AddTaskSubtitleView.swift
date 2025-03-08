@@ -64,7 +64,7 @@ private extension AddTaskSubtitleView {
     func setupTextView() {
         subtitleTextField.backgroundColor = AppConstants.Colors.darkGray
         subtitleTextField.font = AppConstants.Fonts.regular16
-        subtitleTextField.text = "addTask subtitle".localized
+        subtitleTextField.text = AppConstants.L.addTaskSubtitle()
         subtitleTextField.textColor = AppConstants.Colors.gray
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import rswift
 
 final class TasksTableView: UITableView {
 
@@ -84,15 +85,15 @@ extension TasksTableView: UITableViewDataSource, UITableViewDelegate {
 
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
 
-            let editAction = UIAction(title: "edit".localized, image: UIImage(systemName: "square.and.pencil")) { [weak self] _ in
+            let editAction = UIAction(title: AppConstants.L.edit(), image: AppConstants.SystemImages.edit) { [weak self] _ in
                 self?.editTask(at: indexPath)
             }
 
-            let shareAction = UIAction(title: "share".localized, image: UIImage(systemName: "square.and.arrow.up")) { [weak self] _ in
+            let shareAction = UIAction(title: AppConstants.L.share(), image: AppConstants.SystemImages.share) { [weak self] _ in
                 self?.shareTask(at: indexPath)
             }
 
-            let deleteAction = UIAction(title: "delete".localized, image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] _ in
+            let deleteAction = UIAction(title: AppConstants.L.delete(), image: AppConstants.SystemImages.delete, attributes: .destructive) { [weak self] _ in
                 self?.deleteTask(at: indexPath)
             }
 
@@ -116,7 +117,7 @@ private extension TasksTableView {
 
     func shareTask(at indexPath: IndexPath) {
         guard let task = data?[indexPath.row] else { print("We have problem with indexPath"); return }
-        let textToShare = String(format: "shareTask".localized, task.title, task.subtitle)
+        let textToShare = AppConstants.L.shareTask(task.title, task.subtitle)
         let activityVC = UIActivityViewController(activityItems: [textToShare], applicationActivities: nil)
         onShowShareScreen?(activityVC)
     }

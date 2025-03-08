@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import rswift
 
 protocol MainViewInput: AnyObject {
     func setupInitialState()
@@ -64,7 +65,7 @@ private extension MainViewController {
     }
 
     func setupNavigationBar() {
-        title = "mainTitle".localized
+        title = AppConstants.L.mainTitle()
         setNavBarLargeTitle()
         
         let appearance = UINavigationBarAppearance()
@@ -78,7 +79,7 @@ private extension MainViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.tintColor = AppConstants.Colors.yellow
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "backButton".localized, style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: R.string.localizable.backButton(), style: .plain, target: nil, action: nil)
 
         navigationItem.hidesSearchBarWhenScrolling = false
 

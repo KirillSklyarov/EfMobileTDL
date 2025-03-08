@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import rswift
 
 protocol EditItemViewInput: AnyObject {
     func setupInitialState()
@@ -81,7 +82,7 @@ extension EditItemViewController: EditItemViewInput {
 // MARK: - Setup UI
 private extension EditItemViewController {
     func setupUI() {
-        title = "editTask".localized
+        title = AppConstants.L.editTask()
         navigationController?.navigationBar.prefersLargeTitles = false
 
         view.backgroundColor = AppConstants.Colors.black

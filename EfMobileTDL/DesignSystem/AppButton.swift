@@ -32,25 +32,29 @@ private extension AppButton {
     func configure(_ style: AppButtonStyle) {
         switch style {
         case .micro:
-            let image = UIImage(systemName: "microphone.fill")
+            let image = AppConstants.SystemImages.microphone
             tintColor = AppConstants.Colors.gray
             contentMode = .scaleAspectFit
             setImage(image, for: .normal)
         case .addTask:
             let config = UIImage.SymbolConfiguration(pointSize: 24, weight: .regular)
-            let image = UIImage(systemName: "square.and.pencil", withConfiguration: config)?
-                .withTintColor(AppConstants.Colors.yellow)
-                .withRenderingMode(.alwaysOriginal)
+            var image = AppConstants.SystemImages.edit
+            image = image?
+                        .withConfiguration( config)
+                        .withTintColor(AppConstants.Colors.yellow)
+                        .withRenderingMode(.alwaysOriginal)
             setImage(image, for: .normal)
 
         case .save: setupSaveButton()
         case .taskPoint:
             let config = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular)
-            let image = UIImage(systemName: "circle", withConfiguration: config)?
+            var image = AppConstants.SystemImages.taskNotCompleted
+            image =
+                image?.withConfiguration(config)
                 .withTintColor(AppConstants.Colors.gray)
                 .withRenderingMode(.alwaysOriginal)
-            let selectedImage = UIImage(systemName: "checkmark.circle", withConfiguration: config)?
-                .withTintColor(AppConstants.Colors.yellow)
+            var selectedImage = AppConstants.SystemImages.taskCompleted
+            selectedImage = selectedImage?.withConfiguration(config).withTintColor(AppConstants.Colors.yellow)
                 .withRenderingMode(.alwaysOriginal)
             setImage(image, for: .normal)
             setImage(selectedImage, for: .selected)
@@ -64,7 +68,7 @@ private extension AppButton {
 
     func setupSaveButton(type: AppButtonStyle = .save) {
         var config = UIButton.Configuration.plain()
-        config.title = "save".localized
+        config.title = AppConstants.L.save()
         config.baseForegroundColor = AppConstants.Colors.yellow
         config.baseBackgroundColor = .systemBackground
         config.cornerStyle = .capsule

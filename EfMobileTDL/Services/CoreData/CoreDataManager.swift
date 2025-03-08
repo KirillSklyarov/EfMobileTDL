@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import rswift
 
 protocol CoreDataManagerProtocol {
     func getItemToEdit() -> TDLItem?
@@ -30,7 +31,7 @@ final class CoreDataManager: CoreDataManagerProtocol {
             if let error = error as NSError? {
                 print(String(format: "coreDataContainerError", error, error.userInfo))
             } else {
-                print("coreDataLoaded".localized)
+                print(AppConstants.L.coreDataLoaded())
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
@@ -77,7 +78,7 @@ extension CoreDataManager {
         do {
             return try context.fetch(fetchRequest)
         } catch {
-            print(String(format: "coreDataError".localized, error.localizedDescription))
+            print(AppConstants.L.coreDataError(error.localizedDescription))
             return []
         }
     }
@@ -95,7 +96,7 @@ extension CoreDataManager {
                 update(task: task, with: item)
                 saveContext(backgroundContext)
             } else {
-                print("dataNotChanged".localized)
+                print(AppConstants.L.dataNotChanged())
             }
         }
     }
@@ -118,7 +119,7 @@ extension CoreDataManager {
                   let task: TDL = getTask(with: item.id, context: backgroundContext) else { print("Ooops"); return }
 
             backgroundContext.delete(task)
-            print("taskRemoved".localized)
+            print(AppConstants.L.taskRemoved())
             saveContext(backgroundContext)
         }
     }
@@ -138,7 +139,7 @@ extension CoreDataManager {
         if context.hasChanges {
             do {
                 try context.save()
-                print("contextOK".localized)
+                print(AppConstants.L.contextOK())
             } catch {
                 let nserror = error as NSError
                 print("Unresolved error \(nserror), \(nserror.userInfo)")
@@ -156,12 +157,12 @@ private extension CoreDataManager {
             let results = try context.fetch(fetchRequest)
 
             if results.isEmpty {
-                print("coreDataEmpty".localized)
+                print(AppConstants.L.coreDataEmpty())
             } else {
-                print(String(format: "coreDataRecordsCount".localized, results.count))
+                print(AppConstants.L.coreDataRecordsCount(results.count))
             }
         } catch {
-            print(String(format: "coreDataError".localized, error.localizedDescription))
+            print(AppConstants.L.coreDataError(error.localizedDescription))
         }
     }
 
@@ -174,7 +175,7 @@ private extension CoreDataManager {
             let task = try context.fetch(fetchRequest)
             return task.first
         } catch {
-            print(String(format: "errorFindingObject".localized, error.localizedDescription))
+            print(AppConstants.L.errorFindingObject(error.localizedDescription))
             return nil
         }
     }
@@ -219,7 +220,7 @@ private extension CoreDataManager {
         task.subtitle = item.subtitle
         task.date = item.date
         task.completed = item.completed
-        print("taskUpdated".localized)
+        print(AppConstants.L.taskUpdated())
     }
 
     func getExistingItemsIds(from existingItems: [TDL]) -> [Int: TDL] {
@@ -238,7 +239,7 @@ private extension CoreDataManager {
         newItem.date = item.date
         newItem.completed = item.completed
         if isTracking {
-            print("newTaskAdded".localized)
+            print(AppConstants.L.newTaskAdded())
         }
     }
 }

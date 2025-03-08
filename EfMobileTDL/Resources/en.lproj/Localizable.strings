@@ -1,6 +1,6 @@
 "mainTitle" = "Tasks";
 "backButton" = "Back";
-"loading error" = "Loading data error";
+"loadingError" = "Loading data error";
 "tasks" = "tasks";
 "edit" = "Edit";
 "share" = "Share";

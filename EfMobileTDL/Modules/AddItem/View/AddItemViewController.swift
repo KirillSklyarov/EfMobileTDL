@@ -61,7 +61,7 @@ extension AddItemViewController: AddItemViewInput {
 // MARK: - Setup UI
 private extension AddItemViewController {
     func setupUI() {
-        title = "addTask".localized
+        title = AppConstants.L.addTask()
         navigationController?.navigationBar.prefersLargeTitles = false
         view.backgroundColor = AppConstants.Colors.black
 

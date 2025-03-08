@@ -32,7 +32,7 @@ final class FooterView: UIView {
     }
 
     func updateUI(with itemsCount: Int) {
-        tasksLabel.text = "\(itemsCount) \("tasks".localized)"
+        tasksLabel.text = "\(itemsCount) \(AppConstants.L.tasks())"
     }
 }
 
