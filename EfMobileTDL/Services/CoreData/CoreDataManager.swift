@@ -15,9 +15,10 @@ protocol CoreDataManagerProtocol {
     func updateItem(_ item: TDLItem)
     func addNewItem(_ item: TDLItem)
     func saveDataInCoreData(tdlItems: [TDLItem])
-    func fetchData() -> [TDL]
+    func fetchData(_ context: NSManagedObjectContext?) -> [TDL]
     func removeItem(_ item: TDLItem)
 }
+
 
 final class CoreDataManager: CoreDataManagerProtocol {
     private(set) var itemToEdit: TDLItem?
@@ -32,6 +33,8 @@ final class CoreDataManager: CoreDataManagerProtocol {
                 print("✅ CoreData upload successfully")
             }
         })
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return container
     }()
 
@@ -53,22 +56,22 @@ extension CoreDataManager {
 
         backgroundContext.perform { [weak self] in
             guard let self else { print("Ooops"); return }
-            let existingItems = fetchData()
+            let existingItems = fetchData(backgroundContext)
             let existingItemsDict = getExistingItemsIds(from: existingItems)
 
             for item in tdlItems {
                 if existingItemsDict[item.id] != nil {
                     updateItem(item)
                 } else {
-                    createNewItem(from: item, context: backgroundContext)
+                    createNewItem(from: item, context: backgroundContext, isTracking: false)
                 }
             }
             saveContext(backgroundContext)
         }
     }
 
-    // Получить все объекты TDL в виде массива
-    func fetchData() -> [TDL] {
+    func fetchData(_ context: NSManagedObjectContext? = nil) -> [TDL] {
+        let context = context ?? self.context
         let fetchRequest = TDL.fetchRequest()
 
         do {
@@ -79,15 +82,6 @@ extension CoreDataManager {
         }
     }
 
-    func setItemToEdit(_ item: TDLItem) {
-        itemToEdit = item
-    }
-
-    func getItemToEdit() -> TDLItem? {
-        itemToEdit
-    }
-
-    // Обновление данных в coreData
     func updateItem(_ item: TDLItem) {
         let backgroundContext = createBackgroundContext()
 
@@ -106,7 +100,6 @@ extension CoreDataManager {
         }
     }
 
-    // Добавление новой записи
     func addNewItem(_ item: TDLItem) {
         let backgroundContext = createBackgroundContext()
 
@@ -130,7 +123,33 @@ extension CoreDataManager {
         }
     }
 
-    func printAllTDL() {
+    func setItemToEdit(_ item: TDLItem) {
+        itemToEdit = item
+    }
+
+    func getItemToEdit() -> TDLItem? {
+        itemToEdit
+    }
+}
+
+// MARK: - Save context
+extension CoreDataManager {
+func saveContext(_ context: NSManagedObjectContext) {
+    if context.hasChanges {
+        do {
+            try context.save()
+            print("✅ Context saved successfully")
+        } catch {
+            let nserror = error as NSError
+            print("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+    }
+}
+}
+
+// MARK: - Supporting methods
+private extension CoreDataManager {
+    private func printAllTDL() {
         let fetchRequest = TDL.fetchRequest()
 
         do {
@@ -159,25 +178,29 @@ extension CoreDataManager {
             return nil
         }
     }
-}
 
-// MARK: - Save context
-extension CoreDataManager {
-    func saveContext(_ context: NSManagedObjectContext) {
-        if context.hasChanges {
+    func deleteAll() {
+        let backgroundContext = createBackgroundContext()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TDL")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        backgroundContext.perform { [weak self] in
+            guard let self else { print("Ooops"); return }
+
             do {
-                try context.save()
-                print("✅ Context added successfully")
+                try backgroundContext.execute(deleteRequest)
+                saveContext(backgroundContext)
+
+                DispatchQueue.main.async {
+                    self.context.reset()
+                }
+
             } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                print(error.localizedDescription)
             }
         }
     }
-}
 
-// MARK: - Supporting methods
-private extension CoreDataManager {
     func isNeedUpdate(_ tdlObject: TDL, with item: TDLItem) -> Bool {
         return !areEqual(tdlObject, item)
     }
@@ -207,14 +230,15 @@ private extension CoreDataManager {
         return existingItemsDict
     }
 
-    // Создание нового объекта TDL в CoreData
-    func createNewItem(from item: TDLItem, context: NSManagedObjectContext) {
+    func createNewItem(from item: TDLItem, context: NSManagedObjectContext, isTracking: Bool = true) {
         let newItem = TDL(context: context)
         newItem.id = Int64(item.id)
         newItem.title = item.title
         newItem.subtitle = item.subtitle
         newItem.date = item.date
         newItem.completed = item.completed
-        print("✅ Новая запись успешно добавлена")
+        if isTracking {
+            print("✅ Новая запись успешно добавлена")
+        }
     }
 }

@@ -74,6 +74,7 @@ extension MainPresenter: MainViewOutput {
     }
 
     func dataLoaded(_ data: [TDLItem]) {
+        print(#function)
         self.data = data
         checkDataAndUpdateView()
     }

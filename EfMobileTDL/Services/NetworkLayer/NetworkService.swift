@@ -34,7 +34,10 @@ struct NetworkService: NetworkServiceProtocol {
         let tasksData = responseMapping(response)
         return tasksData
     }
+}
 
+// MARK: - Supporting methods
+private extension NetworkService {
     func responseMapping(_ response: JsonResponse) -> [TDLItem] {
         return response.todos.map { $0.toTask() }
     }

@@ -25,6 +25,8 @@ final class MainViewController: UIViewController {
 
     let output: MainViewOutput
 
+    var isFirstLoad = true
+
     // MARK: - Init
     init(output: MainViewOutput) {
         self.output = output
@@ -43,7 +45,7 @@ final class MainViewController: UIViewController {
 
     override func viewIsAppearing(_ animated: Bool) {
         super.viewIsAppearing(animated)
-        output.viewIsAppearing()
+        needToUpdateUI()
         setNavBarLargeTitle()
         searchController.additionalSearchControllerConfigure()
     }
@@ -126,9 +128,10 @@ extension MainViewController: MainViewInput {
     }
 
     func loading() {
-        activityIndicator.startAnimating()
+        print(#function)
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
+            activityIndicator.startAnimating()
             isHideContent(true)
         }
     }
@@ -216,6 +219,17 @@ extension MainViewController {
 
 // MARK: - Supporting methods
 private extension MainViewController {
+
+    func needToUpdateUI() {
+        if !isFirstLoad {
+            print(#function)
+            output.viewIsAppearing()
+        } else {
+            isFirstLoad = false
+        }
+    }
+
+
     func setNavBarLargeTitle() {
         navigationController?.navigationBar.prefersLargeTitles = true
     }

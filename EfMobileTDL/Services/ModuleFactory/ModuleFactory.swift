@@ -11,7 +11,6 @@ protocol ModuleFactoryProtocol: AnyObject {
     func makeModule(_ module: AppModule) -> UIViewController
 }
 
-// Enum который указывает список экранов
 enum AppModule {
     case main
     case editItem
