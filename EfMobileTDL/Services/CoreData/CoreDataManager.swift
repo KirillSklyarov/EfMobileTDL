@@ -38,25 +38,33 @@ final class CoreDataManager: CoreDataManagerProtocol {
     var context: NSManagedObjectContext {
         persistentContainer.viewContext
     }
+
+    func createBackgroundContext() -> NSManagedObjectContext {
+        let context = persistentContainer.newBackgroundContext()
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        return context
+    }
 }
 
 // MARK: - CRUD
 extension CoreDataManager {
-    // Метод для сохранения данных из AppStorage в CoreData
     func saveDataInCoreData(tdlItems: [TDLItem]) {
-        let existingItems = fetchData()
-        let existingItemsDict = getExistingItemsIds(from: existingItems)
+        let backgroundContext = createBackgroundContext()
 
-        for item in tdlItems {
-            if existingItemsDict[item.id] != nil {
-                updateItem(item)
-            } else {
-                createNewItem(from: item)
+        backgroundContext.perform { [weak self] in
+            guard let self else { print("Ooops"); return }
+            let existingItems = fetchData()
+            let existingItemsDict = getExistingItemsIds(from: existingItems)
+
+            for item in tdlItems {
+                if existingItemsDict[item.id] != nil {
+                    updateItem(item)
+                } else {
+                    createNewItem(from: item, context: backgroundContext)
+                }
             }
+            saveContext(backgroundContext)
         }
-
-        saveContext()
-        printAllTDL()
     }
 
     // Получить все объекты TDL в виде массива
@@ -81,34 +89,44 @@ extension CoreDataManager {
 
     // Обновление данных в coreData
     func updateItem(_ item: TDLItem) {
-        guard let task: TDL = getTask(with: item.id) else { print("Ooops"); return }
+        let backgroundContext = createBackgroundContext()
 
-        // Проверка, изменились ли данные
-        let needsUpdate = isNeedUpdate(task, with: item)
+        backgroundContext.perform { [weak self] in
+            guard let self,
+                  let task: TDL = getTask(with: item.id, context: backgroundContext) else { print("Ooops"); return }
 
-        if needsUpdate {
-            update(task: task, with: item)
-        } else {
-            print("ℹ️ Данные не изменились, обновление не требуется")
+            let needsUpdate = isNeedUpdate(task, with: item)
+
+            if needsUpdate {
+                update(task: task, with: item)
+                saveContext(backgroundContext)
+            } else {
+                print("ℹ️ Данные не изменились, обновление не требуется")
+            }
         }
     }
 
     // Добавление новой записи
     func addNewItem(_ item: TDLItem) {
-        createNewItem(from: item)
-        print("✅ Новая запись успешно добавлена")
-        saveContext()
+        let backgroundContext = createBackgroundContext()
+
+        backgroundContext.perform { [weak self] in
+            guard let self else { print("Ooops"); return }
+            createNewItem(from: item, context: backgroundContext)
+            saveContext(backgroundContext)
+        }
     }
 
     func removeItem(_ item: TDLItem) {
-        guard let task: TDL = getTask(with: item.id) else { print("Ooops"); return }
+        let backgroundContext = createBackgroundContext()
 
-        do {
-            context.delete(task)
+        backgroundContext.perform { [weak self] in
+            guard let self,
+                  let task: TDL = getTask(with: item.id, context: backgroundContext) else { print("Ooops"); return }
+
+            backgroundContext.delete(task)
             print("✅ Запись успешно удалена")
-            try context.save()
-        } catch {
-            print("❌ Ошибка при получении данных: \(error.localizedDescription)")
+            saveContext(backgroundContext)
         }
     }
 
@@ -128,20 +146,7 @@ extension CoreDataManager {
         }
     }
 
-    func getTask(with id: Int) -> [TDL]? {
-        let fetchRequest = TDL.fetchRequest()
-
-        do {
-            let allData = try context.fetch(fetchRequest)
-            let task = allData.filter { $0.id == Int64(id) }
-            return task
-        } catch {
-            print("❌ Ошибка при поиске объекта по ID: \(error.localizedDescription)")
-            return nil
-        }
-    }
-
-    func getTask(with id: Int) -> TDL? {
+    func getTask(with id: Int, context: NSManagedObjectContext) -> TDL? {
         let fetchRequest = TDL.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id == %d", Int64(id))
         fetchRequest.fetchLimit = 1
@@ -156,55 +161,9 @@ extension CoreDataManager {
     }
 }
 
-// MARK: - Cleanup duplicates
-extension CoreDataManager {
-    func removeDuplicates() {
-        let fetchRequest = TDL.fetchRequest()
-
-        do {
-            // Получаем все объекты
-            let allItems = try context.fetch(fetchRequest)
-            print("📊 Всего записей до очистки: \(allItems.count)")
-
-            // Создаем словарь для отслеживания уникальных ID
-            var uniqueIds: [Int64: TDL] = [:]
-            var duplicatesToRemove: [TDL] = []
-
-            // Находим дубликаты
-            for item in allItems {
-                if uniqueIds[item.id] != nil {
-                    // Решаем, какой элемент оставить (например, по дате создания или другим критериям)
-                    // В этом примере просто оставляем первый найденный элемент
-                    duplicatesToRemove.append(item)
-                } else {
-                    // Сохраняем первое вхождение элемента с этим ID
-                    uniqueIds[item.id] = item
-                }
-            }
-
-            // Удаляем дубликаты
-            for duplicate in duplicatesToRemove {
-                context.delete(duplicate)
-            }
-
-            // Сохраняем изменения
-            if !duplicatesToRemove.isEmpty {
-                try context.save()
-                print("🧹 Удалено дубликатов: \(duplicatesToRemove.count)")
-                print("✅ Осталось уникальных записей: \(uniqueIds.count)")
-            } else {
-                print("✅ Дубликатов не найдено")
-            }
-
-        } catch {
-            print("❌ Ошибка при удалении дубликатов: \(error.localizedDescription)")
-        }
-    }
-}
-
 // MARK: - Save context
 extension CoreDataManager {
-    func saveContext () {
+    func saveContext(_ context: NSManagedObjectContext) {
         if context.hasChanges {
             do {
                 try context.save()
@@ -238,7 +197,6 @@ private extension CoreDataManager {
         task.date = item.date
         task.completed = item.completed
         print("✅ Запись успешно обновлена")
-        saveContext()
     }
 
     func getExistingItemsIds(from existingItems: [TDL]) -> [Int: TDL] {
@@ -250,12 +208,13 @@ private extension CoreDataManager {
     }
 
     // Создание нового объекта TDL в CoreData
-    func createNewItem(from item: TDLItem) {
+    func createNewItem(from item: TDLItem, context: NSManagedObjectContext) {
         let newItem = TDL(context: context)
         newItem.id = Int64(item.id)
         newItem.title = item.title
         newItem.subtitle = item.subtitle
         newItem.date = item.date
         newItem.completed = item.completed
+        print("✅ Новая запись успешно добавлена")
     }
 }

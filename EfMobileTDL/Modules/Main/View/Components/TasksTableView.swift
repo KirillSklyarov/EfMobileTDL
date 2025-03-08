@@ -14,7 +14,7 @@ final class TasksTableView: UITableView {
 
     var onShowShareScreen: ((UIActivityViewController) -> Void)?
     var onEditScreen: ((TDLItem) -> Void)?
-    var onRemoveTask: ((TDLItem) -> Void)?
+    var onRemoveItem: ((TDLItem) -> Void)?
     var onChangeTDLState: ((TDLItem) -> Void)?
     var onGetFilteredData: ((String) -> Void)?
 
@@ -123,9 +123,8 @@ private extension TasksTableView {
 
     func deleteTask(at indexPath: IndexPath) {
         guard let task = data?[indexPath.row] else { print("We have problem with indexPath"); return }
-        onRemoveTask?(task)
+        onRemoveItem?(task)
 
-//        TaskOld.removeTask(task)
         data?.remove(at: indexPath.row)
         beginUpdates()
         deleteRows(at: [indexPath], with: .automatic)

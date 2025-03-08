@@ -141,11 +141,8 @@ extension MainViewController: MainViewInput {
     }
 
     func showError() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self else { return }
-            activityIndicator.stopAnimating()
-            showAlert()
-        }
+        activityIndicator.stopAnimating()
+        showAlert()
     }
 
     func updateUI(with data: [TDLItem]) {
@@ -188,7 +185,7 @@ extension MainViewController {
             resetSearchController()
         }
 
-        tasksTableView.onRemoveTask = { [weak self] task in
+        tasksTableView.onRemoveItem = { [weak self] task in
             guard let self else { return }
             output.removeItemTapped(task)
         }

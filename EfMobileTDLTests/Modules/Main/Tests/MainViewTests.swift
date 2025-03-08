@@ -110,7 +110,7 @@ final class MainViewTests: XCTestCase {
         XCTAssertEqual(presenterSpy.lastItemForEditing?.id, mockItems[0].id, "Presenter should receive correct item")
         
         // Act - Trigger remove action if possible
-        if let onRemoveTask = viewController.tasksTableView.onRemoveTask {
+        if let onRemoveTask = viewController.tasksTableView.onRemoveItem {
             onRemoveTask(mockItems[0])
         }
         

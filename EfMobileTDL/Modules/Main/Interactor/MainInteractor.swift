@@ -46,6 +46,7 @@ extension MainInteractor: MainInteractorInput {
     func fetchData() async {
         let isFirstLaunch = !userDefaults.bool(forKey: "hasLaunchedBefore")
 
+//        isFirstLaunch = true
         do {
             try await fetchDataIsFirstLaunch(isFirstLaunch)
         } catch {
@@ -60,6 +61,7 @@ extension MainInteractor: MainInteractorInput {
             print("🌐 Data fetched from server")
             userDefaults.set(true, forKey: "hasLaunchedBefore")
             dataManager.saveDataInCoreData(tdlItems: data)
+            output?.dataLoaded(data)
         } else {
             getNewDataFromCD()
             print("📦 Data fetched from CoreData")
@@ -76,15 +78,17 @@ extension MainInteractor: MainInteractorInput {
     }
 
     func getNewDataFromCD() {
-        data = getCorrectDataFromCoreData()
-        output?.dataLoaded(data)
+        queue.async { [weak self] in
+            guard let self else { return }
+            data = getCorrectDataFromCoreData()
+            output?.dataLoaded(data)
+        }
     }
 
     func removeTask(_ task: TDLItem) {
         queue.async { [weak self] in
             guard let self else { return }
             dataManager.removeItem(task)
-            getNewDataFromCD()
         }
     }
 }

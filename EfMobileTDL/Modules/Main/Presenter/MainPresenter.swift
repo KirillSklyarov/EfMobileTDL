@@ -79,10 +79,7 @@ extension MainPresenter: MainViewOutput {
     }
 
     func checkDataAndUpdateView() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-            guard let self else { return }
-            isDataValid() ? updateView() : setErrorState()
-        }
+        isDataValid() ? updateView() : setErrorState()
     }
 
     // Проверяем на nil все данные, если где-то будет nil, то это ошибка
@@ -94,11 +91,15 @@ extension MainPresenter: MainViewOutput {
     // Прокидываем данные на view и формируем ее
     func updateView() {
         guard let data else { return }
-        view?.configure(with: data)
+        DispatchQueue.main.async { [weak self] in
+            self?.view?.configure(with: data)
+        }
     }
 
     func setErrorState() {
-        view?.showError()
+        DispatchQueue.main.async { [weak self] in
+            self?.view?.showError()
+        }
     }
 
     func getError() {
