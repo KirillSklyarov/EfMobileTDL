@@ -129,9 +129,9 @@ extension MainViewController: MainViewInput {
     }
 
     func loading() {
+        activityIndicator.startAnimating()
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
-            activityIndicator.startAnimating()
             isHideContent(true)
         }
     }
@@ -149,7 +149,11 @@ extension MainViewController: MainViewInput {
     }
 
     func updateUI(with data: [TDLItem]) {
-        tasksTableView.getData(data)
+        // Если мы удаляем элемент, анимируем плавно
+        UIView.animate(withDuration: 0.3) {
+            self.tasksTableView.getData(data)
+            self.footerView.updateUI(with: data.count)
+        }
     }
 }
 

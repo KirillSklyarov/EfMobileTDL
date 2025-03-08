@@ -7,6 +7,7 @@
 
 import UIKit
 @testable import EfMobileTDL
+import CoreData
 
 // MARK: - AddItem module spy objects
 final class AddItemViewSpy: AddItemViewInput {
@@ -71,6 +72,10 @@ final class RouterSpy: RouterProtocol {
 
 // Mock for CoreDataManager
 final class MockCoreDataManager: CoreDataManagerProtocol {
+    func fetchData(_ context: NSManagedObjectContext?) -> [TDL] {
+        return []
+    }
+    
     func getItemToEdit() -> TDLItem? {
         return nil
     }
@@ -83,11 +88,7 @@ final class MockCoreDataManager: CoreDataManagerProtocol {
         0
     }
 
-    func fetchData() -> [TDL] {
-        return []
-    }
-
-    func removeItem(_ item: TDLItem) {
+    func removeItem(_ item: EfMobileTDL.TDLItem, completion: (() -> Void)?) {
         0
     }
 
@@ -147,20 +148,3 @@ final class MockNavigationController: UINavigationController {
         super.pushViewController(viewController, animated: animated)
     }
 }
-
-
-
-//// Mock for RouterFactory
-//final class MockRouterFactory: RouterFactoryProtocol {
-//    var makeRouterCalled = false
-//    var lastRouterType: RouterType?
-//
-//    func makeRouter(_ type: RouterType) -> RouterProtocol {
-//        makeRouterCalled = true
-//        lastRouterType = type
-//
-//        let mockNavController = MockNavigationController()
-//        return AddItemRouter(navigationController: mockNavController)
-//    }
-//}
-

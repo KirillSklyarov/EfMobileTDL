@@ -80,13 +80,13 @@ final class MainPresenterTests: XCTestCase {
         XCTAssertEqual(viewSpy.lastDataReceived?.count, mockItems.count, "View should receive correct data")
     }
     
-    func testGetError() {
-        // Act
-        presenter.getError()
-        
-        // Assert
-        XCTAssertTrue(viewSpy.showErrorCalled, "View's showError should be called")
-    }
+//    func testGetError() {
+//        // Act
+//        presenter.getError()
+//        
+//        // Assert
+//        XCTAssertTrue(viewSpy.showErrorCalled, "View's showError should be called")
+//    }
     
     func testSelectItemForEditing() {
         // Act

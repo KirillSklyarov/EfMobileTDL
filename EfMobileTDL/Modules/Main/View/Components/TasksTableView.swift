@@ -29,9 +29,44 @@ final class TasksTableView: UITableView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func getData(_ data: [TDLItem]) {
-        self.data = data
-        reloadData()
+    func getData(_ data: [TDLItem], animated: Bool = true) {
+        // Если данные те же, не обновляем
+        if self.data == data { return }
+
+        
+        // Вычисляем разницу между старыми и новыми данными
+        let oldData = self.data ?? []
+        let newData = data
+        
+        // Сохраняем новые данные
+        self.data = newData
+        
+        // Получаем индексы удаленных элементов (есть в старом, но нет в новом)
+        let deletedIndexes = oldData.enumerated().compactMap { (index, item) -> IndexPath? in
+            return newData.contains(where: { $0.id == item.id }) ? nil : IndexPath(row: index, section: 0)
+        }
+        
+        // Получаем индексы добавленных элементов (есть в новом, но нет в старом)
+        let addedIndexes = newData.enumerated().compactMap { (index, item) -> IndexPath? in
+            return oldData.contains(where: { $0.id == item.id }) ? nil : IndexPath(row: index, section: 0)
+        }
+        
+        // Анимируем изменения
+        if !deletedIndexes.isEmpty || !addedIndexes.isEmpty {
+            beginUpdates()
+            
+            if !deletedIndexes.isEmpty {
+                deleteRows(at: deletedIndexes, with: .top)
+            }
+            
+            if !addedIndexes.isEmpty {
+                insertRows(at: addedIndexes, with: .top)
+            }
+
+            endUpdates()
+        } else {
+            reloadData()
+        }
     }
 
     func filterData(by text: String) {
@@ -126,9 +161,9 @@ private extension TasksTableView {
         guard let task = data?[indexPath.row] else { print("We have problem with indexPath"); return }
         onRemoveItem?(task)
 
-        data?.remove(at: indexPath.row)
-        beginUpdates()
-        deleteRows(at: [indexPath], with: .automatic)
-        endUpdates()
+//        data?.remove(at: indexPath.row)
+//        beginUpdates()
+//        deleteRows(at: [indexPath], with: .automatic)
+//        endUpdates()
     }
 }

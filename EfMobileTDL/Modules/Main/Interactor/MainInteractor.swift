@@ -81,6 +81,7 @@ extension MainInteractor: MainInteractorInput {
     func getNewDataFromCD() {
         queue.async { [weak self] in
             guard let self else { return }
+            print(#function)
             data = getCorrectDataFromCoreData()
             output?.dataLoaded(data)
         }
@@ -89,7 +90,9 @@ extension MainInteractor: MainInteractorInput {
     func removeTask(_ task: TDLItem) {
         queue.async { [weak self] in
             guard let self else { return }
-            dataManager.removeItem(task)
+            dataManager.removeItem(task) {
+                self.getNewDataFromCD()
+            }
         }
     }
 }

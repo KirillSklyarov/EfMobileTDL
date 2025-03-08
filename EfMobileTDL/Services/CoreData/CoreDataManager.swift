@@ -17,7 +17,7 @@ protocol CoreDataManagerProtocol {
     func addNewItem(_ item: TDLItem)
     func saveDataInCoreData(tdlItems: [TDLItem])
     func fetchData(_ context: NSManagedObjectContext?) -> [TDL]
-    func removeItem(_ item: TDLItem)
+    func removeItem(_ item: TDLItem, completion: (() -> Void)?)
 }
 
 
@@ -111,7 +111,7 @@ extension CoreDataManager {
         }
     }
 
-    func removeItem(_ item: TDLItem) {
+    func removeItem(_ item: TDLItem, completion: (() -> Void)?) {
         let backgroundContext = createBackgroundContext()
 
         backgroundContext.perform { [weak self] in
@@ -121,6 +121,7 @@ extension CoreDataManager {
             backgroundContext.delete(task)
             print(AppConstants.L.taskRemoved())
             saveContext(backgroundContext)
+            completion?()
         }
     }
 
@@ -150,7 +151,7 @@ extension CoreDataManager {
 
 // MARK: - Supporting methods
 private extension CoreDataManager {
-    private func printAllTDL() {
+    func printAllTDL() {
         let fetchRequest = TDL.fetchRequest()
 
         do {

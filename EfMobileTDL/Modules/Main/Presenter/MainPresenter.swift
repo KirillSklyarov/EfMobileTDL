@@ -74,12 +74,13 @@ extension MainPresenter: MainViewOutput {
     }
 
     func dataLoaded(_ data: [TDLItem]) {
+        print(#function)
         self.data = data
         checkDataAndUpdateView()
     }
 
     func checkDataAndUpdateView() {
-        isDataValid() ? updateView() : setErrorState()
+        isDataValid() ? updateView() : getError()
     }
 
     // Проверяем на nil все данные, если где-то будет nil, то это ошибка
@@ -90,19 +91,17 @@ extension MainPresenter: MainViewOutput {
 
     // Прокидываем данные на view и формируем ее
     func updateView() {
+        print(#function)
         guard let data else { return }
         DispatchQueue.main.async { [weak self] in
+            print(data)
             self?.view?.configure(with: data)
         }
     }
 
-    func setErrorState() {
+    func getError() {
         DispatchQueue.main.async { [weak self] in
             self?.view?.showError()
         }
-    }
-
-    func getError() {
-        setErrorState()
     }
 }

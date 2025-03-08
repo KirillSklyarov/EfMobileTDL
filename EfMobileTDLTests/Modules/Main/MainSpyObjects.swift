@@ -1,4 +1,5 @@
 import XCTest
+import CoreData
 @testable import EfMobileTDL
 
 // MARK: - View Spy
@@ -258,13 +259,13 @@ final class CoreDataManagerSpy: CoreDataManagerProtocol {
         saveDataInCoreDataCalled = true
         lastItemsToSave = tdlItems
     }
-    
-    func fetchData() -> [TDL] {
+
+    func fetchData(_ context: NSManagedObjectContext?) -> [TDL] {
         fetchDataCalled = true
         return dataToReturn
     }
     
-    func removeItem(_ item: TDLItem) {
+    func removeItem(_ item: EfMobileTDL.TDLItem, completion: (() -> Void)?) {
         removeItemCalled = true
         lastItemRemoved = item
     }

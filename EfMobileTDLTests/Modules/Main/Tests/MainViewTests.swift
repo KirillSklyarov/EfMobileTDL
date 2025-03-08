@@ -38,6 +38,7 @@ final class MainViewTests: XCTestCase {
     
     func testViewIsAppearing() {
         // Act
+        viewController.isFirstLoad = false
         viewController.viewIsAppearing(false)
         
         // Assert
