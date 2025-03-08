@@ -64,7 +64,7 @@ private extension AppButton {
 
     func setupSaveButton(type: AppButtonStyle = .save) {
         var config = UIButton.Configuration.plain()
-        config.title = "Сохранить"
+        config.title = "save".localized
         config.baseForegroundColor = AppConstants.Colors.yellow
         config.baseBackgroundColor = .systemBackground
         config.cornerStyle = .capsule

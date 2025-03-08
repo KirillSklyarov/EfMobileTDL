@@ -28,9 +28,9 @@ final class CoreDataManager: CoreDataManagerProtocol {
         let container = NSPersistentContainer(name: "EfMobileTDL")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-                print("🔴 Unresolved error \(error), \(error.userInfo)")
+                print(String(format: "coreDataContainerError", error, error.userInfo))
             } else {
-                print("✅ CoreData upload successfully")
+                print("coreDataLoaded".localized)
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
@@ -77,7 +77,7 @@ extension CoreDataManager {
         do {
             return try context.fetch(fetchRequest)
         } catch {
-            print("❌ Ошибка при получении данных: \(error.localizedDescription)")
+            print(String(format: "coreDataError".localized, error.localizedDescription))
             return []
         }
     }
@@ -95,7 +95,7 @@ extension CoreDataManager {
                 update(task: task, with: item)
                 saveContext(backgroundContext)
             } else {
-                print("ℹ️ Данные не изменились, обновление не требуется")
+                print("dataNotChanged".localized)
             }
         }
     }
@@ -118,7 +118,7 @@ extension CoreDataManager {
                   let task: TDL = getTask(with: item.id, context: backgroundContext) else { print("Ooops"); return }
 
             backgroundContext.delete(task)
-            print("✅ Запись успешно удалена")
+            print("taskRemoved".localized)
             saveContext(backgroundContext)
         }
     }
@@ -134,17 +134,17 @@ extension CoreDataManager {
 
 // MARK: - Save context
 extension CoreDataManager {
-func saveContext(_ context: NSManagedObjectContext) {
-    if context.hasChanges {
-        do {
-            try context.save()
-            print("✅ Context saved successfully")
-        } catch {
-            let nserror = error as NSError
-            print("Unresolved error \(nserror), \(nserror.userInfo)")
+    func saveContext(_ context: NSManagedObjectContext) {
+        if context.hasChanges {
+            do {
+                try context.save()
+                print("contextOK".localized)
+            } catch {
+                let nserror = error as NSError
+                print("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
         }
     }
-}
 }
 
 // MARK: - Supporting methods
@@ -156,12 +156,12 @@ private extension CoreDataManager {
             let results = try context.fetch(fetchRequest)
 
             if results.isEmpty {
-                print("📭 Core Data пуста - нет данных TDL")
+                print("coreDataEmpty".localized)
             } else {
-                print("📋 Данные из Core Data (\(results.count) записей)")
+                print(String(format: "coreDataRecordsCount".localized, results.count))
             }
         } catch {
-            print("❌ Ошибка при получении данных: \(error.localizedDescription)")
+            print(String(format: "coreDataError".localized, error.localizedDescription))
         }
     }
 
@@ -174,7 +174,7 @@ private extension CoreDataManager {
             let task = try context.fetch(fetchRequest)
             return task.first
         } catch {
-            print("❌ Ошибка при поиске объекта по ID: \(error.localizedDescription)")
+            print(String(format: "errorFindingObject".localized, error.localizedDescription))
             return nil
         }
     }
@@ -219,7 +219,7 @@ private extension CoreDataManager {
         task.subtitle = item.subtitle
         task.date = item.date
         task.completed = item.completed
-        print("✅ Запись успешно обновлена")
+        print("taskUpdated".localized)
     }
 
     func getExistingItemsIds(from existingItems: [TDL]) -> [Int: TDL] {
@@ -238,7 +238,7 @@ private extension CoreDataManager {
         newItem.date = item.date
         newItem.completed = item.completed
         if isTracking {
-            print("✅ Новая запись успешно добавлена")
+            print("newTaskAdded".localized)
         }
     }
 }

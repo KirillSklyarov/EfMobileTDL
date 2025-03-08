@@ -81,7 +81,7 @@ extension EditItemViewController: EditItemViewInput {
 // MARK: - Setup UI
 private extension EditItemViewController {
     func setupUI() {
-        title = "Редактировать задачи"
+        title = "editTask".localized
         navigationController?.navigationBar.prefersLargeTitles = false
 
         view.backgroundColor = AppConstants.Colors.black

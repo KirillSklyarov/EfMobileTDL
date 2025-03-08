@@ -14,7 +14,6 @@ final class FooterView: UIView {
         label.textColor = .white
         label.textAlignment = .center
         label.font = AppConstants.Fonts.regular12
-        label.text = "7 задач"
         return label
     }()
     private lazy var addTaskButton = AppButton(style: .addTask)
@@ -33,7 +32,7 @@ final class FooterView: UIView {
     }
 
     func updateUI(with itemsCount: Int) {
-        tasksLabel.text = "\(itemsCount) задач"
+        tasksLabel.text = "\(itemsCount) \("tasks".localized)"
     }
 }
 

@@ -33,7 +33,7 @@ private extension AppSearchController {
         let searchTextField = searchBar.searchTextField
         searchTextField.backgroundColor = AppConstants.Colors.darkGray
         searchTextField.leftView?.tintColor = AppConstants.Colors.gray
-        searchTextField.attributedPlaceholder = NSAttributedString(string: "Search", attributes: [.foregroundColor: AppConstants.Colors.gray])
+        searchTextField.attributedPlaceholder = NSAttributedString(string: "search".localized, attributes: [.foregroundColor: AppConstants.Colors.gray])
 
         hidesNavigationBarDuringPresentation = true
     }

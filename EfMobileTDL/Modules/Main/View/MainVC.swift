@@ -64,7 +64,7 @@ private extension MainViewController {
     }
 
     func setupNavigationBar() {
-        title = "Задачи"
+        title = "mainTitle".localized
         setNavBarLargeTitle()
         
         let appearance = UINavigationBarAppearance()
@@ -78,7 +78,7 @@ private extension MainViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.tintColor = AppConstants.Colors.yellow
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "backButton".localized, style: .plain, target: nil, action: nil)
 
         navigationItem.hidesSearchBarWhenScrolling = false
 
@@ -128,7 +128,6 @@ extension MainViewController: MainViewInput {
     }
 
     func loading() {
-        print(#function)
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             activityIndicator.startAnimating()
@@ -222,23 +221,19 @@ private extension MainViewController {
 
     func needToUpdateUI() {
         if !isFirstLoad {
-            print(#function)
             output.viewIsAppearing()
         } else {
             isFirstLoad = false
         }
     }
 
-
     func setNavBarLargeTitle() {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
 
     func showAlert() {
-        let alert = UIAlertController(title: "Ошибка загрузки данных", message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+        let alert = AppAlert.create()
         present(alert, animated: true)
-        print("error")
     }
 
     func isHideContent(_ isHide: Bool) {

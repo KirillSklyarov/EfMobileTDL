@@ -10,8 +10,10 @@ import UIKit
 enum AppTextFieldType: String {
     case title
     case subtitle
-    case addTaskTitle = "Введите тему задачи"
-    case addTaskSubtitle = "Введите описание задачи"
+    case addTaskTitle = "enterTaskTitle"
+    case addTaskSubtitle = "enterTaskSubtitle"
+
+    var localizedString: String { rawValue.localized }
 }
 
 final class AppTextField: UITextField {
@@ -58,7 +60,7 @@ private extension AppTextField {
 
     // Настраиваем плейсхолдер
     func setupPlaceholder(_ type: AppTextFieldType) {
-        let placeholder = type.rawValue
+        let placeholder = type.localizedString
         let attributes: [NSAttributedString.Key: Any] = [
             .font: AppConstants.Fonts.regular16,
             .foregroundColor: AppConstants.Colors.gray

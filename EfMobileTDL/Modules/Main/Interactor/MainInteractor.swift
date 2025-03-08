@@ -57,14 +57,14 @@ extension MainInteractor: MainInteractorInput {
     func fetchDataIsFirstLaunch(_ isFirstLaunch: Bool) async throws {
         if isFirstLaunch {
             data = try await networkService.fetchDataFromServer()
-            print("🌐 Data fetched from server")
+            print("dataFromServer".localized)
             userDefaults.set(true, forKey: "hasLaunchedBefore")
             dataManager.saveDataInCoreData(tdlItems: data)
             print(#function)
             output?.dataLoaded(data)
         } else {
             getNewDataFromCD()
-            print("📦 Data fetched from CoreData")
+            print("dataFromCoreData".localized)
         }
     }
 

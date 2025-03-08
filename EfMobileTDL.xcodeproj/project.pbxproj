@@ -10,7 +10,6 @@
 		7320859B2D7626110086525E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085982D7626110086525E /* AppDelegate.swift */; };
 		7320859C2D7626110086525E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085992D7626110086525E /* SceneDelegate.swift */; };
 		732085A62D76262F0086525E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7320859F2D76262F0086525E /* Assets.xcassets */; };
-		732085A82D76262F0086525E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 732085A22D76262F0086525E /* LaunchScreen.storyboard */; };
 		732085B22D76264A0086525E /* EfMobileTDL.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 732085AF2D76264A0086525E /* EfMobileTDL.xcdatamodeld */; };
 		732085B82D762D980086525E /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085B72D762D980086525E /* AppConstants.swift */; };
 		732085DA2D762E8D0086525E /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085D82D762E8D0086525E /* UIColor+Ext.swift */; };
@@ -32,6 +31,9 @@
 		73455BBA2D7B5F3B008FDF5C /* MainRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73455BB02D7B5F3B008FDF5C /* MainRouterTests.swift */; };
 		73455BBC2D7B7BF9008FDF5C /* BuilderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73455BBB2D7B7BF9008FDF5C /* BuilderProtocol.swift */; };
 		73455BBE2D7C820C008FDF5C /* RouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73455BBD2D7C820C008FDF5C /* RouterProtocol.swift */; };
+		73455BC82D7C8AF6008FDF5C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73455BC72D7C8AF6008FDF5C /* Launch Screen.storyboard */; };
+		73455BCB2D7C8B2D008FDF5C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 73455BC92D7C8B2D008FDF5C /* Localizable.strings */; };
+		73455BD12D7C94D5008FDF5C /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73455BD02D7C94D5008FDF5C /* String+Localized.swift */; };
 		73FC330A2D76EA6D0098ABB9 /* AppLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33092D76EA6D0098ABB9 /* AppLabel.swift */; };
 		73FC33122D770B160098ABB9 /* TDLItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33102D770B160098ABB9 /* TDLItem.swift */; };
 		73FC33242D770B220098ABB9 /* CheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC331D2D770B220098ABB9 /* CheckmarkView.swift */; };
@@ -94,7 +96,6 @@
 		732085992D7626110086525E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7320859F2D76262F0086525E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		732085A02D76262F0086525E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		732085A12D76262F0086525E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		732085B12D76264A0086525E /* EfMobileTDL.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EfMobileTDL.xcdatamodel; sourceTree = "<group>"; };
 		732085B72D762D980086525E /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		732085D82D762E8D0086525E /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
@@ -116,6 +117,10 @@
 		73455BB32D7B5F3B008FDF5C /* MainSpyObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSpyObjects.swift; sourceTree = "<group>"; };
 		73455BBB2D7B7BF9008FDF5C /* BuilderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderProtocol.swift; sourceTree = "<group>"; };
 		73455BBD2D7C820C008FDF5C /* RouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterProtocol.swift; sourceTree = "<group>"; };
+		73455BC72D7C8AF6008FDF5C /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		73455BCA2D7C8B2D008FDF5C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		73455BCC2D7C8B3F008FDF5C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		73455BD02D7C94D5008FDF5C /* String+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
 		7371B0B32D760D77004E6C73 /* EfMobileTDL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EfMobileTDL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0CC2D760D78004E6C73 /* EfMobileTDLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0D62D760D78004E6C73 /* EfMobileTDLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -222,7 +227,8 @@
 				732085B72D762D980086525E /* AppConstants.swift */,
 				7320859F2D76262F0086525E /* Assets.xcassets */,
 				732085A02D76262F0086525E /* Info.plist */,
-				732085A22D76262F0086525E /* LaunchScreen.storyboard */,
+				73455BC72D7C8AF6008FDF5C /* Launch Screen.storyboard */,
+				73455BC92D7C8B2D008FDF5C /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -265,6 +271,7 @@
 				732085D82D762E8D0086525E /* UIColor+Ext.swift */,
 				732085DB2D76311A0086525E /* UIView+Ext.swift */,
 				732085E72D764BFB0086525E /* UITableView+Ext.swift */,
+				73455BD02D7C94D5008FDF5C /* String+Localized.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -709,9 +716,13 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 7371B0AA2D760D77004E6C73;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				73455BC52D7C87A4008FDF5C /* XCRemoteSwiftPackageReference "SwiftGenPlugin" */,
+			);
 			productRefGroup = 7371B0B42D760D77004E6C73 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -728,8 +739,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73455BC82D7C8AF6008FDF5C /* Launch Screen.storyboard in Resources */,
+				73455BCB2D7C8B2D008FDF5C /* Localizable.strings in Resources */,
 				732085A62D76262F0086525E /* Assets.xcassets in Resources */,
-				732085A82D76262F0086525E /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -796,6 +808,7 @@
 				73FC33F02D7B301F0098ABB9 /* InteractorInputProtocol.swift in Sources */,
 				732085B82D762D980086525E /* AppConstants.swift in Sources */,
 				73FC33DE2D7AE7960098ABB9 /* MainInteractor.swift in Sources */,
+				73455BD12D7C94D5008FDF5C /* String+Localized.swift in Sources */,
 				73FC33E02D7AE7DB0098ABB9 /* MainPresenter.swift in Sources */,
 				73FC33402D778B350098ABB9 /* AppSearchController.swift in Sources */,
 				73FC33C92D7AD6750098ABB9 /* AddItemBuilder.swift in Sources */,
@@ -848,12 +861,13 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		732085A22D76262F0086525E /* LaunchScreen.storyboard */ = {
+		73455BC92D7C8B2D008FDF5C /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				732085A12D76262F0086525E /* Base */,
+				73455BCA2D7C8B2D008FDF5C /* en */,
+				73455BCC2D7C8B3F008FDF5C /* ru */,
 			);
-			name = LaunchScreen.storyboard;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -928,6 +942,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -991,6 +1006,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1170,6 +1186,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		73455BC52D7C87A4008FDF5C /* XCRemoteSwiftPackageReference "SwiftGenPlugin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftGen/SwiftGenPlugin";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.6.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCVersionGroup section */
 		732085AF2D76264A0086525E /* EfMobileTDL.xcdatamodeld */ = {

@@ -84,15 +84,15 @@ extension TasksTableView: UITableViewDataSource, UITableViewDelegate {
 
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
 
-            let editAction = UIAction(title: "Редактировать", image: UIImage(systemName: "square.and.pencil")) { [weak self] _ in
+            let editAction = UIAction(title: "edit".localized, image: UIImage(systemName: "square.and.pencil")) { [weak self] _ in
                 self?.editTask(at: indexPath)
             }
 
-            let shareAction = UIAction(title: "Поделиться", image: UIImage(systemName: "square.and.arrow.up")) { [weak self] _ in
+            let shareAction = UIAction(title: "share".localized, image: UIImage(systemName: "square.and.arrow.up")) { [weak self] _ in
                 self?.shareTask(at: indexPath)
             }
 
-            let deleteAction = UIAction(title: "Удалить", image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] _ in
+            let deleteAction = UIAction(title: "delete".localized, image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] _ in
                 self?.deleteTask(at: indexPath)
             }
 
@@ -116,7 +116,7 @@ private extension TasksTableView {
 
     func shareTask(at indexPath: IndexPath) {
         guard let task = data?[indexPath.row] else { print("We have problem with indexPath"); return }
-        let textToShare = "Задача: \(task.title)\nОписание: \(task.subtitle)\n"
+        let textToShare = String(format: "shareTask".localized, task.title, task.subtitle)
         let activityVC = UIActivityViewController(activityItems: [textToShare], applicationActivities: nil)
         onShowShareScreen?(activityVC)
     }

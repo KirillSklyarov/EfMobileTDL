@@ -1,0 +1,30 @@
+"mainTitle" = "Tasks";
+"backButton" = "Back";
+"loading error" = "Loading data error";
+"tasks" = "tasks";
+"edit" = "Edit";
+"share" = "Share";
+"delete" = "Delete";
+"addTask" = "Add New Task";
+"addTask subtitle" = "Enter task description";
+"editTask" = "Edit task";
+"dataNotChanged" = "ℹ️ Data hasn't changed, update not required";
+"taskRemoved" = "✅ Task removed successfully";
+"contextOK" = "✅ Context saved successfully";
+"coreDataEmpty" = "📭 Core Data is empty - no data";
+"errorFindingObject" = "❌ Error finding object by ID: %@";
+"coreDataLoaded" = "✅ CoreData upload successfully";
+"coreDataError" = "❌ Error fetching data: %@";
+"taskUpdated" = "✅ Task updated successfully";
+"newTaskAdded" = "✅ New task added successfully";
+"dataFromServer" = "🌐 Data fetched from server";
+"dataFromCoreData" = "📦 Data fetched from CoreData";
+"coreDataContainerError" = "🔴 Unresolved error %@, %@";
+"coreDataRecordsCount" = "📋 Data from Core Data (%d records)";
+
+"shareTask" = "Title: %@\nDescription: %@\n";
+"enterTaskTitle" = "Enter task title";
+"enterTaskSubtitle" = "Enter task description";
+"save" = "Save";
+"search" = "Search";
+
