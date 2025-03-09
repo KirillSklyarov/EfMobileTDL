@@ -15,7 +15,7 @@ struct TDLItem: Equatable, Codable {
     var completed: Bool
     
     static func == (lhs: TDLItem, rhs: TDLItem) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.id == rhs.id && lhs.title == rhs.title && lhs.subtitle == rhs.subtitle && lhs.date == rhs.date && lhs.completed == rhs.completed
     }
     
     func getDate() -> Date {

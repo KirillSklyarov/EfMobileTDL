@@ -17,7 +17,6 @@ enum AppModule {
     case addItem
 }
 
-// Класс фабрика экранов отвечает за создание экранов
 final class ModuleFactory {
     // MARK: - Properties
     private let dataManager: CoreDataManagerProtocol

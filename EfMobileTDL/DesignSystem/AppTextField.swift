@@ -58,7 +58,6 @@ private extension AppTextField {
         setupLayout()
     }
 
-    // Настраиваем плейсхолдер
     func setupPlaceholder(_ type: AppTextFieldType) {
         let placeholder = type.localizedString
         let attributes: [NSAttributedString.Key: Any] = [

@@ -30,42 +30,9 @@ final class TasksTableView: UITableView {
     }
 
     func getData(_ data: [TDLItem], animated: Bool = true) {
-        // Если данные те же, не обновляем
-        if self.data == data { return }
-
-        
-        // Вычисляем разницу между старыми и новыми данными
-        let oldData = self.data ?? []
-        let newData = data
-        
-        // Сохраняем новые данные
-        self.data = newData
-        
-        // Получаем индексы удаленных элементов (есть в старом, но нет в новом)
-        let deletedIndexes = oldData.enumerated().compactMap { (index, item) -> IndexPath? in
-            return newData.contains(where: { $0.id == item.id }) ? nil : IndexPath(row: index, section: 0)
-        }
-        
-        // Получаем индексы добавленных элементов (есть в новом, но нет в старом)
-        let addedIndexes = newData.enumerated().compactMap { (index, item) -> IndexPath? in
-            return oldData.contains(where: { $0.id == item.id }) ? nil : IndexPath(row: index, section: 0)
-        }
-        
-        // Анимируем изменения
-        if !deletedIndexes.isEmpty || !addedIndexes.isEmpty {
-            beginUpdates()
-            
-            if !deletedIndexes.isEmpty {
-                deleteRows(at: deletedIndexes, with: .top)
-            }
-            
-            if !addedIndexes.isEmpty {
-                insertRows(at: addedIndexes, with: .top)
-            }
-
-            endUpdates()
-        } else {
-            reloadData()
+        if self.data != data {
+            let deletedIndexes = getIndexesOfDeletedItems(data)
+            removeRowsOrUpdateCells(deletedIndexes)
         }
     }
 
@@ -160,10 +127,33 @@ private extension TasksTableView {
     func deleteTask(at indexPath: IndexPath) {
         guard let task = data?[indexPath.row] else { print("We have problem with indexPath"); return }
         onRemoveItem?(task)
+    }
+}
 
-//        data?.remove(at: indexPath.row)
-//        beginUpdates()
-//        deleteRows(at: [indexPath], with: .automatic)
-//        endUpdates()
+
+// MARK: - Supporting methods
+private extension TasksTableView {
+    func removeRowsOrUpdateCells(_ indexes: [IndexPath]) {
+        if !indexes.isEmpty {
+            removeRows(indexes)
+        } else {
+            reloadData()
+        }
+    }
+
+    func getIndexesOfDeletedItems(_ newData: [TDLItem]) -> [IndexPath] {
+        let oldData = self.data ?? []
+        self.data = newData
+
+        let deletedIndexes = oldData.enumerated().compactMap { (index, item) -> IndexPath? in
+            return newData.contains(where: { $0.id == item.id }) ? nil : IndexPath(row: index, section: 0)
+        }
+        return deletedIndexes
+    }
+
+     func removeRows(_ deletedIndexes: [IndexPath]) {
+        beginUpdates()
+        deleteRows(at: deletedIndexes, with: .automatic)
+        endUpdates()
     }
 }

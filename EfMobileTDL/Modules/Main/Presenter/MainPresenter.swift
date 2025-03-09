@@ -74,7 +74,6 @@ extension MainPresenter: MainViewOutput {
     }
 
     func dataLoaded(_ data: [TDLItem]) {
-        print(#function)
         self.data = data
         checkDataAndUpdateView()
     }
@@ -91,10 +90,8 @@ extension MainPresenter: MainViewOutput {
 
     // Прокидываем данные на view и формируем ее
     func updateView() {
-        print(#function)
         guard let data else { return }
         DispatchQueue.main.async { [weak self] in
-            print(data)
             self?.view?.configure(with: data)
         }
     }

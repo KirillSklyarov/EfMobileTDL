@@ -61,7 +61,6 @@ extension MainInteractor: MainInteractorInput {
             print(AppConstants.L.dataFromServer())
             userDefaults.set(true, forKey: "hasLaunchedBefore")
             dataManager.saveDataInCoreData(tdlItems: data)
-            print(#function)
             output?.dataLoaded(data)
         } else {
             getNewDataFromCD()
@@ -81,7 +80,6 @@ extension MainInteractor: MainInteractorInput {
     func getNewDataFromCD() {
         queue.async { [weak self] in
             guard let self else { return }
-            print(#function)
             data = getCorrectDataFromCoreData()
             output?.dataLoaded(data)
         }
@@ -153,7 +151,6 @@ private extension MainInteractor {
         return sortData(array)
     }
 
-    // Сортируем массив по датам
     func sortData(_ items: [TDLItem]) -> [TDLItem] {
         return items.sorted { $0.getDate() > $1.getDate() }
     }

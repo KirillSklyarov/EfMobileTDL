@@ -139,8 +139,7 @@ extension MainViewController: MainViewInput {
     func configure(with data: [TDLItem]) {
         isHideContent(false)
         activityIndicator.stopAnimating()
-        tasksTableView.getData(data)
-        footerView.updateUI(with: data.count)
+        updateUI(with: data)
     }
 
     func showError() {
@@ -149,7 +148,6 @@ extension MainViewController: MainViewInput {
     }
 
     func updateUI(with data: [TDLItem]) {
-        // Если мы удаляем элемент, анимируем плавно
         UIView.animate(withDuration: 0.3) {
             self.tasksTableView.getData(data)
             self.footerView.updateUI(with: data.count)

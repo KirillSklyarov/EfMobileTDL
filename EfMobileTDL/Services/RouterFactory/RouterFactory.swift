@@ -15,7 +15,6 @@ protocol RouterFactoryProtocol: AnyObject {
     func setModuleFactory(_ moduleFactory: ModuleFactoryProtocol?)
 }
 
-// Класс фабрика экранов отвечает за создание экранов
 final class RouterFactory: RouterFactoryProtocol {
 
     // MARK: - Properties
