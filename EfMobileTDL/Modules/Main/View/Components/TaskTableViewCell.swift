@@ -20,6 +20,7 @@ final class TaskTableViewCell: UITableViewCell {
     private lazy var contentStack = AppStackView([checkView, textStack], axis: .horizontal, spacing: 8)
 
     private var titleTextHere = ""
+
     var onTaskStateChanged: (() -> Void)?
 
     // MARK: - Init

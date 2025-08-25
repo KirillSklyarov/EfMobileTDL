@@ -12,7 +12,6 @@ protocol MainViewInput: AnyObject {
     func loading()
     func configure(with data: [TDLItem])
     func showError()
-    func updateUI(with data: [TDLItem])
 
     func resetSearchController()
 }
@@ -53,7 +52,6 @@ final class MainViewController: UIViewController {
 // MARK: - Setup UI
 private extension MainViewController {
     func setupUI() {
-
         setupNavigationBar()
         setupSearchController()
 
@@ -116,10 +114,7 @@ extension MainViewController: MainViewInput {
 
     func loading() {
         activityIndicator.startAnimating()
-        DispatchQueue.main.async { [weak self] in
-            guard let self else { return }
-            isHideContent(true)
-        }
+        isHideContent(true)
     }
 
     func configure(with data: [TDLItem]) {
@@ -133,11 +128,8 @@ extension MainViewController: MainViewInput {
         showAlert()
     }
 
-    func updateUI(with data: [TDLItem]) {
-        UIView.animate(withDuration: 0.3) {
-            self.tasksTableView.getData(data)
-            self.footerView.updateUI(with: data.count)
-        }
+    func resetSearchController() {
+        searchController.searchBar.text = ""
     }
 }
 
@@ -150,7 +142,7 @@ extension MainViewController: UISearchBarDelegate, UISearchResultsUpdating, UISe
 
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else { return }
-        tasksTableView.filterData(by: searchText)
+        output.eventHandler(.filterData(by: searchText))
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -159,7 +151,7 @@ extension MainViewController: UISearchBarDelegate, UISearchResultsUpdating, UISe
 }
 
 // MARK: - Setup action
-extension MainViewController {
+private extension MainViewController {
     func setupAction() {
         setupTasksTableViewAction()
         setupAddTaskButtonAction()
@@ -184,11 +176,6 @@ extension MainViewController {
             guard let self else { return }
             output.eventHandler(.changeItemState(task))
         }
-
-        tasksTableView.onGetFilteredData = { [weak self] filterText in
-            guard let self else { return }
-            output.eventHandler(.filterData(by: filterText))
-        }
     }
 
     func setupAddTaskButtonAction() {
@@ -197,14 +184,16 @@ extension MainViewController {
             output.eventHandler(.addNewTask)
         }
     }
-
-    func resetSearchController() {
-        searchController.searchBar.text = ""
-    }
 }
 
 // MARK: - Supporting methods
 private extension MainViewController {
+    func updateUI(with data: [TDLItem]) {
+        DispatchQueue.main.async { [weak self] in
+            self?.tasksTableView.apply(tasks: data)
+            self?.footerView.updateUI(with: data.count)
+        }
+    }
 
     func showAlert() {
         let alert = AppAlert.create()
@@ -212,13 +201,9 @@ private extension MainViewController {
     }
 
     func isHideContent(_ isHide: Bool) {
-        switch isHide {
-        case true:
-            tasksTableView.alpha = 0
-            footerView.alpha = 0
-        case false:
-            tasksTableView.alpha = 1
-            footerView.alpha = 1
+        DispatchQueue.main.async { [weak self] in
+            self?.tasksTableView.alpha = isHide ? 0 : 1
+            self?.footerView.alpha = isHide ? 0 : 1
         }
     }
 }

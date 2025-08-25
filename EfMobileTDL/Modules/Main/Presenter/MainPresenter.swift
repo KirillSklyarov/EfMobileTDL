@@ -74,7 +74,7 @@ extension MainPresenter: MainViewOutput {
             interactor.changeTaskState(item)
         case .filterData(let text):
             let filteredData = interactor.filterData(by: text)
-            view?.updateUI(with: filteredData)
+            view?.configure(with: filteredData)
         case .cancelSearch:
             updateDataFromCD()
         }
@@ -121,13 +121,11 @@ private extension MainPresenter {
         isDataValid() ? dataLoadedSuccessful() : getError()
     }
 
-    // Проверяем на nil все данные, если где-то будет nil, то это ошибка
     func isDataValid() -> Bool {
         let data: [Any?] = [data]
         return data.allSatisfy { $0 != nil }
     }
 
-    // Прокидываем данные на view и формируем ее
     func dataLoadedSuccessful() {
         guard let data else { return }
         setState(.success(data: data))
