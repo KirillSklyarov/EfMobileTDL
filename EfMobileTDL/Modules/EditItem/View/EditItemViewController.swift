@@ -59,7 +59,7 @@ extension EditItemViewController: EditItemViewInput {
     func setupInitialState() {
         setupUI()
         setupTextFields()
-        setupGestureToDissmissKeyboard()
+        hideKeyboardWhenTappedAround()
     }
 
     func showLoading() {
@@ -158,17 +158,5 @@ private extension EditItemViewController {
         activityIndicator.stopAnimating()
         let alert = AppAlert.create()
         present(alert, animated: true)
-    }
-}
-
-// MARK: - Hide keyboard by tap
-private extension EditItemViewController {
-    func setupGestureToDissmissKeyboard() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tapGesture)
-    }
-
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
     }
 }

@@ -12,6 +12,7 @@ enum AppLabelType {
     case subtitle
     case date
     case editTitle
+    case footerLabel
 }
 
 final class AppLabel: UILabel {
@@ -47,6 +48,10 @@ private extension AppLabel {
             font = AppConstants.Fonts.bold34
             textColor = AppConstants.Colors.white
             self.numberOfLines = 0
+        case .footerLabel:
+            textColor = .white
+            textAlignment = .center
+            font = AppConstants.Fonts.regular12
         }
     }
 }

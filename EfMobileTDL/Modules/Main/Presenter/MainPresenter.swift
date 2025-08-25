@@ -9,15 +9,27 @@ import Foundation
 
 protocol MainViewOutput: AnyObject {
     func viewLoaded()
-    func viewIsAppearing()
-    func dataLoaded(_ data: [TDLItem])
-    func checkDataAndUpdateView()
-    func getError()
-    func selectItemForEditing(_ item: TDLItem)
-    func addNewTaskButtonTapped()
-    func removeItemTapped(_ item: TDLItem)
-    func changeItemState(_ item: TDLItem)
-    func filterData(by: String)
+    func appearingUpdateUI()
+
+    func eventHandler(_ event: MainEvent)
+    func setState(_ state: PresenterState)
+}
+
+enum MainEvent {
+    case addNewTask
+    case editTask(TDLItem)
+    case deleteItem(TDLItem)
+    case changeItemState(TDLItem)
+    case filterData(by: String)
+    case cancelSearch
+}
+
+enum PresenterState {
+    case idle
+    case loading
+    case dataValidating(data: [TDLItem])
+    case success(data: [TDLItem])
+    case error
 }
 
 final class MainPresenter {
@@ -28,6 +40,8 @@ final class MainPresenter {
 
     private var data: [TDLItem]?
 
+    private var isFirstLoad = true
+
     init(interactor: MainInteractorInput, router: MainRouterProtocol) {
         self.interactor = interactor
         self.router = router
@@ -36,50 +50,75 @@ final class MainPresenter {
 
 // MARK: - MainViewOutput
 extension MainPresenter: MainViewOutput {
-    func viewIsAppearing() {
-        interactor.getNewDataFromCD()
-        view?.updateUI(with: data ?? [])
-    }
-    
-    func filterData(by text: String) {
-        let filteredData = interactor.filterData(by: text)
-        view?.updateUI(with: filteredData)
-    }
 
-    func changeItemState(_ item: TDLItem) {
-        interactor.changeTaskState(item)
-    }
-    
-    func removeItemTapped(_ item: TDLItem) {
-        interactor.removeTask(item)
-    }
-    
-    func addNewTaskButtonTapped() {
-        router.goToAddItemModule()
-    }
-    
-    func selectItemForEditing(_ item: TDLItem) {
-        interactor.selectItemForEditing(item)
-        router.goToEditItemModule()
-    }
-    
     func viewLoaded() {
-        view?.setupInitialState()
-        loadData()
+        setState(.idle)
     }
 
+    func updateDataFromCD() {
+        interactor.getNewDataFromCD()
+    }
+
+    func eventHandler(_ event: MainEvent) {
+        switch event {
+        case .addNewTask:
+            view?.resetSearchController()
+            router.goToAddItemModule()
+        case .editTask(let item):
+            view?.resetSearchController()
+            interactor.selectItemForEditing(item)
+            router.goToEditItemModule()
+        case .deleteItem(let item):
+            interactor.removeTask(item)
+        case .changeItemState(let item):
+            interactor.changeTaskState(item)
+        case .filterData(let text):
+            let filteredData = interactor.filterData(by: text)
+            view?.updateUI(with: filteredData)
+        case .cancelSearch:
+            updateDataFromCD()
+        }
+    }
+
+    func setState(_ state: PresenterState) {
+        switch state {
+        case .idle:
+            view?.setupInitialState()
+            loadData()
+        case .loading:
+            view?.loading()
+        case .dataValidating(let data):
+            dataValidating(data)
+        case .success(let data):
+            DispatchQueue.main.async { [weak self] in
+                self?.view?.configure(with: data)
+            }
+        case .error:
+            DispatchQueue.main.async { [weak self] in
+                self?.view?.showError()
+            }
+        }
+    }
+
+    func appearingUpdateUI() {
+        if !isFirstLoad {
+           updateDataFromCD()
+        } else {
+            isFirstLoad = false
+        }
+    }
+}
+
+// MARK: - Supporting methods
+private extension MainPresenter {
     func loadData() {
-        view?.loading()
+        setState(.loading)
         Task { await interactor.fetchData() }
     }
 
-    func dataLoaded(_ data: [TDLItem]) {
+    func dataValidating(_ data: [TDLItem]) {
         self.data = data
-        checkDataAndUpdateView()
-    }
-
-    func checkDataAndUpdateView() {
-        isDataValid() ? updateView() : getError()
+        isDataValid() ? dataLoadedSuccessful() : getError()
     }
 
     // Проверяем на nil все данные, если где-то будет nil, то это ошибка
@@ -89,16 +128,12 @@ extension MainPresenter: MainViewOutput {
     }
 
     // Прокидываем данные на view и формируем ее
-    func updateView() {
+    func dataLoadedSuccessful() {
         guard let data else { return }
-        DispatchQueue.main.async { [weak self] in
-            self?.view?.configure(with: data)
-        }
+        setState(.success(data: data))
     }
 
     func getError() {
-        DispatchQueue.main.async { [weak self] in
-            self?.view?.showError()
-        }
+        setState(.error)
     }
 }

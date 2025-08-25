@@ -50,7 +50,7 @@ extension MainInteractor: MainInteractorInput {
         do {
             try await fetchDataIsFirstLaunch(isFirstLaunch)
         } catch {
-            output?.getError()
+            output?.setState(.error)
             print(error.localizedDescription)
         }
     }
@@ -61,7 +61,7 @@ extension MainInteractor: MainInteractorInput {
             print(AppConstants.L.dataFromServer())
             userDefaults.set(true, forKey: "hasLaunchedBefore")
             dataManager.saveDataInCoreData(tdlItems: data)
-            output?.dataLoaded(data)
+            output?.setState(.dataValidating(data: data))
         } else {
             getNewDataFromCD()
             print(AppConstants.L.dataFromCoreData())
@@ -81,7 +81,7 @@ extension MainInteractor: MainInteractorInput {
         queue.async { [weak self] in
             guard let self else { return }
             data = getCorrectDataFromCoreData()
-            output?.dataLoaded(data)
+            output?.setState(.dataValidating(data: data))
         }
     }
 

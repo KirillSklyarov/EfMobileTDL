@@ -49,7 +49,7 @@ extension AddItemViewController: AddItemViewInput {
         setupUI()
         setupAction()
         setupTextFields()
-        setupGestureToDissmissKeyboard()
+        hideKeyboardWhenTappedAround()
     }
 
     func isSaveButtonEnable(_ isEnabled: Bool) {
@@ -121,17 +121,5 @@ extension AddItemViewController: UITextViewDelegate {
 
     func textViewDidChange(_ textView: UITextView) {
         output.addedItemSubtitle(textView.text)
-    }
-}
-
-// MARK: - Hide keyboard by tap
-private extension AddItemViewController {
-    func setupGestureToDissmissKeyboard() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tapGesture)
-    }
-
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
     }
 }

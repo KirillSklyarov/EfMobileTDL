@@ -36,6 +36,8 @@
 		73455BD12D7C94D5008FDF5C /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73455BD02D7C94D5008FDF5C /* String+Localized.swift */; };
 		73455BE02D7CA9B2008FDF5C /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 73455BDF2D7CA9B2008FDF5C /* RswiftLibrary */; };
 		73455BE22D7CA9B2008FDF5C /* rswift in Frameworks */ = {isa = PBXBuildFile; productRef = 73455BE12D7CA9B2008FDF5C /* rswift */; };
+		734B5BA12E5CD126003A2A8C /* UIVC+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5BA02E5CD126003A2A8C /* UIVC+Ext.swift */; };
+		734B5BB22E5CD4A1003A2A8C /* NavigationBarStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5BB12E5CD4A1003A2A8C /* NavigationBarStyler.swift */; };
 		73FC330A2D76EA6D0098ABB9 /* AppLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33092D76EA6D0098ABB9 /* AppLabel.swift */; };
 		73FC33122D770B160098ABB9 /* TDLItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33102D770B160098ABB9 /* TDLItem.swift */; };
 		73FC33242D770B220098ABB9 /* CheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC331D2D770B220098ABB9 /* CheckmarkView.swift */; };
@@ -123,6 +125,8 @@
 		73455BCA2D7C8B2D008FDF5C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		73455BCC2D7C8B3F008FDF5C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		73455BD02D7C94D5008FDF5C /* String+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
+		734B5BA02E5CD126003A2A8C /* UIVC+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVC+Ext.swift"; sourceTree = "<group>"; };
+		734B5BB12E5CD4A1003A2A8C /* NavigationBarStyler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarStyler.swift; sourceTree = "<group>"; };
 		7371B0B32D760D77004E6C73 /* EfMobileTDL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EfMobileTDL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0CC2D760D78004E6C73 /* EfMobileTDLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0D62D760D78004E6C73 /* EfMobileTDLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -276,6 +280,7 @@
 				732085DB2D76311A0086525E /* UIView+Ext.swift */,
 				732085E72D764BFB0086525E /* UITableView+Ext.swift */,
 				73455BD02D7C94D5008FDF5C /* String+Localized.swift */,
+				734B5BA02E5CD126003A2A8C /* UIVC+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -615,6 +620,7 @@
 				73FC33EF2D7B301F0098ABB9 /* InteractorInputProtocol.swift */,
 				73455BBB2D7B7BF9008FDF5C /* BuilderProtocol.swift */,
 				73455BBD2D7C820C008FDF5C /* RouterProtocol.swift */,
+				734B5BB12E5CD4A1003A2A8C /* NavigationBarStyler.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -701,7 +707,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1620;
-				LastUpgradeCheck = 1620;
+				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					7371B0B22D760D77004E6C73 = {
 						CreatedOnToolsVersion = 16.2;
@@ -798,6 +804,8 @@
 				73FC33A52D7A1C9E0098ABB9 /* EditPresenter.swift in Sources */,
 				73FC33D72D7AE5750098ABB9 /* EditItemRouter.swift in Sources */,
 				73FC33CD2D7AD9F00098ABB9 /* AddItemRouter.swift in Sources */,
+				734B5BB22E5CD4A1003A2A8C /* NavigationBarStyler.swift in Sources */,
+				734B5BA12E5CD126003A2A8C /* UIVC+Ext.swift in Sources */,
 				73FC33272D770B220098ABB9 /* TaskTableViewCell.swift in Sources */,
 				73FC33282D770B220098ABB9 /* MainVC.swift in Sources */,
 				732085DA2D762E8D0086525E /* UIColor+Ext.swift in Sources */,
@@ -891,7 +899,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7W278NP9KT;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EfMobileTDL/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -923,7 +930,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7W278NP9KT;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EfMobileTDL/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -984,6 +990,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 7W278NP9KT;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -1048,6 +1055,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7W278NP9KT;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -1075,7 +1083,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7W278NP9KT;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				MARKETING_VERSION = 1.0;
@@ -1098,7 +1105,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7W278NP9KT;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				MARKETING_VERSION = 1.0;
@@ -1120,7 +1126,6 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7W278NP9KT;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = k.Sklyarov.IndDev.EfMobileTDLUITests;
@@ -1141,7 +1146,6 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7W278NP9KT;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = k.Sklyarov.IndDev.EfMobileTDLUITests;

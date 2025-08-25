@@ -9,13 +9,7 @@ import UIKit
 
 final class FooterView: UIView {
 
-    private lazy var tasksLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.textAlignment = .center
-        label.font = AppConstants.Fonts.regular12
-        return label
-    }()
+    private lazy var tasksLabel = AppLabel(type: .footerLabel)
     private lazy var addTaskButton = AppButton(style: .addTask)
 
     var onAddTaskButtonTapped: (() -> Void)?

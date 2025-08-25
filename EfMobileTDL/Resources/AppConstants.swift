@@ -39,8 +39,6 @@ struct AppConstants {
         static let regular12: UIFont = .systemFont(ofSize: 12, weight: .regular)
         static let regular16: UIFont = .systemFont(ofSize: 16, weight: .regular)
         static let regular18: UIFont = .systemFont(ofSize: 16, weight: .regular)
-
-
         static let bold34: UIFont = .systemFont(ofSize: 34, weight: .bold)
     }
 

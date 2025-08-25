@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import rswift
 
 protocol MainViewInput: AnyObject {
     func setupInitialState()
@@ -14,19 +13,19 @@ protocol MainViewInput: AnyObject {
     func configure(with data: [TDLItem])
     func showError()
     func updateUI(with data: [TDLItem])
+
+    func resetSearchController()
 }
 
 final class MainViewController: UIViewController {
 
     // MARK: - Properties
-    lazy var searchController = AppSearchController()
-    lazy var tasksTableView = TasksTableView()
-    lazy var footerView = FooterView()
-    lazy var activityIndicator = AppActivityIndicator()
+    private lazy var searchController = AppSearchController()
+    private lazy var tasksTableView = TasksTableView()
+    private lazy var footerView = FooterView()
+    private lazy var activityIndicator = AppActivityIndicator()
 
-    let output: MainViewOutput
-
-    var isFirstLoad = true
+    private let output: MainViewOutput
 
     // MARK: - Init
     init(output: MainViewOutput) {
@@ -46,15 +45,15 @@ final class MainViewController: UIViewController {
 
     override func viewIsAppearing(_ animated: Bool) {
         super.viewIsAppearing(animated)
-        needToUpdateUI()
-        setNavBarLargeTitle()
-        searchController.additionalSearchControllerConfigure()
+        output.appearingUpdateUI()
+        appearingUpdateUI()
     }
 }
 
 // MARK: - Setup UI
 private extension MainViewController {
     func setupUI() {
+
         setupNavigationBar()
         setupSearchController()
 
@@ -65,25 +64,12 @@ private extension MainViewController {
     }
 
     func setupNavigationBar() {
-        title = AppConstants.L.mainTitle()
-        setNavBarLargeTitle()
-        
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = AppConstants.Colors.black
-        appearance.largeTitleTextAttributes = [.foregroundColor: AppConstants.Colors.white]
-        appearance.titleTextAttributes = [.foregroundColor: AppConstants.Colors.white]
-        appearance.backButtonAppearance.normal.titleTextAttributes = [.foregroundColor: AppConstants.Colors.yellow]
+        NavigationBarStyler.apply(.main, to: self, searchController: searchController)
+    }
 
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationController?.navigationBar.compactAppearance = appearance
-        navigationController?.navigationBar.tintColor = AppConstants.Colors.yellow
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: R.string.localizable.backButton(), style: .plain, target: nil, action: nil)
-
-        navigationItem.hidesSearchBarWhenScrolling = false
-
-        navigationItem.searchController = searchController
+    func appearingUpdateUI() {
+        NavigationBarStyler.setNavBarLargeTitle(to: self)
+        searchController.additionalSearchControllerConfigure()
     }
 }
 
@@ -168,7 +154,7 @@ extension MainViewController: UISearchBarDelegate, UISearchResultsUpdating, UISe
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        output.viewIsAppearing()
+        output.eventHandler(.cancelSearch)
     }
 }
 
@@ -186,31 +172,29 @@ extension MainViewController {
 
         tasksTableView.onEditScreen = { [weak self] task in
             guard let self else { return }
-            output.selectItemForEditing(task)
-            resetSearchController()
+            output.eventHandler(.editTask(task))
         }
 
         tasksTableView.onRemoveItem = { [weak self] task in
             guard let self else { return }
-            output.removeItemTapped(task)
+            output.eventHandler(.deleteItem(task))
         }
 
         tasksTableView.onChangeTDLState = { [weak self] task in
             guard let self else { return }
-            output.changeItemState(task)
+            output.eventHandler(.changeItemState(task))
         }
 
-        tasksTableView.onGetFilteredData = { [weak self] string in
+        tasksTableView.onGetFilteredData = { [weak self] filterText in
             guard let self else { return }
-            output.filterData(by: string)
+            output.eventHandler(.filterData(by: filterText))
         }
     }
 
     func setupAddTaskButtonAction() {
         footerView.onAddTaskButtonTapped = { [weak self] in
             guard let self else { return }
-            resetSearchController()
-            output.addNewTaskButtonTapped()
+            output.eventHandler(.addNewTask)
         }
     }
 
@@ -221,18 +205,6 @@ extension MainViewController {
 
 // MARK: - Supporting methods
 private extension MainViewController {
-
-    func needToUpdateUI() {
-        if !isFirstLoad {
-            output.viewIsAppearing()
-        } else {
-            isFirstLoad = false
-        }
-    }
-
-    func setNavBarLargeTitle() {
-        navigationController?.navigationBar.prefersLargeTitles = true
-    }
 
     func showAlert() {
         let alert = AppAlert.create()
