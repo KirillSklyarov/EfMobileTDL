@@ -18,12 +18,15 @@ final class DependencyContainer {
     let moduleFactory: ModuleFactory
     let navigationController: UINavigationController
     let routerFactory: RouterFactoryProtocol
+    let navBarStyler: NavigationBarStyler
 
     init() {
         decoder = JSONDecoder()
         encoder = JSONEncoder()
         session = URLSession(configuration: .default)
         navigationController = UINavigationController()
+
+        navBarStyler = NavigationBarStyler()
 
         networkClient = NetworkClient(decoder: decoder, encoder: encoder, session: session)
         networkService = NetworkService(networkClient: networkClient)
@@ -32,7 +35,7 @@ final class DependencyContainer {
 
         routerFactory = RouterFactory(navigationController: navigationController)
 
-        moduleFactory = ModuleFactory(dataManager: coreDataManager, routerFactory: routerFactory, networkService: networkService)
+        moduleFactory = ModuleFactory(dataManager: coreDataManager, routerFactory: routerFactory, networkService: networkService, navBarStyler: navBarStyler)
 
         routerFactory.setModuleFactory(moduleFactory)
     }

@@ -13,9 +13,9 @@ protocol TextInputHandling {
 
 final class TextInputHandler: NSObject, TextInputHandling {
 
-    private let output: AddItemViewOutput
+    private let output: TextInputProtocol
 
-    init(output: AddItemViewOutput) {
+    init(output: TextInputProtocol) {
         self.output = output
     }
 
@@ -27,8 +27,8 @@ final class TextInputHandler: NSObject, TextInputHandling {
     }
 
     @objc func textFieldDidChange(_ textField: UITextField) {
-        guard let text = textField.text else { return }
-        output.eventHandler(.addedItemTitle(text))
+        guard let title = textField.text else { return }
+        output.handleTitleChange(title: title)
     }
 }
 
@@ -51,6 +51,6 @@ extension TextInputHandler: UITextViewDelegate {
 
     func textViewDidChange(_ textView: UITextView) {
         guard let subTitle = textView.text else { return }
-        output.eventHandler(.addedItemSubtitle(subTitle))
+        output.handleSubTitleChange(subTitle: subTitle)
     }
 }

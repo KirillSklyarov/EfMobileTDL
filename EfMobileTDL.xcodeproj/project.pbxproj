@@ -44,6 +44,7 @@
 		734B5D042E5DB041003A2A8C /* AddItemBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5D012E5DB041003A2A8C /* AddItemBuilder.swift */; };
 		734B5D0E2E5DB077003A2A8C /* AddItemActionBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5D0C2E5DB077003A2A8C /* AddItemActionBinder.swift */; };
 		734B5D222E5DB270003A2A8C /* TextInputHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5D202E5DB270003A2A8C /* TextInputHandler.swift */; };
+		734B5DC82E5DEAAC003A2A8C /* TextInputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5DC72E5DEAAC003A2A8C /* TextInputProtocol.swift */; };
 		73FC330A2D76EA6D0098ABB9 /* AppLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33092D76EA6D0098ABB9 /* AppLabel.swift */; };
 		73FC33122D770B160098ABB9 /* TDLItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33102D770B160098ABB9 /* TDLItem.swift */; };
 		73FC33242D770B220098ABB9 /* CheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC331D2D770B220098ABB9 /* CheckmarkView.swift */; };
@@ -137,6 +138,7 @@
 		734B5D012E5DB041003A2A8C /* AddItemBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemBuilder.swift; sourceTree = "<group>"; };
 		734B5D0C2E5DB077003A2A8C /* AddItemActionBinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemActionBinder.swift; sourceTree = "<group>"; };
 		734B5D202E5DB270003A2A8C /* TextInputHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputHandler.swift; sourceTree = "<group>"; };
+		734B5DC72E5DEAAC003A2A8C /* TextInputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputProtocol.swift; sourceTree = "<group>"; };
 		7371B0B32D760D77004E6C73 /* EfMobileTDL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EfMobileTDL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0CC2D760D78004E6C73 /* EfMobileTDLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0D62D760D78004E6C73 /* EfMobileTDLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -486,11 +488,11 @@
 		73FC33342D772F290098ABB9 /* AddItem */ = {
 			isa = PBXGroup;
 			children = (
-				734B5D032E5DB041003A2A8C /* Services */,
 				73FC33392D772F6F0098ABB9 /* View */,
 				73FC33C12D7ACE460098ABB9 /* Interactor */,
 				73FC33C22D7ACE460098ABB9 /* Presenter */,
 				73FC33CB2D7AD9E30098ABB9 /* Router */,
+				734B5D032E5DB041003A2A8C /* Services */,
 			);
 			path = AddItem;
 			sourceTree = "<group>";
@@ -681,6 +683,7 @@
 				73FC33EF2D7B301F0098ABB9 /* InteractorInputProtocol.swift */,
 				73455BBB2D7B7BF9008FDF5C /* BuilderProtocol.swift */,
 				73455BBD2D7C820C008FDF5C /* RouterProtocol.swift */,
+				734B5DC72E5DEAAC003A2A8C /* TextInputProtocol.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -864,6 +867,7 @@
 				73FC33262D770B220098ABB9 /* TasksTableView.swift in Sources */,
 				73FC33A52D7A1C9E0098ABB9 /* EditPresenter.swift in Sources */,
 				73FC33D72D7AE5750098ABB9 /* EditItemRouter.swift in Sources */,
+				734B5DC82E5DEAAC003A2A8C /* TextInputProtocol.swift in Sources */,
 				73FC33CD2D7AD9F00098ABB9 /* AddItemRouter.swift in Sources */,
 				734B5BB22E5CD4A1003A2A8C /* NavigationBarStyler.swift in Sources */,
 				734B5BA12E5CD126003A2A8C /* UIVC+Ext.swift in Sources */,

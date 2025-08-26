@@ -22,12 +22,14 @@ final class ModuleFactory {
     private let dataManager: CoreDataManagerProtocol
     private let routerFactory: RouterFactoryProtocol
     private let networkService: NetworkService
+    private let navBarStyler: NavigationBarStyler
 
     // MARK: - Init
-    init(dataManager: CoreDataManagerProtocol, routerFactory: RouterFactoryProtocol, networkService: NetworkService) {
+    init(dataManager: CoreDataManagerProtocol, routerFactory: RouterFactoryProtocol, networkService: NetworkService, navBarStyler: NavigationBarStyler) {
         self.dataManager = dataManager
         self.routerFactory = routerFactory
         self.networkService = networkService
+        self.navBarStyler = navBarStyler
     }
 }
 
@@ -50,7 +52,7 @@ private extension ModuleFactory {
     }
 
     func makeEditItemModule() -> EditItemViewController {
-        let builder = EditModuleBuilder(dataManager: dataManager)
+        let builder = EditModuleBuilder(dataManager: dataManager, navBarStyler: navBarStyler, routerFactory: routerFactory)
         return builder.build()
     }
 

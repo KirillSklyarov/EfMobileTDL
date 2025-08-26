@@ -7,91 +7,120 @@
 
 import Foundation
 
-protocol EditItemViewOutput: ViewOutputProtocol {
-    var itemToEdit: TDLItem? { get set }
-
+protocol EditItemViewOutput: ViewOutputProtocol, TextInputProtocol {
     func viewLoaded()
-    func checkDataAndUpdateView()
-    func isDataValid() -> Bool
-    func updateView()
-    func setErrorState()
-    func viewWillDisappear()
-    func didUpdateTaskTitle(_ title: String)
-    func didUpdateTaskSubTitle(_ subtitle: String)
+    func eventHandler(_ event: EditItemEvent)
 }
+
+enum EditItemPresenterState {
+    case idle
+    case loading
+    case dataValidating(data: TDLItem?)
+    case success(data: TDLItem)
+    case error(_ type: AlertType)
+}
+
+enum EditItemEvent {
+    case saveButtonTapped
+}
+
 
 final class EditPresenter {
 
     // MARK: - Properties
     var interactor: EditItemInteractorInput
     weak var view: EditItemViewInput?
+    private let router: RouterProtocol
 
     var itemToEdit: TDLItem?
 
     // MARK: - Init
-    init(interactor: EditItemInteractorInput) {
+    init(interactor: EditItemInteractorInput, router: RouterProtocol) {
         self.interactor = interactor
+        self.router = router
     }
 }
 
 // MARK: - EditTaskViewOutput
 extension EditPresenter: EditItemViewOutput {
     func viewLoaded() {
-        view?.setupInitialState()
-        loadData()
-        checkDataAndUpdateView()
+        setState(.idle)
     }
 
-    func loadData() {
-        view?.showLoading()
-        getDataFromInteractor()
-    }
-
-    // Если какие-то данные не получили, то показывает алерт с ошибкой, если все ок, то выставляем статус success
-    func checkDataAndUpdateView() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-            guard let self else { return }
-            isDataValid() ? updateView() : setErrorState()
+    func eventHandler(_ event: EditItemEvent) {
+        switch event {
+        case .saveButtonTapped:
+            if changedTaskValidation() {
+                guard let itemToEdit else { return }
+                interactor.updateItem(itemToEdit)
+                router.pop()
+            } else {
+                setState(.error(.editTaskError))
+            }
         }
     }
+}
 
-    // Проверяем на nil все данные, если где-то будет nil, то это ошибка
-    func isDataValid() -> Bool {
-        let data: [Any?] = [itemToEdit]
-        return data.allSatisfy { $0 != nil }
+// MARK: - TextInputProtocol
+extension EditPresenter {
+    func handleTitleChange(title: String) {
+        itemToEdit?.title = title
     }
 
-    // Прокидываем данные на view и формируем ее
-    func updateView() {
-        guard let itemToEdit else { return }
-        view?.configure(with: itemToEdit)
-    }
-
-    func setErrorState() {
-        view?.showError()
-    }
-
-    func didUpdateTaskTitle(_ title: String) {
-        if !title.isEmpty && title != itemToEdit?.title {
-            itemToEdit?.title = title
-        }
-    }
-
-    func didUpdateTaskSubTitle(_ subtitle: String) {
-        if !subtitle.isEmpty && subtitle != itemToEdit?.subtitle {
-            itemToEdit?.subtitle = subtitle
-        }
-    }
-
-    func viewWillDisappear() {
-        guard let itemToEdit else { return }
-        interactor.updateItem(itemToEdit)
+    func handleSubTitleChange(subTitle: String) {
+        itemToEdit?.subtitle = subTitle
     }
 }
 
 // MARK: - Supporting methods
 private extension EditPresenter {
+    func setState(_ state: EditItemPresenterState) {
+        switch state {
+        case .idle:
+            view?.setupInitialState()
+            loadData()
+        case .loading:
+            view?.showLoading()
+            getDataFromInteractor()
+        case .dataValidating(let data):
+            dataValidating(data)
+        case .success(let data):
+            self.itemToEdit = data
+            DispatchQueue.main.async { [weak self] in
+                self?.view?.configure(with: data)
+            }
+        case .error(let type):
+            DispatchQueue.main.async { [weak self] in
+                let alert = AppAlert.create(type)
+                self?.view?.showError(alert)
+            }
+        }
+    }
+
+    func loadData() {
+        setState(.loading)
+    }
+
+    func dataValidating(_ data: TDLItem?) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let self else { return }
+            isDataValid(data) ? setState(.success(data: data!)) : setState(.error(.loadingError))
+        }
+    }
+
+    func isDataValid(_ data: TDLItem?) -> Bool {
+        return data != nil
+    }
+
     func getDataFromInteractor() {
-        itemToEdit = interactor.getTaskToEdit()
+        let itemToEdit = interactor.getTaskToEdit()
+        setState(.dataValidating(data: itemToEdit))
+    }
+
+    func changedTaskValidation() -> Bool {
+        guard let itemToEdit else { return false }
+        let title = itemToEdit.title
+        let subtitle = itemToEdit.subtitle
+        return !title.isBlank && !subtitle.isBlank
     }
 }

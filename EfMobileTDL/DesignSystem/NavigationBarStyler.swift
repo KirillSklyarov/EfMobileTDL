@@ -13,8 +13,11 @@ enum NavBarStyle {
     case addTask
 }
 
-struct NavigationBarStyler {
-    static func appearance() -> UINavigationBarAppearance {
+final class NavigationBarStyler {
+
+    var onSaveButtonTapped: (() -> Void)?
+
+    private func appearance() -> UINavigationBarAppearance {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
             appearance.backgroundColor = AppConstants.Colors.black
@@ -24,7 +27,7 @@ struct NavigationBarStyler {
             return appearance
         }
 
-    static func apply(_ style: NavBarStyle, to vc: UIViewController, searchController: UISearchController? = nil) {
+    func apply(_ style: NavBarStyle, to vc: UIViewController, searchController: UISearchController? = nil) {
         let appearance = appearance()
         vc.navigationController?.navigationBar.standardAppearance = appearance
         vc.navigationController?.navigationBar.scrollEdgeAppearance = appearance
@@ -44,17 +47,24 @@ struct NavigationBarStyler {
         case .main:
             vc.title = AppConstants.L.mainTitle()
             vc.navigationController?.navigationBar.prefersLargeTitles = true
-        case .editTask, .addTask:
+        case .addTask:
             vc.title = AppConstants.L.addTask()
             vc.navigationController?.navigationBar.prefersLargeTitles = false
+        case .editTask:
+            vc.title = AppConstants.L.editTask()
+            vc.navigationController?.navigationBar.prefersLargeTitles = false
+
+            vc.navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .save, primaryAction: UIAction { [weak self] _ in
+                self?.onSaveButtonTapped?()
+            })
         }
     }
 
-    static func setNavBarLargeTitle(to vc: UIViewController) {
+    func setNavBarLargeTitle(to vc: UIViewController) {
         vc.navigationController?.navigationBar.prefersLargeTitles = true
     }
 
-    static func hideNavBar(_ isHide: Bool, vc: UIViewController) {
+    func hideNavBar(_ isHide: Bool, vc: UIViewController) {
         vc.title = isHide ? "" : AppConstants.L.mainTitle()
     }
 }

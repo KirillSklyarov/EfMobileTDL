@@ -58,6 +58,8 @@ private extension AddTaskSubtitleView {
             subtitleTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -2),
             subtitleTextField.topAnchor.constraint(equalTo: topAnchor, constant: 2),
             subtitleTextField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2),
+
+            subtitleTextField.heightAnchor.constraint(equalToConstant: AppConstants.Height.subTitleTextView),
         ])
     }
 

@@ -28,6 +28,8 @@ final class MainViewController: UIViewController {
     private let searchHandler: SearchHandling
     private let mainActionBinder: MainActionBinding
 
+    private let navStyler = NavigationBarStyler()
+
     // MARK: - Init
     init(output: MainViewOutput) {
         self.output = output
@@ -67,7 +69,7 @@ private extension MainViewController {
     }
 
     func setupNavigationBar() {
-        NavigationBarStyler.apply(.main, to: self, searchController: searchController)
+        navStyler.apply(.main, to: self, searchController: searchController)
     }
 
     func setupSearchHandler() {
@@ -75,7 +77,7 @@ private extension MainViewController {
     }
 
     func appearingUpdateUI() {
-        NavigationBarStyler.setNavBarLargeTitle(to: self)
+        navStyler.setNavBarLargeTitle(to: self)
         searchController.additionalSearchControllerConfigure()
     }
 }
@@ -107,10 +109,7 @@ private extension MainViewController {
     }
 
     func setupActivityIndicatorLayout() {
-        NSLayoutConstraint.activate([
-            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
+        activityIndicator.setCenterConstraints(on: view)
     }
 }
 
@@ -135,7 +134,6 @@ extension MainViewController: MainViewInput {
     func showError(_ alert: UIAlertController) {
         activityIndicator.stopAnimating()
         present(alert, animated: true)
-
     }
 
     func resetSearchController() {
@@ -155,7 +153,7 @@ private extension MainViewController {
     }
 
     func isHideContent(_ isHide: Bool) {
-        NavigationBarStyler.hideNavBar(isHide, vc: self)
+        navStyler.hideNavBar(isHide, vc: self)
         searchController.hide(isHide)
 
         UIView.animate(withDuration: 0.3) { [weak self] in

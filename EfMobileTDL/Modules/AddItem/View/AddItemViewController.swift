@@ -64,7 +64,8 @@ extension AddItemViewController: AddItemViewInput {
 // MARK: - Setup UI
 private extension AddItemViewController {
     func setupUI() {
-        NavigationBarStyler.apply(.addTask, to: self)
+        let navStyler = NavigationBarStyler()
+        navStyler.apply(.addTask, to: self)
     
         view.backgroundColor = AppConstants.Colors.black
 
@@ -76,7 +77,6 @@ private extension AddItemViewController {
         contentStack.setConstraints(isSafeArea: true, allInsets: AppConstants.Insets.medium)
 
         NSLayoutConstraint.activate([
-            subTitleContainer.heightAnchor.constraint(equalToConstant: AppConstants.Height.subTitleTextView),
             saveButton.widthAnchor.constraint(equalTo: contentStack.widthAnchor, multiplier: 0.5),
         ])
     }

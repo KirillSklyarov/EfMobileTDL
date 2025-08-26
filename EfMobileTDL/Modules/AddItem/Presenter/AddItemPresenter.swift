@@ -7,14 +7,12 @@
 
 import Foundation
 
-protocol AddItemViewOutput: AnyObject {
+protocol AddItemViewOutput: TextInputProtocol {
     func viewLoaded()
     func eventHandler(_ event: AddItemEvent)
 }
 
 enum AddItemEvent {
-    case addedItemTitle(String)
-    case addedItemSubtitle(String)
     case saveButtonTapped
 }
 
@@ -36,12 +34,6 @@ final class AddItemPresenter {
 
     func eventHandler(_ event: AddItemEvent) {
         switch event {
-        case .addedItemTitle(let title):
-            self.title = title
-            checkButton()
-        case .addedItemSubtitle(let subTitle):
-            self.subtitle = subTitle
-            checkButton()
         case .saveButtonTapped:
             configureTask()
             sendNewTaskToStorage()
@@ -52,6 +44,16 @@ final class AddItemPresenter {
 
 // MARK: - AddItemViewOutput
 extension AddItemPresenter: AddItemViewOutput {
+    func handleTitleChange(title: String) {
+        self.title = title
+        checkButton()
+    }
+    
+    func handleSubTitleChange(subTitle: String) {
+        self.subtitle = subTitle
+        checkButton()
+    }
+    
     func viewLoaded() {
         view?.setupInitialState()
         checkButton()

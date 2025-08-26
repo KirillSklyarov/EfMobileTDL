@@ -6,14 +6,12 @@
 //
 
 import UIKit
-import rswift
 
 protocol EditItemViewInput: AnyObject {
     func setupInitialState()
     func showLoading()
     func configure(with task: TDLItem)
-    func showError()
-    func textFieldDidChange(_ textField: UITextField)
+    func showError(_ alert: UIAlertController)
 }
 
 final class EditItemViewController: UIViewController {
@@ -31,10 +29,14 @@ final class EditItemViewController: UIViewController {
 
     // MARK: - Other properties
     private let output: EditItemViewOutput
+    private let textInputHandler: TextInputHandling
+    private var navBarStyler: NavigationBarStyler
 
     // MARK: - Init
-    init(output: EditItemViewOutput) {
+    init(output: EditItemViewOutput, navBarStyler: NavigationBarStyler) {
         self.output = output
+        self.navBarStyler = navBarStyler
+        self.textInputHandler = TextInputHandler(output: output)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -46,11 +48,6 @@ final class EditItemViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         output.viewLoaded()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        output.viewWillDisappear()
     }
 }
 
@@ -73,17 +70,19 @@ extension EditItemViewController: EditItemViewInput {
         updateUI(with: task)
     }
 
-    func showError() {
+    func showError(_ alert: UIAlertController) {
         activityIndicator.stopAnimating()
-        showAlert()
+        present(alert, animated: true)
     }
 }
 
 // MARK: - Setup UI
 private extension EditItemViewController {
     func setupUI() {
-        title = AppConstants.L.editTask()
-        navigationController?.navigationBar.prefersLargeTitles = false
+        navBarStyler.apply(.editTask, to: self)
+        navBarStyler.onSaveButtonTapped = { [weak self] in
+            self?.output.eventHandler(.saveButtonTapped)
+        }
 
         view.backgroundColor = AppConstants.Colors.black
         view.addSubviews(contentStack, activityIndicator)
@@ -96,50 +95,23 @@ private extension EditItemViewController {
     }
 
     func setupContentStackLayout() {
-        NSLayoutConstraint.activate([
-            contentStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: AppConstants.Insets.small),
-            contentStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: AppConstants.Insets.medium),
-            contentStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -AppConstants.Insets.medium),
-
-            subtitleTextField.heightAnchor.constraint(equalToConstant: AppConstants.Height.textField*5),
-        ])
+        contentStack.setLocalConstraints(
+            isSafeArea: true,
+            top: AppConstants.Insets.small,
+            left: AppConstants.Insets.medium,
+            right: AppConstants.Insets.medium
+        )
     }
 
     func setupActivityIndicatorLayout() {
-        NSLayoutConstraint.activate([
-            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-        ])
+        activityIndicator.setCenterConstraints(on: view)
     }
 
     func setupTextFields() {
-        titleTextField.delegate = self
-        subtitleTextField.setTextViewDelegate(self)
-
-        titleTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        textInputHandler.bind(to: titleTextField, textView: subtitleTextField)
     }
 }
 
-// MARK: - UITextViewDelegate
-extension EditItemViewController: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        guard let text = textView.text else { return }
-        output.didUpdateTaskSubTitle(text)
-    }
-
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        guard let text = textField.text else { return }
-        output.didUpdateTaskTitle(text)
-    }
-}
-
-// MARK: - UITextFieldDelegate
-extension EditItemViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-}
 
 // MARK: - Supporting methods
 private extension EditItemViewController {
@@ -152,11 +124,5 @@ private extension EditItemViewController {
         subtitleTextField.setTextViewText(task.subtitle)
         subtitleTextField.setTextViewTextColor(AppConstants.Colors.white)
         dateLabel.text = task.date
-    }
-
-    func showAlert() {
-        activityIndicator.stopAnimating()
-        let alert = AppAlert.create()
-        present(alert, animated: true)
     }
 }

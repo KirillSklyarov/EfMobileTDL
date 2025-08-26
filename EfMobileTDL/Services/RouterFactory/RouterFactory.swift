@@ -10,7 +10,7 @@ import UIKit
 protocol RouterFactoryProtocol: AnyObject {
     func makeMainRouter() -> MainRouterProtocol
     func makeEditItemRouter() -> EditItemRouter
-    func makeAddItemModule() -> AddItemRouter
+    func makeAddItemRouter() -> AddItemRouter
 
     func setModuleFactory(_ moduleFactory: ModuleFactoryProtocol?)
 }
@@ -41,7 +41,7 @@ extension RouterFactory {
         return EditItemRouter(navigationController: navigationController)
     }
 
-    func makeAddItemModule() -> AddItemRouter {
+    func makeAddItemRouter() -> AddItemRouter {
         return AddItemRouter(navigationController: navigationController)
     }
 }

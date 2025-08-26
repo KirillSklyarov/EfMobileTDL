@@ -17,4 +17,11 @@ final class AppActivityIndicator: UIActivityIndicatorView {
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func setCenterConstraints(on superview: UIView) {
+        NSLayoutConstraint.activate([
+            centerXAnchor.constraint(equalTo: superview.centerXAnchor),
+            centerYAnchor.constraint(equalTo: superview.centerYAnchor),
+        ])
+    }
 }

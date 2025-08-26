@@ -23,7 +23,7 @@ final class AddItemModuleBuilder: BuilderProtocol {
     // MARK: - Methods
     func build() -> AddItemViewController {
         let interactor = AddItemInteractor(dataManager: dataManager)
-        let router = routerFactory.makeAddItemModule()
+        let router = routerFactory.makeAddItemRouter()
         let presenter = AddItemPresenter(interactor: interactor, router: router)
         let view = AddItemViewController(output: presenter)
 

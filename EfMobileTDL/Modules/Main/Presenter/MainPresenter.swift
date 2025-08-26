@@ -95,7 +95,7 @@ extension MainPresenter: MainViewOutput {
             }
         case .error:
             DispatchQueue.main.async { [weak self] in
-                let alert = AppAlert.create()
+                let alert = AppAlert.create(.loadingError)
                 self?.view?.showError(alert)
             }
         }
