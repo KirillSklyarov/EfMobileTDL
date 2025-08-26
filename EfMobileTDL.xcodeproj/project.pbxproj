@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 63;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -38,6 +38,7 @@
 		73455BE22D7CA9B2008FDF5C /* rswift in Frameworks */ = {isa = PBXBuildFile; productRef = 73455BE12D7CA9B2008FDF5C /* rswift */; };
 		734B5BA12E5CD126003A2A8C /* UIVC+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5BA02E5CD126003A2A8C /* UIVC+Ext.swift */; };
 		734B5BB22E5CD4A1003A2A8C /* NavigationBarStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5BB12E5CD4A1003A2A8C /* NavigationBarStyler.swift */; };
+		734B5C4E2E5D9235003A2A8C /* MainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5C4B2E5D9235003A2A8C /* MainBuilder.swift */; };
 		73FC330A2D76EA6D0098ABB9 /* AppLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33092D76EA6D0098ABB9 /* AppLabel.swift */; };
 		73FC33122D770B160098ABB9 /* TDLItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33102D770B160098ABB9 /* TDLItem.swift */; };
 		73FC33242D770B220098ABB9 /* CheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC331D2D770B220098ABB9 /* CheckmarkView.swift */; };
@@ -71,7 +72,6 @@
 		73FC33D72D7AE5750098ABB9 /* EditItemRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33D62D7AE5750098ABB9 /* EditItemRouter.swift */; };
 		73FC33DE2D7AE7960098ABB9 /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33DD2D7AE7960098ABB9 /* MainInteractor.swift */; };
 		73FC33E02D7AE7DB0098ABB9 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33DF2D7AE7DB0098ABB9 /* MainPresenter.swift */; };
-		73FC33E42D7AFFAB0098ABB9 /* MainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33E32D7AFFAB0098ABB9 /* MainBuilder.swift */; };
 		73FC33EE2D7B2DC10098ABB9 /* ViewOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33ED2D7B2DC10098ABB9 /* ViewOutputProtocol.swift */; };
 		73FC33F02D7B301F0098ABB9 /* InteractorInputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33EF2D7B301F0098ABB9 /* InteractorInputProtocol.swift */; };
 		73FC33F82D7B4DD40098ABB9 /* EditSpyObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33F62D7B4DD40098ABB9 /* EditSpyObjects.swift */; };
@@ -127,6 +127,7 @@
 		73455BD02D7C94D5008FDF5C /* String+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
 		734B5BA02E5CD126003A2A8C /* UIVC+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVC+Ext.swift"; sourceTree = "<group>"; };
 		734B5BB12E5CD4A1003A2A8C /* NavigationBarStyler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarStyler.swift; sourceTree = "<group>"; };
+		734B5C4B2E5D9235003A2A8C /* MainBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBuilder.swift; sourceTree = "<group>"; };
 		7371B0B32D760D77004E6C73 /* EfMobileTDL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EfMobileTDL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0CC2D760D78004E6C73 /* EfMobileTDLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0D62D760D78004E6C73 /* EfMobileTDLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,12 +164,15 @@
 		73FC33D62D7AE5750098ABB9 /* EditItemRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemRouter.swift; sourceTree = "<group>"; };
 		73FC33DD2D7AE7960098ABB9 /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
 		73FC33DF2D7AE7DB0098ABB9 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
-		73FC33E32D7AFFAB0098ABB9 /* MainBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBuilder.swift; sourceTree = "<group>"; };
 		73FC33ED2D7B2DC10098ABB9 /* ViewOutputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOutputProtocol.swift; sourceTree = "<group>"; };
 		73FC33EF2D7B301F0098ABB9 /* InteractorInputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractorInputProtocol.swift; sourceTree = "<group>"; };
 		73FC33F62D7B4DD40098ABB9 /* EditSpyObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSpyObjects.swift; sourceTree = "<group>"; };
 		73FC33FB2D7B525B0098ABB9 /* AddSpyObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpyObjects.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		734B5C512E5D923B003A2A8C /* ActionBinder */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ActionBinder; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		7371B0B02D760D77004E6C73 /* Frameworks */ = {
@@ -268,7 +272,7 @@
 				73FC33DC2D7AE6BD0098ABB9 /* Presenter */,
 				73FC33112D770B160098ABB9 /* Entity */,
 				73FC33B92D7A432C0098ABB9 /* Router */,
-				73FC33E22D7AE8520098ABB9 /* Builder */,
+				734B5C4D2E5D9235003A2A8C /* Services */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -337,6 +341,23 @@
 				73455BB22D7B5F3B008FDF5C /* Tests */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		734B5C4C2E5D9235003A2A8C /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				734B5C4B2E5D9235003A2A8C /* MainBuilder.swift */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
+		734B5C4D2E5D9235003A2A8C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				734B5C512E5D923B003A2A8C /* ActionBinder */,
+				734B5C4C2E5D9235003A2A8C /* Builder */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		7371B0AA2D760D77004E6C73 = {
@@ -586,14 +607,6 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
-		73FC33E22D7AE8520098ABB9 /* Builder */ = {
-			isa = PBXGroup;
-			children = (
-				73FC33E32D7AFFAB0098ABB9 /* MainBuilder.swift */,
-			);
-			path = Builder;
-			sourceTree = "<group>";
-		};
 		73FC33E62D7B27590098ABB9 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -649,6 +662,9 @@
 			);
 			dependencies = (
 				73455BE42D7CA9CC008FDF5C /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				734B5C512E5D923B003A2A8C /* ActionBinder */,
 			);
 			name = EfMobileTDL;
 			packageProductDependencies = (
@@ -785,7 +801,6 @@
 				7320859B2D7626110086525E /* AppDelegate.swift in Sources */,
 				73FC335B2D7857890098ABB9 /* NetworkClient.swift in Sources */,
 				7320859C2D7626110086525E /* SceneDelegate.swift in Sources */,
-				73FC33E42D7AFFAB0098ABB9 /* MainBuilder.swift in Sources */,
 				73FC333A2D772F6F0098ABB9 /* AddItemViewController.swift in Sources */,
 				73FC33A32D79C6A50098ABB9 /* EditItemInteractor.swift in Sources */,
 				73FC33302D770F790098ABB9 /* EditItemViewController.swift in Sources */,
@@ -824,6 +839,7 @@
 				732085B82D762D980086525E /* AppConstants.swift in Sources */,
 				73FC33DE2D7AE7960098ABB9 /* MainInteractor.swift in Sources */,
 				73455BD12D7C94D5008FDF5C /* String+Localized.swift in Sources */,
+				734B5C4E2E5D9235003A2A8C /* MainBuilder.swift in Sources */,
 				73FC33E02D7AE7DB0098ABB9 /* MainPresenter.swift in Sources */,
 				73FC33402D778B350098ABB9 /* AppSearchController.swift in Sources */,
 				73FC33C92D7AD6750098ABB9 /* AddItemBuilder.swift in Sources */,

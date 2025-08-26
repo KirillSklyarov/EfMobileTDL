@@ -25,17 +25,19 @@ final class MainViewController: UIViewController {
     private lazy var activityIndicator = AppActivityIndicator()
 
     private let output: MainViewOutput
+    private var mainActionBinder: MainActionBinding?
 
     // MARK: - Init
     init(output: MainViewOutput) {
         self.output = output
         super.init(nibName: nil, bundle: nil)
+        mainActionBinderInit()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,7 +111,7 @@ private extension MainViewController {
 extension MainViewController: MainViewInput {
     func setupInitialState() {
         setupUI()
-        setupAction()
+        mainActionBinder?.bind(tasksTableView: tasksTableView, footerView: footerView)
     }
 
     func loading() {
@@ -150,44 +152,12 @@ extension MainViewController: UISearchBarDelegate, UISearchResultsUpdating, UISe
     }
 }
 
-// MARK: - Setup action
-private extension MainViewController {
-    func setupAction() {
-        setupTasksTableViewAction()
-        setupAddTaskButtonAction()
-    }
-
-    func setupTasksTableViewAction() {
-        tasksTableView.onShowShareScreen = { [weak self] activityVC in
-            self?.present(activityVC, animated: true)
-        }
-
-        tasksTableView.onEditScreen = { [weak self] task in
-            guard let self else { return }
-            output.eventHandler(.editTask(task))
-        }
-
-        tasksTableView.onRemoveItem = { [weak self] task in
-            guard let self else { return }
-            output.eventHandler(.deleteItem(task))
-        }
-
-        tasksTableView.onChangeTDLState = { [weak self] task in
-            guard let self else { return }
-            output.eventHandler(.changeItemState(task))
-        }
-    }
-
-    func setupAddTaskButtonAction() {
-        footerView.onAddTaskButtonTapped = { [weak self] in
-            guard let self else { return }
-            output.eventHandler(.addNewTask)
-        }
-    }
-}
-
 // MARK: - Supporting methods
 private extension MainViewController {
+    func mainActionBinderInit() {
+        self.mainActionBinder = MainActionBinder(output: output, viewController: self)
+    }
+
     func updateUI(with data: [TDLItem]) {
         DispatchQueue.main.async { [weak self] in
             self?.tasksTableView.apply(tasks: data)
