@@ -9,6 +9,7 @@ import UIKit
 
 protocol MainActionBinding {
     func bind(tasksTableView: TasksTableView, footerView: FooterView)
+    func setVC(_ viewController: UIViewController)
 }
 
 final class MainActionBinder: MainActionBinding {
@@ -16,8 +17,11 @@ final class MainActionBinder: MainActionBinding {
     private weak var viewController: UIViewController?
     private let output: MainViewOutput
 
-    init(output: MainViewOutput, viewController: UIViewController?) {
+    init(output: MainViewOutput) {
         self.output = output
+    }
+
+    func setVC(_ viewController: UIViewController) {
         self.viewController = viewController
     }
 

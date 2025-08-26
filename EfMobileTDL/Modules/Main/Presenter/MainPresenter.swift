@@ -74,7 +74,7 @@ extension MainPresenter: MainViewOutput {
             interactor.changeTaskState(item)
         case .filterData(let text):
             let filteredData = interactor.filterData(by: text)
-            view?.configure(with: filteredData)
+            setState(.success(data: filteredData))
         case .cancelSearch:
             updateDataFromCD()
         }

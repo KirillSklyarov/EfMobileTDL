@@ -52,4 +52,8 @@ struct NavigationBarStyler {
     static func setNavBarLargeTitle(to vc: UIViewController) {
         vc.navigationController?.navigationBar.prefersLargeTitles = true
     }
+
+    static func hideNavBar(_ isHide: Bool, vc: UIViewController) {
+        vc.title = isHide ? "" : AppConstants.L.mainTitle()
+    }
 }

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import rswift
 
 final class AppSearchController: UISearchController {
 
@@ -17,6 +16,10 @@ final class AppSearchController: UISearchController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func hide(_ isHide: Bool) {
+        searchBar.alpha = isHide ? 0 : 1
     }
 
     func additionalSearchControllerConfigure() {

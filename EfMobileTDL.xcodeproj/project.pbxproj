@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -39,6 +39,8 @@
 		734B5BA12E5CD126003A2A8C /* UIVC+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5BA02E5CD126003A2A8C /* UIVC+Ext.swift */; };
 		734B5BB22E5CD4A1003A2A8C /* NavigationBarStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5BB12E5CD4A1003A2A8C /* NavigationBarStyler.swift */; };
 		734B5C4E2E5D9235003A2A8C /* MainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5C4B2E5D9235003A2A8C /* MainBuilder.swift */; };
+		734B5C752E5D96D3003A2A8C /* MainActionBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5C732E5D96D3003A2A8C /* MainActionBinder.swift */; };
+		734B5C7C2E5D96F1003A2A8C /* SearchHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5C7B2E5D96F1003A2A8C /* SearchHandler.swift */; };
 		73FC330A2D76EA6D0098ABB9 /* AppLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33092D76EA6D0098ABB9 /* AppLabel.swift */; };
 		73FC33122D770B160098ABB9 /* TDLItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33102D770B160098ABB9 /* TDLItem.swift */; };
 		73FC33242D770B220098ABB9 /* CheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC331D2D770B220098ABB9 /* CheckmarkView.swift */; };
@@ -128,6 +130,8 @@
 		734B5BA02E5CD126003A2A8C /* UIVC+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVC+Ext.swift"; sourceTree = "<group>"; };
 		734B5BB12E5CD4A1003A2A8C /* NavigationBarStyler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarStyler.swift; sourceTree = "<group>"; };
 		734B5C4B2E5D9235003A2A8C /* MainBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBuilder.swift; sourceTree = "<group>"; };
+		734B5C732E5D96D3003A2A8C /* MainActionBinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainActionBinder.swift; sourceTree = "<group>"; };
+		734B5C7B2E5D96F1003A2A8C /* SearchHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHandler.swift; sourceTree = "<group>"; };
 		7371B0B32D760D77004E6C73 /* EfMobileTDL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EfMobileTDL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0CC2D760D78004E6C73 /* EfMobileTDLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0D62D760D78004E6C73 /* EfMobileTDLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -169,10 +173,6 @@
 		73FC33F62D7B4DD40098ABB9 /* EditSpyObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSpyObjects.swift; sourceTree = "<group>"; };
 		73FC33FB2D7B525B0098ABB9 /* AddSpyObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpyObjects.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		734B5C512E5D923B003A2A8C /* ActionBinder */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ActionBinder; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		7371B0B02D760D77004E6C73 /* Frameworks */ = {
@@ -354,10 +354,27 @@
 		734B5C4D2E5D9235003A2A8C /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				734B5C512E5D923B003A2A8C /* ActionBinder */,
+				734B5C742E5D96D3003A2A8C /* ActionBinder */,
 				734B5C4C2E5D9235003A2A8C /* Builder */,
+				734B5C792E5D96DE003A2A8C /* SearchHandler */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		734B5C742E5D96D3003A2A8C /* ActionBinder */ = {
+			isa = PBXGroup;
+			children = (
+				734B5C732E5D96D3003A2A8C /* MainActionBinder.swift */,
+			);
+			path = ActionBinder;
+			sourceTree = "<group>";
+		};
+		734B5C792E5D96DE003A2A8C /* SearchHandler */ = {
+			isa = PBXGroup;
+			children = (
+				734B5C7B2E5D96F1003A2A8C /* SearchHandler.swift */,
+			);
+			path = SearchHandler;
 			sourceTree = "<group>";
 		};
 		7371B0AA2D760D77004E6C73 = {
@@ -663,9 +680,6 @@
 			dependencies = (
 				73455BE42D7CA9CC008FDF5C /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				734B5C512E5D923B003A2A8C /* ActionBinder */,
-			);
 			name = EfMobileTDL;
 			packageProductDependencies = (
 				73455BDF2D7CA9B2008FDF5C /* RswiftLibrary */,
@@ -809,6 +823,7 @@
 				73FC33752D798C560098ABB9 /* CoreDataManager.swift in Sources */,
 				73FC33EE2D7B2DC10098ABB9 /* ViewOutputProtocol.swift in Sources */,
 				73FC33AF2D7A3D160098ABB9 /* EditModuleBuilder.swift in Sources */,
+				734B5C7C2E5D96F1003A2A8C /* SearchHandler.swift in Sources */,
 				73FC33242D770B220098ABB9 /* CheckmarkView.swift in Sources */,
 				73FC33C52D7ACE950098ABB9 /* AddItemInteractor.swift in Sources */,
 				73FC33C72D7ACEC80098ABB9 /* AddItemPresenter.swift in Sources */,
@@ -822,6 +837,7 @@
 				734B5BB22E5CD4A1003A2A8C /* NavigationBarStyler.swift in Sources */,
 				734B5BA12E5CD126003A2A8C /* UIVC+Ext.swift in Sources */,
 				73FC33272D770B220098ABB9 /* TaskTableViewCell.swift in Sources */,
+				734B5C752E5D96D3003A2A8C /* MainActionBinder.swift in Sources */,
 				73FC33282D770B220098ABB9 /* MainVC.swift in Sources */,
 				732085DA2D762E8D0086525E /* UIColor+Ext.swift in Sources */,
 				73FC33322D771F110098ABB9 /* AppTextField.swift in Sources */,

@@ -25,13 +25,16 @@ final class MainViewController: UIViewController {
     private lazy var activityIndicator = AppActivityIndicator()
 
     private let output: MainViewOutput
-    private var mainActionBinder: MainActionBinding?
+    private let searchHandler: SearchHandling
+    private let mainActionBinder: MainActionBinding
 
     // MARK: - Init
     init(output: MainViewOutput) {
         self.output = output
+        self.searchHandler = SearchHandler(output: output)
+        self.mainActionBinder = MainActionBinder(output: output)
         super.init(nibName: nil, bundle: nil)
-        mainActionBinderInit()
+        mainActionBinder.setVC(self)
     }
     
     required init?(coder: NSCoder) {
@@ -54,8 +57,8 @@ final class MainViewController: UIViewController {
 // MARK: - Setup UI
 private extension MainViewController {
     func setupUI() {
+        setupSearchHandler()
         setupNavigationBar()
-        setupSearchController()
 
         view.backgroundColor = AppConstants.Colors.black
         view.addSubviews(tasksTableView, footerView, activityIndicator)
@@ -65,6 +68,10 @@ private extension MainViewController {
 
     func setupNavigationBar() {
         NavigationBarStyler.apply(.main, to: self, searchController: searchController)
+    }
+
+    func setupSearchHandler() {
+        searchHandler.bind(to: searchController)
     }
 
     func appearingUpdateUI() {
@@ -83,7 +90,7 @@ private extension MainViewController {
 
     func setupFooterViewLayout() {
         NSLayoutConstraint.activate([
-            footerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 83/800),
+            footerView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.1),
             footerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             footerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             footerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -111,7 +118,7 @@ private extension MainViewController {
 extension MainViewController: MainViewInput {
     func setupInitialState() {
         setupUI()
-        mainActionBinder?.bind(tasksTableView: tasksTableView, footerView: footerView)
+        setupActions()
     }
 
     func loading() {
@@ -131,38 +138,19 @@ extension MainViewController: MainViewInput {
     }
 
     func resetSearchController() {
-        searchController.searchBar.text = ""
-    }
-}
-
-// MARK: - UISearchBarDelegate, UISearchControllerDelegate
-extension MainViewController: UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
-    func setupSearchController() {
-        searchController.searchBar.delegate = self
-        searchController.searchResultsUpdater = self
-    }
-
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let searchText = searchController.searchBar.text else { return }
-        output.eventHandler(.filterData(by: searchText))
-    }
-
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        output.eventHandler(.cancelSearch)
+        searchHandler.reset(searchController)
     }
 }
 
 // MARK: - Supporting methods
 private extension MainViewController {
-    func mainActionBinderInit() {
-        self.mainActionBinder = MainActionBinder(output: output, viewController: self)
+    func setupActions() {
+        mainActionBinder.bind(tasksTableView: tasksTableView, footerView: footerView)
     }
 
     func updateUI(with data: [TDLItem]) {
-        DispatchQueue.main.async { [weak self] in
-            self?.tasksTableView.apply(tasks: data)
-            self?.footerView.updateUI(with: data.count)
-        }
+        tasksTableView.apply(tasks: data)
+        footerView.updateUI(with: data.count)
     }
 
     func showAlert() {
@@ -171,7 +159,10 @@ private extension MainViewController {
     }
 
     func isHideContent(_ isHide: Bool) {
-        DispatchQueue.main.async { [weak self] in
+        NavigationBarStyler.hideNavBar(isHide, vc: self)
+        searchController.hide(isHide)
+
+        UIView.animate(withDuration: 0.3) { [weak self] in
             self?.tasksTableView.alpha = isHide ? 0 : 1
             self?.footerView.alpha = isHide ? 0 : 1
         }
