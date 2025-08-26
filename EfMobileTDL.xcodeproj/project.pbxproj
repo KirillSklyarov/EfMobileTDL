@@ -41,6 +41,9 @@
 		734B5C4E2E5D9235003A2A8C /* MainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5C4B2E5D9235003A2A8C /* MainBuilder.swift */; };
 		734B5C752E5D96D3003A2A8C /* MainActionBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5C732E5D96D3003A2A8C /* MainActionBinder.swift */; };
 		734B5C7C2E5D96F1003A2A8C /* SearchHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5C7B2E5D96F1003A2A8C /* SearchHandler.swift */; };
+		734B5D042E5DB041003A2A8C /* AddItemBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5D012E5DB041003A2A8C /* AddItemBuilder.swift */; };
+		734B5D0E2E5DB077003A2A8C /* AddItemActionBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5D0C2E5DB077003A2A8C /* AddItemActionBinder.swift */; };
+		734B5D222E5DB270003A2A8C /* TextInputHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5D202E5DB270003A2A8C /* TextInputHandler.swift */; };
 		73FC330A2D76EA6D0098ABB9 /* AppLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33092D76EA6D0098ABB9 /* AppLabel.swift */; };
 		73FC33122D770B160098ABB9 /* TDLItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33102D770B160098ABB9 /* TDLItem.swift */; };
 		73FC33242D770B220098ABB9 /* CheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC331D2D770B220098ABB9 /* CheckmarkView.swift */; };
@@ -68,7 +71,6 @@
 		73FC33BB2D7A43D60098ABB9 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33BA2D7A43D60098ABB9 /* MainRouter.swift */; };
 		73FC33C52D7ACE950098ABB9 /* AddItemInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33C42D7ACE950098ABB9 /* AddItemInteractor.swift */; };
 		73FC33C72D7ACEC80098ABB9 /* AddItemPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33C62D7ACEC80098ABB9 /* AddItemPresenter.swift */; };
-		73FC33C92D7AD6750098ABB9 /* AddItemBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33C82D7AD6750098ABB9 /* AddItemBuilder.swift */; };
 		73FC33CD2D7AD9F00098ABB9 /* AddItemRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33CC2D7AD9F00098ABB9 /* AddItemRouter.swift */; };
 		73FC33D32D7ADFBA0098ABB9 /* RouterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33D12D7ADFBA0098ABB9 /* RouterFactory.swift */; };
 		73FC33D72D7AE5750098ABB9 /* EditItemRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33D62D7AE5750098ABB9 /* EditItemRouter.swift */; };
@@ -132,6 +134,9 @@
 		734B5C4B2E5D9235003A2A8C /* MainBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBuilder.swift; sourceTree = "<group>"; };
 		734B5C732E5D96D3003A2A8C /* MainActionBinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainActionBinder.swift; sourceTree = "<group>"; };
 		734B5C7B2E5D96F1003A2A8C /* SearchHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHandler.swift; sourceTree = "<group>"; };
+		734B5D012E5DB041003A2A8C /* AddItemBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemBuilder.swift; sourceTree = "<group>"; };
+		734B5D0C2E5DB077003A2A8C /* AddItemActionBinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemActionBinder.swift; sourceTree = "<group>"; };
+		734B5D202E5DB270003A2A8C /* TextInputHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputHandler.swift; sourceTree = "<group>"; };
 		7371B0B32D760D77004E6C73 /* EfMobileTDL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EfMobileTDL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0CC2D760D78004E6C73 /* EfMobileTDLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0D62D760D78004E6C73 /* EfMobileTDLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -162,7 +167,6 @@
 		73FC33BA2D7A43D60098ABB9 /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
 		73FC33C42D7ACE950098ABB9 /* AddItemInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemInteractor.swift; sourceTree = "<group>"; };
 		73FC33C62D7ACEC80098ABB9 /* AddItemPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemPresenter.swift; sourceTree = "<group>"; };
-		73FC33C82D7AD6750098ABB9 /* AddItemBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemBuilder.swift; sourceTree = "<group>"; };
 		73FC33CC2D7AD9F00098ABB9 /* AddItemRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemRouter.swift; sourceTree = "<group>"; };
 		73FC33D12D7ADFBA0098ABB9 /* RouterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterFactory.swift; sourceTree = "<group>"; };
 		73FC33D62D7AE5750098ABB9 /* EditItemRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemRouter.swift; sourceTree = "<group>"; };
@@ -298,6 +302,7 @@
 				73FC33312D771F110098ABB9 /* AppTextField.swift */,
 				73FC336E2D787CB70098ABB9 /* AppActivityIndicator.swift */,
 				73FC33A62D7A292C0098ABB9 /* AppAlert.swift */,
+				734B5BB12E5CD4A1003A2A8C /* NavigationBarStyler.swift */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -343,19 +348,19 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		734B5C4C2E5D9235003A2A8C /* Builder */ = {
+		734B5C4C2E5D9235003A2A8C /* ModuleBuilder */ = {
 			isa = PBXGroup;
 			children = (
 				734B5C4B2E5D9235003A2A8C /* MainBuilder.swift */,
 			);
-			path = Builder;
+			path = ModuleBuilder;
 			sourceTree = "<group>";
 		};
 		734B5C4D2E5D9235003A2A8C /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				734B5C742E5D96D3003A2A8C /* ActionBinder */,
-				734B5C4C2E5D9235003A2A8C /* Builder */,
+				734B5C4C2E5D9235003A2A8C /* ModuleBuilder */,
 				734B5C792E5D96DE003A2A8C /* SearchHandler */,
 			);
 			path = Services;
@@ -375,6 +380,40 @@
 				734B5C7B2E5D96F1003A2A8C /* SearchHandler.swift */,
 			);
 			path = SearchHandler;
+			sourceTree = "<group>";
+		};
+		734B5D022E5DB041003A2A8C /* ModuleBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				734B5D012E5DB041003A2A8C /* AddItemBuilder.swift */,
+			);
+			path = ModuleBuilder;
+			sourceTree = "<group>";
+		};
+		734B5D032E5DB041003A2A8C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				734B5D0D2E5DB077003A2A8C /* ActionBinder */,
+				734B5D022E5DB041003A2A8C /* ModuleBuilder */,
+				734B5D212E5DB270003A2A8C /* TextInputHandler */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		734B5D0D2E5DB077003A2A8C /* ActionBinder */ = {
+			isa = PBXGroup;
+			children = (
+				734B5D0C2E5DB077003A2A8C /* AddItemActionBinder.swift */,
+			);
+			path = ActionBinder;
+			sourceTree = "<group>";
+		};
+		734B5D212E5DB270003A2A8C /* TextInputHandler */ = {
+			isa = PBXGroup;
+			children = (
+				734B5D202E5DB270003A2A8C /* TextInputHandler.swift */,
+			);
+			path = TextInputHandler;
 			sourceTree = "<group>";
 		};
 		7371B0AA2D760D77004E6C73 = {
@@ -447,11 +486,11 @@
 		73FC33342D772F290098ABB9 /* AddItem */ = {
 			isa = PBXGroup;
 			children = (
+				734B5D032E5DB041003A2A8C /* Services */,
 				73FC33392D772F6F0098ABB9 /* View */,
 				73FC33C12D7ACE460098ABB9 /* Interactor */,
 				73FC33C22D7ACE460098ABB9 /* Presenter */,
 				73FC33CB2D7AD9E30098ABB9 /* Router */,
-				73FC33C32D7ACE460098ABB9 /* Builder */,
 			);
 			path = AddItem;
 			sourceTree = "<group>";
@@ -576,14 +615,6 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
-		73FC33C32D7ACE460098ABB9 /* Builder */ = {
-			isa = PBXGroup;
-			children = (
-				73FC33C82D7AD6750098ABB9 /* AddItemBuilder.swift */,
-			);
-			path = Builder;
-			sourceTree = "<group>";
-		};
 		73FC33CB2D7AD9E30098ABB9 /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -650,7 +681,6 @@
 				73FC33EF2D7B301F0098ABB9 /* InteractorInputProtocol.swift */,
 				73455BBB2D7B7BF9008FDF5C /* BuilderProtocol.swift */,
 				73455BBD2D7C820C008FDF5C /* RouterProtocol.swift */,
-				734B5BB12E5CD4A1003A2A8C /* NavigationBarStyler.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -816,6 +846,7 @@
 				73FC335B2D7857890098ABB9 /* NetworkClient.swift in Sources */,
 				7320859C2D7626110086525E /* SceneDelegate.swift in Sources */,
 				73FC333A2D772F6F0098ABB9 /* AddItemViewController.swift in Sources */,
+				734B5D0E2E5DB077003A2A8C /* AddItemActionBinder.swift in Sources */,
 				73FC33A32D79C6A50098ABB9 /* EditItemInteractor.swift in Sources */,
 				73FC33302D770F790098ABB9 /* EditItemViewController.swift in Sources */,
 				732085EC2D764D240086525E /* AppStackView.swift in Sources */,
@@ -851,6 +882,7 @@
 				73FC330A2D76EA6D0098ABB9 /* AppLabel.swift in Sources */,
 				732085B22D76264A0086525E /* EfMobileTDL.xcdatamodeld in Sources */,
 				73455BBC2D7B7BF9008FDF5C /* BuilderProtocol.swift in Sources */,
+				734B5D042E5DB041003A2A8C /* AddItemBuilder.swift in Sources */,
 				73FC33F02D7B301F0098ABB9 /* InteractorInputProtocol.swift in Sources */,
 				732085B82D762D980086525E /* AppConstants.swift in Sources */,
 				73FC33DE2D7AE7960098ABB9 /* MainInteractor.swift in Sources */,
@@ -858,8 +890,8 @@
 				734B5C4E2E5D9235003A2A8C /* MainBuilder.swift in Sources */,
 				73FC33E02D7AE7DB0098ABB9 /* MainPresenter.swift in Sources */,
 				73FC33402D778B350098ABB9 /* AppSearchController.swift in Sources */,
-				73FC33C92D7AD6750098ABB9 /* AddItemBuilder.swift in Sources */,
 				732085E02D7640570086525E /* AppButton.swift in Sources */,
+				734B5D222E5DB270003A2A8C /* TextInputHandler.swift in Sources */,
 				73FC33D32D7ADFBA0098ABB9 /* RouterFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

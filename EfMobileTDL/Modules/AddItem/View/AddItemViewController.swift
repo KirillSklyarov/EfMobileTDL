@@ -21,14 +21,18 @@ final class AddItemViewController: UIViewController {
 
     private lazy var saveStack = AppStackView([saveButton], axis: .vertical, alignment: .center)
 
-    private lazy var contentStack = AppStackView([titleTextField, subTitleContainer, saveStack], axis: .vertical, spacing: 16)
+    private lazy var contentStack = AppStackView([titleTextField, subTitleContainer, saveStack, UIView()], axis: .vertical, spacing: 16)
 
     // MARK: - Other properties
     private let output: AddItemViewOutput
+    private let actionBinder: AddItemActionBinding
+    private let textInputHandler: TextInputHandler
 
     // MARK: - Init
     init(output: AddItemViewOutput) {
         self.output = output
+        self.actionBinder = AddItemActionBinder(output: output)
+        self.textInputHandler = TextInputHandler(output: output)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -53,16 +57,15 @@ extension AddItemViewController: AddItemViewInput {
     }
 
     func isSaveButtonEnable(_ isEnabled: Bool) {
-        saveButton.isEnabled = isEnabled
-        saveButton.configuration?.background.strokeColor = isEnabled ? AppConstants.Colors.yellow : AppConstants.Colors.gray
+        saveButton.isSaveButtonEnable(isEnabled)
     }
 }
 
 // MARK: - Setup UI
 private extension AddItemViewController {
     func setupUI() {
-        title = AppConstants.L.addTask()
-        navigationController?.navigationBar.prefersLargeTitles = false
+        NavigationBarStyler.apply(.addTask, to: self)
+    
         view.backgroundColor = AppConstants.Colors.black
 
         view.addSubviews(contentStack)
@@ -70,56 +73,19 @@ private extension AddItemViewController {
     }
 
     func setupLayout() {
-        NSLayoutConstraint.activate([
-            contentStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: AppConstants.Insets.medium),
-            contentStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: AppConstants.Insets.medium),
-            contentStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -AppConstants.Insets.medium),
+        contentStack.setConstraints(isSafeArea: true, allInsets: AppConstants.Insets.medium)
 
-            subTitleContainer.heightAnchor.constraint(equalToConstant: AppConstants.Height.textField*5),
+        NSLayoutConstraint.activate([
+            subTitleContainer.heightAnchor.constraint(equalToConstant: AppConstants.Height.subTitleTextView),
             saveButton.widthAnchor.constraint(equalTo: contentStack.widthAnchor, multiplier: 0.5),
         ])
     }
 
     func setupTextFields() {
-        titleTextField.delegate = self
-        subTitleContainer.setTextViewDelegate(self)
-
-        titleTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        textInputHandler.bind(to: titleTextField, textView: subTitleContainer)
     }
-}
 
-private extension AddItemViewController {
     func setupAction() {
-        saveButton.onButtonTapped = { [weak self] in
-            guard let self = self else { return }
-            output.sendButtonTapped()
-        }
-    }
-}
-
-// MARK: - UITextFieldDelegate
-extension AddItemViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        guard let text = textField.text else { return }
-        output.addedItemTitle(text)
-    }
-}
-
-// MARK: - UITextViewDelegate
-extension AddItemViewController: UITextViewDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == AppConstants.Colors.gray {
-            textView.text.removeAll()
-            textView.textColor = AppConstants.Colors.white
-        }
-    }
-
-    func textViewDidChange(_ textView: UITextView) {
-        output.addedItemSubtitle(textView.text)
+        actionBinder.bind(saveButton: saveButton)
     }
 }

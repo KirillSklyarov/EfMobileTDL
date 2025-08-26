@@ -24,7 +24,7 @@ struct NavigationBarStyler {
             return appearance
         }
 
-    static func apply(_ style: NavBarStyle, to vc: UIViewController, searchController: UISearchController) {
+    static func apply(_ style: NavBarStyle, to vc: UIViewController, searchController: UISearchController? = nil) {
         let appearance = appearance()
         vc.navigationController?.navigationBar.standardAppearance = appearance
         vc.navigationController?.navigationBar.scrollEdgeAppearance = appearance
@@ -45,6 +45,7 @@ struct NavigationBarStyler {
             vc.title = AppConstants.L.mainTitle()
             vc.navigationController?.navigationBar.prefersLargeTitles = true
         case .editTask, .addTask:
+            vc.title = AppConstants.L.addTask()
             vc.navigationController?.navigationBar.prefersLargeTitles = false
         }
     }

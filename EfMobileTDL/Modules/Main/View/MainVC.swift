@@ -11,8 +11,8 @@ protocol MainViewInput: AnyObject {
     func setupInitialState()
     func loading()
     func configure(with data: [TDLItem])
-    func showError()
-
+    func showError(_ alert: UIAlertController)
+    
     func resetSearchController()
 }
 
@@ -90,7 +90,7 @@ private extension MainViewController {
 
     func setupFooterViewLayout() {
         NSLayoutConstraint.activate([
-            footerView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.1),
+            footerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1),
             footerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             footerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             footerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -132,9 +132,10 @@ extension MainViewController: MainViewInput {
         updateUI(with: data)
     }
 
-    func showError() {
+    func showError(_ alert: UIAlertController) {
         activityIndicator.stopAnimating()
-        showAlert()
+        present(alert, animated: true)
+
     }
 
     func resetSearchController() {
@@ -151,11 +152,6 @@ private extension MainViewController {
     func updateUI(with data: [TDLItem]) {
         tasksTableView.apply(tasks: data)
         footerView.updateUI(with: data.count)
-    }
-
-    func showAlert() {
-        let alert = AppAlert.create()
-        present(alert, animated: true)
     }
 
     func isHideContent(_ isHide: Bool) {

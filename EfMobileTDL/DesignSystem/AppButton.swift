@@ -26,6 +26,11 @@ final class AppButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func isSaveButtonEnable(_ isEnabled: Bool) {
+        self.isEnabled = isEnabled
+        configuration?.background.strokeColor = isEnabled ? AppConstants.Colors.yellow : AppConstants.Colors.gray
+    }
 }
 
 private extension AppButton {

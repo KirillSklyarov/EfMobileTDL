@@ -43,7 +43,7 @@ final class AddTaskSubtitleView: UIView {
 // MARK: - Setup UI
 private extension AddTaskSubtitleView {
     func setupUI() {
-        layer.cornerRadius = 8
+        layer.cornerRadius = AppConstants.CornerRadius.small
         backgroundColor = AppConstants.Colors.darkGray
 
         setupTextView()

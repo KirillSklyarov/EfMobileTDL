@@ -44,5 +44,10 @@ struct AppConstants {
 
     enum Height {
         static let textField: CGFloat = 50
+        static let subTitleTextView: CGFloat = 250
+    }
+
+    enum CornerRadius {
+        static let small: CGFloat = 6
     }
 }

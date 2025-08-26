@@ -52,7 +52,7 @@ private extension AppTextField {
             font = AppConstants.Fonts.regular18
             backgroundColor = AppConstants.Colors.darkGray
             setupPlaceholder(type)
-            borderStyle = .roundedRect
+            layer.cornerRadius = AppConstants.CornerRadius.small
         }
 
         setupLayout()

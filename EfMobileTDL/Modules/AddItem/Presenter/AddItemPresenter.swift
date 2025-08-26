@@ -9,9 +9,13 @@ import Foundation
 
 protocol AddItemViewOutput: AnyObject {
     func viewLoaded()
-    func sendButtonTapped()
-    func addedItemSubtitle(_ subtitle: String)
-    func addedItemTitle(_ title: String)
+    func eventHandler(_ event: AddItemEvent)
+}
+
+enum AddItemEvent {
+    case addedItemTitle(String)
+    case addedItemSubtitle(String)
+    case saveButtonTapped
 }
 
 final class AddItemPresenter {
@@ -29,6 +33,21 @@ final class AddItemPresenter {
         self.interactor = interactor
         self.router = router
     }
+
+    func eventHandler(_ event: AddItemEvent) {
+        switch event {
+        case .addedItemTitle(let title):
+            self.title = title
+            checkButton()
+        case .addedItemSubtitle(let subTitle):
+            self.subtitle = subTitle
+            checkButton()
+        case .saveButtonTapped:
+            configureTask()
+            sendNewTaskToStorage()
+            router.pop()
+        }
+    }
 }
 
 // MARK: - AddItemViewOutput
@@ -37,30 +56,15 @@ extension AddItemPresenter: AddItemViewOutput {
         view?.setupInitialState()
         checkButton()
     }
-
-    func addedItemSubtitle(_ subtitle: String) {
-        self.subtitle = subtitle
-        checkButton()
-    }
-    
-    func addedItemTitle(_ title: String) {
-        self.title = title
-        checkButton()
-    }
-
-    func sendButtonTapped() {
-        configureTask()
-        sendNewTaskToStorage()
-        router.pop()
-    }
 }
 
 // MARK: - Supporting methods
 private extension AddItemPresenter {
     func configureTask() {
         guard let title, let subtitle else { print("We have empty fields"); return }
+        print(UUID().uuidString.prefix(6))
+        let tempID = Int.random(in: 0..<1_000_000)
         let date = configureDate()
-        let tempID = abs(UUID().hashValue % 1_000_000)
         task = TDLItem(id: tempID, title: title, subtitle: subtitle, date: date, completed: false)
     }
 
