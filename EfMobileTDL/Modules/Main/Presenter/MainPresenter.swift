@@ -128,7 +128,7 @@ private extension MainPresenter {
     }
 
     func dataLoadedSuccessful() {
-        guard let data else { return }
+        guard let data else { Log.app.error("MainPresenter: data is nil"); return }
         setState(.success(data: data))
     }
 

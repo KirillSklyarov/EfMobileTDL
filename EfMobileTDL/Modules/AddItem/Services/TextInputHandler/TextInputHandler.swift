@@ -27,7 +27,7 @@ final class TextInputHandler: NSObject, TextInputHandling {
     }
 
     @objc func textFieldDidChange(_ textField: UITextField) {
-        guard let title = textField.text else { return }
+        guard let title = textField.text else { Log.app.errorAlways("Title is nil"); return }
         output.handleTitleChange(title: title)
     }
 }
@@ -50,7 +50,7 @@ extension TextInputHandler: UITextViewDelegate {
     }
 
     func textViewDidChange(_ textView: UITextView) {
-        guard let subTitle = textView.text else { return }
+        guard let subTitle = textView.text else { Log.app.errorAlways("SubTitle is nil"); return }
         output.handleSubTitleChange(subTitle: subTitle)
     }
 }

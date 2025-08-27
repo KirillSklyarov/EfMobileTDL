@@ -31,22 +31,22 @@ final class MainActionBinder: MainActionBinding {
         }
 
         tasksTableView.onEditScreen = { [weak self] task in
-            guard let self else { return }
+            guard let self else { Log.main.errorAlways("self is nil"); return }
             output.eventHandler(.editTask(task))
         }
 
         tasksTableView.onRemoveItem = { [weak self] task in
-            guard let self else { return }
+            guard let self else { Log.main.errorAlways("self is nil"); return }
             output.eventHandler(.deleteItem(task))
         }
 
         tasksTableView.onChangeTDLState = { [weak self] task in
-            guard let self else { return }
+            guard let self else { Log.main.errorAlways("self is nil"); return }
             output.eventHandler(.changeItemState(task))
         }
 
         footerView.onAddTaskButtonTapped = { [weak self] in
-            guard let self else { return }
+            guard let self else { Log.main.errorAlways("self is nil"); return }
             output.eventHandler(.addNewTask)
         }
     }

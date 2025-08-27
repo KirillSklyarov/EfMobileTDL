@@ -21,7 +21,7 @@ final class AddItemActionBinder: AddItemActionBinding {
 
     func bind(saveButton: AppButton) {
         saveButton.onButtonTapped = { [weak self] in
-            guard let self = self else { return }
+            guard let self else { Log.addItem.errorAlways("Self is nil"); return }
             output.eventHandler(.saveButtonTapped)
         }
     }

@@ -51,7 +51,7 @@ extension EditPresenter: EditItemViewOutput {
         switch event {
         case .saveButtonTapped:
             if changedTaskValidation() {
-                guard let itemToEdit else { return }
+                guard let itemToEdit else { Log.editItem.warning("Item to edit is nil"); return }
                 interactor.updateItem(itemToEdit)
                 router.pop()
             } else {
@@ -103,7 +103,7 @@ private extension EditPresenter {
 
     func dataValidating(_ data: TDLItem?) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-            guard let self else { return }
+            guard let self else { Log.editItem.warning("self is nil"); return }
             isDataValid(data) ? setState(.success(data: data!)) : setState(.error(.loadingError))
         }
     }
@@ -118,7 +118,7 @@ private extension EditPresenter {
     }
 
     func changedTaskValidation() -> Bool {
-        guard let itemToEdit else { return false }
+        guard let itemToEdit else { Log.editItem.warning("Item to edit is nil"); return false }
         let title = itemToEdit.title
         let subtitle = itemToEdit.subtitle
         return !title.isBlank && !subtitle.isBlank

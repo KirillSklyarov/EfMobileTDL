@@ -54,7 +54,7 @@ private extension TasksTableView {
     func setupTableView() {
         registerCell(TaskTableViewCell.self)
         diffDataSource = UITableViewDiffableDataSource(tableView: self) { [weak self] tableView, indexPath, task in
-            guard let self else { return UITableViewCell() }
+            guard let self else { Log.app.errorAlways("self is nil"); return UITableViewCell() }
             let cell = tableView.dequeueCell(indexPath) as TaskTableViewCell
             cell.configureCell(with: task)
 
@@ -80,7 +80,10 @@ private extension TasksTableView {
 // MARK: - UITableViewDelegate
 extension TasksTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        guard let item = diffDataSource.itemIdentifier(for: indexPath) else { return nil }
+        guard let item = diffDataSource.itemIdentifier(for: indexPath) else {
+            Log.app.errorAlways("Could not find item for indexPath: \(indexPath)")
+            return nil
+        }
 
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
 

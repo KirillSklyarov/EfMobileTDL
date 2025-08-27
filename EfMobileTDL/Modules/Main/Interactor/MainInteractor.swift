@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import rswift
 
 protocol MainInteractorInput: AnyObject {
     func setUserTasks(_ tasks: [TDLItem])
@@ -51,26 +50,26 @@ extension MainInteractor: MainInteractorInput {
             try await fetchDataIsFirstLaunch(isFirstLaunch)
         } catch {
             output?.setState(.error)
-            print(error.localizedDescription)
+            Log.main.errorAlways("\(error.localizedDescription)")
         }
     }
 
     func fetchDataIsFirstLaunch(_ isFirstLaunch: Bool) async throws {
         if isFirstLaunch {
             data = try await networkService.fetchDataFromServer()
-            print(AppConstants.L.dataFromServer())
+            Log.main.debugOnly(AppConstants.L.dataFromServer())
             userDefaults.set(true, forKey: "hasLaunchedBefore")
             dataManager.saveDataInCoreData(tdlItems: data)
             output?.setState(.dataValidating(data: data))
         } else {
             getNewDataFromCD()
-            print(AppConstants.L.dataFromCoreData())
+            Log.main.debugOnly(AppConstants.L.dataFromCoreData())
         }
     }
 
     func changeTaskState(_ task: TDLItem) {
         queue.async { [weak self] in
-            guard let self else { return }
+            guard let self else { Log.app.errorAlways("self is nil"); return }
             var newStatusTask = task
             newStatusTask.completed.toggle()
             dataManager.updateItem(newStatusTask)
@@ -79,7 +78,7 @@ extension MainInteractor: MainInteractorInput {
 
     func getNewDataFromCD() {
         queue.async { [weak self] in
-            guard let self else { return }
+            guard let self else { Log.app.errorAlways("self is nil"); return }
             data = getCorrectDataFromCoreData()
             output?.setState(.dataValidating(data: data))
         }
@@ -87,7 +86,7 @@ extension MainInteractor: MainInteractorInput {
 
     func removeTask(_ task: TDLItem) {
         queue.async { [weak self] in
-            guard let self else { return }
+            guard let self else { Log.app.errorAlways("self is nil"); return }
             dataManager.removeItem(task) {
                 self.getNewDataFromCD()
             }

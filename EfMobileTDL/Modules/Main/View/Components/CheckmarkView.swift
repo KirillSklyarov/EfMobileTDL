@@ -48,7 +48,7 @@ private extension CheckmarkView {
 private extension CheckmarkView {
     func setupAction() {
         checkButton.onButtonTapped = { [weak self] in
-            guard let self else { return }
+            guard let self else { Log.app.errorAlways("Self is nil"); return }
             checkButton.isSelected.toggle()
             onDoneButtonTapped?(checkButton.isSelected)
         }

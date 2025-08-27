@@ -35,7 +35,6 @@
 		73455BCB2D7C8B2D008FDF5C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 73455BC92D7C8B2D008FDF5C /* Localizable.strings */; };
 		73455BD12D7C94D5008FDF5C /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73455BD02D7C94D5008FDF5C /* String+Localized.swift */; };
 		73455BE02D7CA9B2008FDF5C /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 73455BDF2D7CA9B2008FDF5C /* RswiftLibrary */; };
-		73455BE22D7CA9B2008FDF5C /* rswift in Frameworks */ = {isa = PBXBuildFile; productRef = 73455BE12D7CA9B2008FDF5C /* rswift */; };
 		734B5BA12E5CD126003A2A8C /* UIVC+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5BA02E5CD126003A2A8C /* UIVC+Ext.swift */; };
 		734B5BB22E5CD4A1003A2A8C /* NavigationBarStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5BB12E5CD4A1003A2A8C /* NavigationBarStyler.swift */; };
 		734B5C4E2E5D9235003A2A8C /* MainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5C4B2E5D9235003A2A8C /* MainBuilder.swift */; };
@@ -45,6 +44,7 @@
 		734B5D0E2E5DB077003A2A8C /* AddItemActionBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5D0C2E5DB077003A2A8C /* AddItemActionBinder.swift */; };
 		734B5D222E5DB270003A2A8C /* TextInputHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5D202E5DB270003A2A8C /* TextInputHandler.swift */; };
 		734B5DC82E5DEAAC003A2A8C /* TextInputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5DC72E5DEAAC003A2A8C /* TextInputProtocol.swift */; };
+		73E309C42E5EF20E00A00F03 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E309C22E5EF20E00A00F03 /* Logger.swift */; };
 		73FC330A2D76EA6D0098ABB9 /* AppLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33092D76EA6D0098ABB9 /* AppLabel.swift */; };
 		73FC33122D770B160098ABB9 /* TDLItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC33102D770B160098ABB9 /* TDLItem.swift */; };
 		73FC33242D770B220098ABB9 /* CheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC331D2D770B220098ABB9 /* CheckmarkView.swift */; };
@@ -142,6 +142,7 @@
 		7371B0B32D760D77004E6C73 /* EfMobileTDL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EfMobileTDL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0CC2D760D78004E6C73 /* EfMobileTDLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7371B0D62D760D78004E6C73 /* EfMobileTDLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfMobileTDLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		73E309C22E5EF20E00A00F03 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		73FC33092D76EA6D0098ABB9 /* AppLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLabel.swift; sourceTree = "<group>"; };
 		73FC33102D770B160098ABB9 /* TDLItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDLItem.swift; sourceTree = "<group>"; };
 		73FC331D2D770B220098ABB9 /* CheckmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkView.swift; sourceTree = "<group>"; };
@@ -186,7 +187,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				73455BE02D7CA9B2008FDF5C /* RswiftLibrary in Frameworks */,
-				73455BE22D7CA9B2008FDF5C /* rswift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,6 +423,7 @@
 			children = (
 				731CFBBC2D761DF6001C94EA /* EfMobileTDL */,
 				731CFBB02D761DF3001C94EA /* EfMobileTDLTests */,
+				73E30A0A2E5EFF5000A00F03 /* Frameworks */,
 				7371B0B42D760D77004E6C73 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -435,6 +436,21 @@
 				7371B0D62D760D78004E6C73 /* EfMobileTDLUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		73E309C32E5EF20E00A00F03 /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				73E309C22E5EF20E00A00F03 /* Logger.swift */,
+			);
+			path = Logger;
+			sourceTree = "<group>";
+		};
+		73E30A0A2E5EFF5000A00F03 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		73FC33112D770B160098ABB9 /* Entity */ = {
@@ -518,6 +534,7 @@
 		73FC33422D7856710098ABB9 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				73E309C32E5EF20E00A00F03 /* Logger */,
 				73FC33D22D7ADFBA0098ABB9 /* RouterFactory */,
 				73FC33B62D7A3F1E0098ABB9 /* ModuleFactory */,
 				732085B02D76264A0086525E /* CoreData */,
@@ -881,6 +898,7 @@
 				73FC33122D770B160098ABB9 /* TDLItem.swift in Sources */,
 				73FC336D2D7874B90098ABB9 /* DependencyContainer.swift in Sources */,
 				73FC33BB2D7A43D60098ABB9 /* MainRouter.swift in Sources */,
+				73E309C42E5EF20E00A00F03 /* Logger.swift in Sources */,
 				73FC33B72D7A3F1E0098ABB9 /* ModuleFactory.swift in Sources */,
 				73FC333E2D773CB90098ABB9 /* AddTaskSubtitleView.swift in Sources */,
 				73FC330A2D76EA6D0098ABB9 /* AppLabel.swift in Sources */,

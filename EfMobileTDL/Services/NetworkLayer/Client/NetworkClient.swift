@@ -24,6 +24,7 @@ struct NetworkClient: Sendable {
     // MARK: - Methods
     func fetchData<T: Codable>(_ typeOfData: endPoint, type: T.Type) async throws -> T {
         guard let url = typeOfData.url else {
+            Log.networkLayer.errorAlways("Can't create URL")
             throw NetworkError.invalidURL
         }
 
@@ -32,10 +33,12 @@ struct NetworkClient: Sendable {
         let (data, response) = try await session.data(for: request)
 
         guard let httpResponse = response as? HTTPURLResponse else {
+            Log.networkLayer.errorAlways("Invalid HTTP response")
             throw NetworkError.invalidResponse
         }
 
         guard 200...299 ~= httpResponse.statusCode else {
+            Log.networkLayer.errorAlways("Invalid response status code: \(httpResponse.statusCode)")
             throw NetworkError.httpError(httpResponse.statusCode)
         }
 
@@ -43,6 +46,7 @@ struct NetworkClient: Sendable {
             let fetchedData = try self.decoder.decode(T.self, from: data)
             return fetchedData
         } catch {
+            Log.networkLayer.errorAlways("Error decoding data: \(error)")
             throw NetworkError.decodingError(error)
         }
     }

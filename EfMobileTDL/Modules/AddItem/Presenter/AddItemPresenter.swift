@@ -63,8 +63,7 @@ extension AddItemPresenter: AddItemViewOutput {
 // MARK: - Supporting methods
 private extension AddItemPresenter {
     func configureTask() {
-        guard let title, let subtitle else { print("We have empty fields"); return }
-        print(UUID().uuidString.prefix(6))
+        guard let title, let subtitle else { Log.addItem.errorAlways("We have empty fields"); return }
         let tempID = Int.random(in: 0..<1_000_000)
         let date = configureDate()
         task = TDLItem(id: tempID, title: title, subtitle: subtitle, date: date, completed: false)
@@ -83,12 +82,12 @@ private extension AddItemPresenter {
     }
 
     func sendNewTaskToStorage() {
-        guard let task else { return }
+        guard let task else { Log.addItem.errorAlways("We have empty fields"); return }
         interactor.addItem(task)
     }
 
     func checkButton() {
-        guard let title, let subtitle else { return }
+        guard let title, let subtitle else { Log.addItem.errorAlways("We have empty fields"); return }
         let isOk = !title.isEmpty && !subtitle.isEmpty
         view?.isSaveButtonEnable(isOk)
     }

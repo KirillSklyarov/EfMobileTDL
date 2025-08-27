@@ -16,12 +16,12 @@ protocol RouterProtocol: AnyObject {
 
 extension RouterProtocol {
     func pop() {
-        guard let navigationController = navigationController else { print("Navigation controller is nil, so can not pop"); return }
+        guard let navigationController = navigationController else { Log.app.errorAlways("Navigation controller is nil, so can not pop"); return }
         navigationController.popViewController(animated: true)
     }
 
     func push(to view: UIViewController) {
-        guard let navigationController = navigationController else { print("Navigation controller is nil, so can not push"); return }
+        guard let navigationController = navigationController else { Log.app.errorAlways("Navigation controller is nil, so can not push"); return }
         navigationController.pushViewController(view, animated: true)
     }
 }

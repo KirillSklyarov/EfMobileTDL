@@ -34,7 +34,10 @@ final class SearchHandler: NSObject, SearchHandling {
 extension SearchHandler: UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
 
     func updateSearchResults(for searchController: UISearchController) {
-        guard let searchText = searchController.searchBar.text else { return }
+        guard let searchText = searchController.searchBar.text else {
+            Log.main.errorAlways("Search text is empty")
+            return
+        }
         output.eventHandler(.filterData(by: searchText))
     }
 

@@ -7,7 +7,6 @@
 
 import Foundation
 import CoreData
-import rswift
 
 protocol CoreDataManagerProtocol {
     func getItemToEdit() -> TDLItem?
@@ -29,9 +28,9 @@ final class CoreDataManager: CoreDataManagerProtocol {
         let container = NSPersistentContainer(name: "EfMobileTDL")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-                print(String(format: "coreDataContainerError", error, error.userInfo))
+                Log.coreData.errorAlways("Core Data loading error: \(error), \(error.userInfo)")
             } else {
-                print(AppConstants.L.coreDataLoaded())
+                Log.coreData.debugOnly(AppConstants.L.coreDataLoaded())
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
@@ -56,7 +55,7 @@ extension CoreDataManager {
         let backgroundContext = createBackgroundContext()
 
         backgroundContext.perform { [weak self] in
-            guard let self else { print("Ooops"); return }
+            guard let self else { Log.coreData.errorAlways("self is nil"); return }
             let existingItems = fetchData(backgroundContext)
             let existingItemsDict = getExistingItemsIds(from: existingItems)
 
@@ -78,7 +77,7 @@ extension CoreDataManager {
         do {
             return try context.fetch(fetchRequest)
         } catch {
-            print(AppConstants.L.coreDataError(error.localizedDescription))
+            Log.coreData.errorAlways("Core Data fetch error: \(error.localizedDescription)")
             return []
         }
     }
@@ -88,7 +87,8 @@ extension CoreDataManager {
 
         backgroundContext.perform { [weak self] in
             guard let self,
-                  let task: TDL = getTask(with: item.id, context: backgroundContext) else { print("Ooops"); return }
+                  let task = getTask(with: item.id, context: backgroundContext) else {
+                Log.coreData.errorAlways("No task found"); return }
 
             let needsUpdate = isNeedUpdate(task, with: item)
 
@@ -96,7 +96,7 @@ extension CoreDataManager {
                 update(task: task, with: item)
                 saveContext(backgroundContext)
             } else {
-                print(AppConstants.L.dataNotChanged())
+                Log.coreData.debugOnly(AppConstants.L.dataNotChanged())
             }
         }
     }
@@ -105,7 +105,7 @@ extension CoreDataManager {
         let backgroundContext = createBackgroundContext()
 
         backgroundContext.perform { [weak self] in
-            guard let self else { print("Ooops"); return }
+            guard let self else { Log.coreData.errorAlways("self is nil"); return }
             createNewItem(from: item, context: backgroundContext)
             saveContext(backgroundContext)
         }
@@ -116,10 +116,11 @@ extension CoreDataManager {
 
         backgroundContext.perform { [weak self] in
             guard let self,
-                  let task: TDL = getTask(with: item.id, context: backgroundContext) else { print("Ooops"); return }
+                  let task = getTask(with: item.id, context: backgroundContext) else {
+                Log.coreData.errorAlways("Task not found"); return }
 
             backgroundContext.delete(task)
-            print(AppConstants.L.taskRemoved())
+            Log.coreData.debugOnly(AppConstants.L.taskRemoved())
             saveContext(backgroundContext)
             completion?()
         }
@@ -140,10 +141,10 @@ extension CoreDataManager {
         if context.hasChanges {
             do {
                 try context.save()
-                print(AppConstants.L.contextOK())
+                Log.coreData.debugOnly(AppConstants.L.contextOK())
             } catch {
                 let nserror = error as NSError
-                print("Unresolved error \(nserror), \(nserror.userInfo)")
+                Log.coreData.errorAlways("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
     }
@@ -151,22 +152,6 @@ extension CoreDataManager {
 
 // MARK: - Supporting methods
 private extension CoreDataManager {
-    func printAllTDL() {
-        let fetchRequest = TDL.fetchRequest()
-
-        do {
-            let results = try context.fetch(fetchRequest)
-
-            if results.isEmpty {
-                print(AppConstants.L.coreDataEmpty())
-            } else {
-                print(AppConstants.L.coreDataRecordsCount(results.count))
-            }
-        } catch {
-            print(AppConstants.L.coreDataError(error.localizedDescription))
-        }
-    }
-
     func getTask(with id: Int, context: NSManagedObjectContext) -> TDL? {
         let fetchRequest = TDL.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id == %d", Int64(id))
@@ -176,7 +161,7 @@ private extension CoreDataManager {
             let task = try context.fetch(fetchRequest)
             return task.first
         } catch {
-            print(AppConstants.L.errorFindingObject(error.localizedDescription))
+            Log.coreData.errorAlways("Get task error: \(error.localizedDescription)")
             return nil
         }
     }
@@ -187,7 +172,7 @@ private extension CoreDataManager {
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 
         backgroundContext.perform { [weak self] in
-            guard let self else { print("Ooops"); return }
+            guard let self else { Log.coreData.errorAlways("self is nil"); return }
 
             do {
                 try backgroundContext.execute(deleteRequest)
@@ -196,9 +181,8 @@ private extension CoreDataManager {
                 DispatchQueue.main.async {
                     self.context.reset()
                 }
-
             } catch {
-                print(error.localizedDescription)
+                Log.coreData.errorAlways("Delete all error: \(error.localizedDescription)")
             }
         }
     }
@@ -221,7 +205,7 @@ private extension CoreDataManager {
         task.subtitle = item.subtitle
         task.date = item.date
         task.completed = item.completed
-        print(AppConstants.L.taskUpdated())
+        Log.coreData.debugOnly(AppConstants.L.taskUpdated())
     }
 
     func getExistingItemsIds(from existingItems: [TDL]) -> [Int: TDL] {
@@ -240,7 +224,7 @@ private extension CoreDataManager {
         newItem.date = item.date
         newItem.completed = item.completed
         if isTracking {
-            print(AppConstants.L.newTaskAdded())
+            Log.coreData.debugOnly(AppConstants.L.newTaskAdded())
         }
     }
 }
