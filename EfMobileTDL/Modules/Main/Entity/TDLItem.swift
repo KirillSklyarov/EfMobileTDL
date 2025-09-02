@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TDLItem: Equatable, Codable, Hashable {
+struct TDLItem: Equatable, Hashable {
     let id: Int
     var title: String
     var subtitle: String

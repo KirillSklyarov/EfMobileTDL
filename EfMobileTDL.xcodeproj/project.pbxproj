@@ -17,6 +17,7 @@
 		732085E02D7640570086525E /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085DF2D7640570086525E /* AppButton.swift */; };
 		732085E82D764BFB0086525E /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085E72D764BFB0086525E /* UITableView+Ext.swift */; };
 		732085EC2D764D240086525E /* AppStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732085EB2D764D240086525E /* AppStackView.swift */; };
+		7336B9912E670E21002C86CD /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 73455BDF2D7CA9B2008FDF5C /* RswiftLibrary */; };
 		73455BA22D7B5349008FDF5C /* AddViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73455BA02D7B5349008FDF5C /* AddViewTests.swift */; };
 		73455BA32D7B5349008FDF5C /* InteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73455B9D2D7B5349008FDF5C /* InteractorTests.swift */; };
 		73455BA52D7B5349008FDF5C /* AddPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73455B9E2D7B5349008FDF5C /* AddPresenterTests.swift */; };
@@ -34,7 +35,6 @@
 		73455BC82D7C8AF6008FDF5C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73455BC72D7C8AF6008FDF5C /* Launch Screen.storyboard */; };
 		73455BCB2D7C8B2D008FDF5C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 73455BC92D7C8B2D008FDF5C /* Localizable.strings */; };
 		73455BD12D7C94D5008FDF5C /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73455BD02D7C94D5008FDF5C /* String+Localized.swift */; };
-		73455BE02D7CA9B2008FDF5C /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 73455BDF2D7CA9B2008FDF5C /* RswiftLibrary */; };
 		734B5BA12E5CD126003A2A8C /* UIVC+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5BA02E5CD126003A2A8C /* UIVC+Ext.swift */; };
 		734B5BB22E5CD4A1003A2A8C /* NavigationBarStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5BB12E5CD4A1003A2A8C /* NavigationBarStyler.swift */; };
 		734B5C4E2E5D9235003A2A8C /* MainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734B5C4B2E5D9235003A2A8C /* MainBuilder.swift */; };
@@ -186,7 +186,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73455BE02D7CA9B2008FDF5C /* RswiftLibrary in Frameworks */,
+				7336B9912E670E21002C86CD /* RswiftLibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -733,7 +733,6 @@
 			name = EfMobileTDL;
 			packageProductDependencies = (
 				73455BDF2D7CA9B2008FDF5C /* RswiftLibrary */,
-				73455BE12D7CA9B2008FDF5C /* rswift */,
 			);
 			productName = EfMobileTDL;
 			productReference = 7371B0B32D760D77004E6C73 /* EfMobileTDL.app */;
@@ -1304,11 +1303,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 73455BDE2D7CA9B2008FDF5C /* XCRemoteSwiftPackageReference "R.swift" */;
 			productName = RswiftLibrary;
-		};
-		73455BE12D7CA9B2008FDF5C /* rswift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 73455BDE2D7CA9B2008FDF5C /* XCRemoteSwiftPackageReference "R.swift" */;
-			productName = rswift;
 		};
 		73455BE32D7CA9CC008FDF5C /* RswiftGenerateInternalResources */ = {
 			isa = XCSwiftPackageProductDependency;
